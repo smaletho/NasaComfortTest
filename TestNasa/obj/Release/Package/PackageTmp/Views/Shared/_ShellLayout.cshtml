@@ -1,0 +1,414 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewBag.Title</title>
+    
+    <link href="~/Content/highslide.css" rel="stylesheet" />
+    
+    <style>
+        html {
+            -ms-touch-action: none; /* Direct all pointer events to JavaScript code. */
+        }
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .tabButton:hover{
+            border:1px solid black;
+        }
+
+        .clickArea{
+            cursor:pointer;
+        }.clickArea:hover {
+            border:2px solid yellow;
+            border-radius:20px;
+        }
+
+
+        .bodyClickableArea{
+            display:none;
+            border:2px solid yellow;
+            border-radius:20px;
+        }
+        
+    </style>
+</head>
+<body onclick="hs.close()" ontouchstart="hs.close()" style="position:relative;background-color:#ebebeb;width:1420px;height:925px;border: 1px solid black">
+    <div style="width:1420px;height:30px;border-bottom:2px dashed black">
+        <div style="float:left;width:473px;text-align:center;font-family:'Courier New';font-size:18pt">name</div>
+        <div style="float:left;width:473px;text-align:center;font-family:'Courier New';font-size:18pt">date</div>
+        <div style="float:left;width:473px;text-align:center;font-family:'Courier New';font-size:18pt">more info</div>
+    </div>
+    <div id="Slider_Container" style="position:absolute;z-index:999;top:0px;left:705px;">
+        <div id="Slider_Background" style="height:825px;width:25px;background-color:#2c3d50;margin-top:30px"></div>
+        <img id="Slider_Handle" src="~/Content/slider.png" style="height:100px;position:absolute;top:400px;left:-28px" />
+
+
+
+        @*<div id="Slider_VerticalTop" style="width:25px;height:387px;background-color:gray;margin-left:25px;margin-top:30px"></div>
+        <div id="Slider_Handle" style="width:75px;height:75px;z-index:99999;background:url(slider.png)">  
+            <div style="float:left;color:white;font-weight:bold;font-size:40pt;margin-top:7px;pointer-events:none">&lt;</div>
+            <div style="float:right;color:white;font-weight:bold;font-size:40pt;margin-top:7px;pointer-events:none">&gt;</div>
+        </div>
+        <div id="Slider_VerticalBottom" style="width:25px;height:388px;background-color:gray;margin-left:25px"></div>*@
+    </div>
+    <div id="FullSplitContainer" style="height:852px">
+        <div id="LeftViewContainer" style="float: left; height: 852px; position: relative; background-color: #bdc3c7">
+        </div>
+        <div id="RightViewContainer" style="float: left; height: 852px; position: relative; background-color: #ecf0f1">
+        </div>
+    </div>
+    <div id="ResizeContainer" style="height: 852px; display: none; position: absolute; width: 1420px; top: 0px; left: 0px; background-color: silver; opacity: 0.9;margin-top:30px">
+        <div style="height:100%;width:10px;position:absolute;background-color:#767676;top:0px;left:35px"></div>
+        <div style="height:100%;width:10px;position:absolute;background-color:#767676;top:0px;left:160px"></div>
+        <div style="height:100%;width:10px;position:absolute;background-color:#767676;top:0px;left:710px"></div>
+        <div style="height:100%;width:10px;position:absolute;background-color:#767676;top:0px;left:1136px"></div>
+        <div style="height:100%;width:10px;position:absolute;background-color:#767676;top:0px;left:1370px"></div>
+    </div>
+</body>
+</html>
+
+<script src="~/Scripts/highslide-full.min.js"></script>
+<script src="~/Scripts/highslide.config.js"></script>
+
+<script>var urlRoot = '@Url.Content("~/")';</script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+
+<script>
+    var CurrentWindowDimensions = { width: 0, height: 0 };
+    //if(window.innerWidth < )
+
+    var wid = window.innerWidth;
+    var hgt = window.innerHeight;
+    $(function () {
+        //set body, ResizeContainer, RightViewContainer, LeftViewContainer, FullSplitContainer
+
+        //Slider_VerticalTop, Slider_VerticalBottom -  410 (ratio)
+
+    });
+</script>
+
+<script>
+    var UserBrowser = "";
+    var pulse = false;
+    var mouse = { x: 0, y: 0 };
+    var CurrentlyDragging = false;
+    var CanvasDone = 0;
+
+    //these will need to be calculated based on screen size
+
+    var SnapArray = [31, 160, 705, 1137, 1370];
+    //var SnapArray = [1, 130, 675, 1107, 1340];
+
+
+    console.log('height', window.innerHeight);
+    //alert(window.innerHeight);
+    $(function () {
+
+
+        if (window.innerHeight > 940)
+            UserBrowser = "Metro";
+        else if (window.innerHeight > 870)
+            UserBrowser = "IE";
+        else if (window.innerHeight > 860)
+            UserBrowser = "Chrome";
+        else
+            UserBrowser = "Firefox";
+        
+        console.log("browser", UserBrowser);
+
+        //ResizeContainer, RightViewContainer, LeftViewContainer, FullSplitContainer, Slider_VerticalTop, Slider_VerticalBottom, body
+        switch (UserBrowser) {
+            case "Metro":
+                $("#ResizeContainer").height(895);
+                $("#RightViewContainer").height(891);
+                $("#LeftViewContainer").height(891);
+                $("#FullSplitContainer").height(895);
+                $("#Slider_Background").height(895);
+                $("body").height(924);
+                break;
+            case "IE":
+                $("#ResizeContainer").height(825);
+                $("#RightViewContainer").height(821);
+                $("#LeftViewContainer").height(821);
+                $("#FullSplitContainer").height(825);
+                $("#Slider_Background").height(825);
+                $("body").height(854);
+                break;
+            case "Chrome":
+                $("#ResizeContainer").height(815);
+                $("#RightViewContainer").height(811);
+                $("#LeftViewContainer").height(811);
+                $("#FullSplitContainer").height(815);
+                $("#Slider_Background").height(815);
+                $("body").height(844);
+                break;
+            case "Firefox":
+                $("#ResizeContainer").height(805);
+                $("#RightViewContainer").height(801);
+                $("#LeftViewContainer").height(801);
+                $("#FullSplitContainer").height(805);
+                $("#Slider_Background").height(805);
+                $("body").height(834);
+                break;
+        }
+
+        document.addEventListener("touchstart", TouchStartEvent, false);
+        document.addEventListener("touchmove", TouchMoveEvent, false);
+        document.addEventListener("touchend", TouchEndEvent, false);
+
+        document.addEventListener("mousedown", MouseDownEvent, false);
+        document.addEventListener('mousemove', MouseMoveEvent, false);
+        document.addEventListener("mouseup", MouseUpEvent, false);
+    });
+
+    
+    function TouchStartEvent(event) {
+        StartMove(true, event);
+    }
+    function TouchEndEvent(event) {
+        EndMove(true, event);
+    }
+    function TouchMoveEvent(event) {
+        MovingElement(true, event);
+    }
+    function MouseDownEvent(event) {
+        StartMove(false, event);
+    }
+    function MouseUpEvent(event) {
+        EndMove(false, event);
+    }
+    function MouseMoveEvent(event) {
+        MovingElement(false, event);
+    }
+    
+
+    function StartMove(isTouch, event) {
+        if (isTouch)
+            event.preventDefault();
+        console.log('touch', isTouch);
+        console.log("target", event.target);
+        if ($(event.target).prop('id') == "Slider_Handle") {
+            console.log('handle down');
+            CurrentlyDragging = true;
+
+            $("#ResizeContainer").show();
+
+        }
+    }
+    function EndMove(isTouch, event) {
+        if (isTouch)
+            event.preventDefault();
+        if (CurrentlyDragging) {
+            console.log('handle up');
+            CurrentlyDragging = false;
+            
+            var num;
+            if (isTouch)
+                num = event.changedTouches[0].clientX;
+            else
+                num = event.clientX;
+
+            var closestNum = ClosestSnapNumber(num) + "px";
+            $("#Slider_Container").css('left', closestNum);
+
+            var snapNum = ClosestSnapNumber(num)
+            //console.log("closest", snapNum);
+            //console.log("index", SnapArray.indexOf(snapNum));
+
+            var snapIndex = SnapArray.indexOf(snapNum);
+
+            //render new views
+            var leftUrl = '@Url.Action("LoadLeft", new { id = 99999, tab = 88888 })';
+            leftUrl = leftUrl.replace("99999", snapIndex);
+            leftUrl = leftUrl.replace("88888", LeftActiveTab);
+
+            $("#LeftViewContainer").load(leftUrl);
+
+            var rightUrl = '@Url.Action("LoadRight", new { id = 99999 })';
+            rightUrl = rightUrl.replace("99999", snapIndex);
+
+            $("#RightViewContainer").load(rightUrl);
+            
+            $("#ResizeContainer").hide();
+        }
+            
+    }
+    function MovingElement(isTouch, event) {
+        //console.log('moving');
+        if (isTouch)
+            event.preventDefault();
+        
+        if (isTouch) {
+            mouse.x = event.touches[0].clientX;
+            mouse.y = event.touches[0].clientY;
+        } else {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        }
+        
+        if (CurrentlyDragging) {
+            event.preventDefault();
+            var a = 0;
+            var x;
+            
+            if(isTouch)
+                x = (event.touches[0].clientX) + "px";
+            else
+                x = (event.clientX) + "px";
+
+            var num;
+            if (isTouch)
+                num = event.touches[0].clientX;
+            else
+                num = event.clientX;
+
+            console.log("clientX", num);
+            if (num > 1 && num < 1391) {
+                var closestSnap = ClosestSnapNumber(num);
+
+                //if num within 100 of closest snap, snap
+                var newdiff = Math.abs(num - closestSnap);
+
+                //console.log("current closest", closestSnap);
+                if (newdiff < 75) {
+                    var px = closestSnap + "px";
+                    $("#Slider_Container").css('left', px);
+
+                } else {
+                    $("#Slider_Container").css('left', x);
+                } 
+            }
+        }
+    }
+
+    function ClosestSnapNumber(num) {
+        var curr = SnapArray[0];
+        var diff = Math.abs(num - curr);
+        for (var val = 0; val < SnapArray.length; val++) {
+            var newdiff = Math.abs(num - SnapArray[val]);
+            if (newdiff < diff) {
+                diff = newdiff;
+                curr = SnapArray[val];
+            }
+        }
+        return curr;
+    }
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function LeftViewChangeFunction(tab, viewstate) {
+        //tab index
+        // 1 - patient information
+        // 2 - patient history
+        // 3 - lab results
+        // 4 - order tests
+        // 5 - diagnosis
+
+        //if viewstate == 1, switch tabstate also
+        if (viewstate == 1) {
+            var leftUrl = '@Url.Action("LoadLeft", new { id = 2, tab = 88888 })';
+            leftUrl = leftUrl.replace("88888", tab);
+
+            $("#LeftViewContainer").load(leftUrl);
+
+            var rightUrl = '@Url.Action("LoadRight", new { id = 2})';
+            $("#RightViewContainer").load(rightUrl);
+
+            $("#Slider_Container").css('left', '695px');
+
+        } else {
+            var leftUrl = '@Url.Action("LoadLeft", new { id = 99999, tab = 88888 })';
+            leftUrl = leftUrl.replace("99999", viewstate);
+            leftUrl = leftUrl.replace("88888", tab);
+
+            $("#LeftViewContainer").load(leftUrl);
+        }
+    }
+
+    function flashClickableAreas() {
+        console.time("flash");
+
+        pulse = true;
+        pulseNext();
+        setTimeout(function () {
+            pulse = false;
+            console.timeEnd("flash");
+        }, 3000);
+    }
+
+    function pulseNext() {
+        if (pulse)
+            $(".bodyClickableArea").delay(100).fadeOut('slow').delay(50).fadeIn('slow', pulseNext);
+        else
+            $(".bodyClickableArea").fadeOut();
+    }
+
+
+
+
+
+
+
+    function displayIntestine() {
+        $(".bodyClickableArea").fadeOut();
+        pulse = false;
+        hs.close();
+        hs.htmlExpand(null, {
+            pageOrigin: {
+                x: mouse.x,
+                y: mouse.y
+            },
+            headingText: 'Human gastrointestinal tract',
+            maincontentText: '<p>The <b>human gastrointestinal tract</b>, or <b>GI tract</b>, or <b>GIT</b> is an organ system responsible for consuming and digesting foodstuffs, absorbing nutrients, and expelling waste.</p>\
+<p>The tract consists of the <a href="/wiki/Stomach" title="Stomach">stomach</a> and intestines, and is divided into the upper and lower gastrointestinal tracts.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>1<span>]</span></a></sup> However, by the broadest definition, the GI tract includes all structures between the <a href="/wiki/Human_mouth" title="Human mouth">mouth</a> and the <a href="/wiki/Human_anus" title="Human anus">anus</a>.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>2<span>]</span></a></sup> On the other hand, the <a href="/wiki/Human_digestive_system" title="Human digestive system">digestive system</a> is a broader term that includes other structures, including the digestive <a href="/wiki/Organs" title="Organs" class="mw-redirect">organs</a> and their <a href="/wiki/Accessory_organs_of_digestion" title="Accessory organs of digestion" class="mw-redirect">accessories</a>.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>3<span>]</span></a></sup> The tract may also be divided into <a href="/wiki/Foregut" title="Foregut">foregut</a>, <a href="/wiki/Midgut" title="Midgut">midgut</a>, and <a href="/wiki/Hindgut" title="Hindgut">hindgut</a>, reflecting the <a href="/wiki/Embryology" title="Embryology">embryological</a> origin of each segment.</p>\
+<p>The whole digestive tract is about nine metres (30 feet) long.<sup id="cite_ref-KongSingh2008_4-0" class="reference"><a href="#cite_note-KongSingh2008-4"><span>[</span>4<span>]</span></a></sup></p>\
+<p>The GI tract releases <a href="/wiki/Hormone" title="Hormone">hormones</a> to help regulate the digestive process. These hormones, including <a href="/wiki/Gastrin" title="Gastrin">gastrin</a>, <a href="/wiki/Secretin" title="Secretin">secretin</a>, <a href="/wiki/Cholecystokinin" title="Cholecystokinin">cholecystokinin</a>, and <a href="/wiki/Ghrelin" title="Ghrelin">ghrelin</a>, are mediated through either <a href="/wiki/Intracrine" title="Intracrine">intracrine</a> or <a href="/wiki/Autocrine" title="Autocrine" class="mw-redirect">autocrine</a> mechanisms, indicating that the cells releasing these hormones are conserved structures throughout <a href="/wiki/Evolution" title="Evolution">evolution</a>.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>5<span>]</span></a></sup></p>\
+<p></p>',
+            width: 500
+        });
+    }
+
+    function displayRibcage() {
+        $(".bodyClickableArea").fadeOut();
+        pulse = false;
+        hs.close();
+        hs.htmlExpand(null, {
+            pageOrigin: {
+                x: mouse.x,
+                y: mouse.y
+            },
+            headingText: 'Human Rib Cage',
+            maincontentText: '<p>The <b>rib cage</b> is an arrangement of <a href="/wiki/Bones" title="Bones" class="mw-redirect">bones</a> in the <a href="/wiki/Thorax" title="Thorax">thorax</a> of all <a href="/wiki/Vertebrate" title="Vertebrate">vertebrates</a> except the <a href="/wiki/Lamprey" title="Lamprey">lamprey</a>. It is formed by the <a href="/wiki/Vertebral_column" title="Vertebral column">vertebral column</a>, <a href="/wiki/Rib" title="Rib">ribs</a>, and <a href="/wiki/Sternum" title="Sternum">sternum</a> and encloses the <a href="/wiki/Heart" title="Heart">heart</a> and <a href="/wiki/Lung" title="Lung">lungs</a>. In humans, the rib cage, also known as the <b>thoracic cage</b>, is a bony and <a href="/wiki/Cartilage" title="Cartilage">cartilaginous</a> structure which surrounds the <a href="/wiki/Thoracic_cavity" title="Thoracic cavity">thoracic cavity</a> and supports the <a href="/wiki/Pectoral_girdle" title="Pectoral girdle">pectoral girdle</a> (shoulder girdle), forming a core portion of the <a href="/wiki/Human_skeleton" title="Human skeleton">human skeleton</a>. A typical human rib cage consists of 24 ribs, the sternum (with <a href="/wiki/Xiphoid_process" title="Xiphoid process">xiphoid process</a>), <a href="/wiki/Costal_cartilage" title="Costal cartilage">costal cartilages</a>, and the 12 <a href="/wiki/Thoracic_vertebra" title="Thoracic vertebra" class="mw-redirect">thoracic vertebrae</a>. Together with the <a href="/wiki/Skin" title="Skin">skin</a> and associated <a href="/wiki/Fascia" title="Fascia">fascia</a> and <a href="/wiki/Muscle" title="Muscle">muscles</a>, the rib cage makes up the <a href="/wiki/Thoracic_wall" title="Thoracic wall">thoracic wall</a> and provides attachments for the muscles of the neck, thorax, upper abdomen, and back.</p>',
+            width: 500
+        });
+    }
+
+
+</script>
+@RenderSection("Scripts", false)
+
+
+

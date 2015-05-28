@@ -1,0 +1,83 @@
+﻿@model TestNasa.Controllers.RightViewStateModel
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = Url.Content("~/") + "/Views/Shared/_ShellLayout.cshtml";
+
+}
+
+@*scales are backwards for Right side*@
+@switch (Model.Scale)
+{
+    case 0:
+        {
+            <div style="width: 1380px; height: 100%;background-color:#ecf0f1">
+                <img src="~/Content/Slide6.png" style="height: 100%; display: table; margin: 0 auto;" />
+
+
+                <div class="bodyClickableArea" style="position:absolute;top:410px;left:570px;width:240px;height:220px"></div>
+                <div class="clickArea" style="position:absolute;top:410px;left:570px;width:240px;height:220px" onclick="displayIntestine()" ontouchstart="displayIntestine();"></div>
+
+                <div class="bodyClickableArea" style="position:absolute;top:140px;left:515px;width:340px;height:260px"></div>
+                <div class="clickArea" style="position:absolute;top:140px;left:515px;width:340px;height:260px" onclick="displayRibcage()" ontouchstart="displayRibcage();"></div>
+
+                <input type="button" value="Show clickable areas" style="position:absolute;bottom:40px;left:615px" onclick="flashClickableAreas();" ontouchstart="flashClickableAreas();" />
+
+            </div>
+            break;
+        }
+    case 1:
+        {
+            <div style="width: 1253px; height: 100%; background-color: #ecf0f1">
+                <img src="~/Content/Slide6.png" style="height: 100%; display: table; margin: 0 auto;" />
+
+                <div class="bodyClickableArea" style="position:absolute;top:410px;left:515px;width:245px;height:225px"></div>
+                <div class="clickArea" style="position:absolute;top:410px;left:515px;width:245px;height:225px" onclick="displayIntestine()" ontouchstart="displayIntestine();"></div>
+
+                <div class="bodyClickableArea" style="position:absolute;top:140px;left:460px;width:330px;height:260px"></div>
+                <div class="clickArea" style="position:absolute;top:140px;left:460px;width:330px;height:260px" onclick="displayRibcage()" ontouchstart="displayRibcage();"></div>
+
+                <input type="button" value="Show clickable areas" style="position:absolute;bottom:40px;left:550px" onclick="flashClickableAreas();" ontouchstart="flashClickableAreas();" />
+            </div>
+            break;
+        }
+    case 2:
+        {
+            <div style="width: 707px; height: 100%; position: relative; background-color: #ecf0f1">
+                <img src="~/Content/Slide6.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; " />
+
+                <div class="bodyClickableArea" style="position:absolute;top:410px;left:220px;width:265px;height:230px"></div>
+                <div class="clickArea" style="position:absolute;top:410px;left:220px;width:265px;height:230px" onclick="displayIntestine()" ontouchstart="displayIntestine();"></div>
+
+                <div class="bodyClickableArea" style="position:absolute;top:135px;left:180px;width:340px;height:260px"></div>
+                <div class="clickArea" style="position:absolute;top:135px;left:180px;width:340px;height:260px" onclick="displayRibcage()" ontouchstart="displayRibcage();"></div>
+                
+
+                <input type="button" value="Show clickable areas" style="position:absolute;bottom:40px;left:265px" onclick="flashClickableAreas();" ontouchstart="flashClickableAreas();" />
+            </div>
+            break;
+        }
+    case 3:
+        {
+            <div style="width: 275px; position: relative; background-color: #ecf0f1">
+                <img src="~/Content/Slide6.png" style="display: table; margin: 0 auto; max-width:275px;margin-top:250px" />
+
+                <div class="bodyClickableArea" style="position:absolute;top:180px;left:83px;width:100px;height:100px"></div>
+                <div class="clickArea" style="position:absolute;top:180px;left:83px;width:100px;height:100px" onclick="displayIntestine()" ontouchstart="displayIntestine();"></div>
+
+                <div class="bodyClickableArea" style="position:absolute;top:70px;left:75px;width:120px;height:100px"></div>
+                <div class="clickArea" style="position:absolute;top:70px;left:75px;width:120px;height:100px" onclick="displayRibcage()" ontouchstart="displayRibcage();"></div>
+
+
+                <input type="button" value="Show clickable areas" style="position:absolute;bottom:0px;left:65px" onclick="flashClickableAreas();" ontouchstart="flashClickableAreas();" />
+            </div>
+            break;
+        }
+    case 4:
+        {
+            <div style="width: 41px; height: 100%; background-color: #ecf0f1;">
+
+            </div>
+            break;
+        }
+}

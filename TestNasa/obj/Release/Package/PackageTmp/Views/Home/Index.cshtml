@@ -1,0 +1,22 @@
+﻿@*@model TestNasa.Controllers.HomeViewModel*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Url.Content("~/") + "/Views/Shared/_ShellLayout.cshtml";
+    
+}
+
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            var leftUrl = '@Url.Action("LoadLeft", new { id = 2, tab = 1 })';
+            $("#LeftViewContainer").load(leftUrl);
+
+            var rightUrl = '@Url.Action("LoadRight", new { id = 2 })';
+            $("#RightViewContainer").load(rightUrl);
+
+        });
+    </script>
+}

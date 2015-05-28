@@ -1,0 +1,154 @@
+﻿@model TestNasa.Controllers.LeftViewStateModel
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = Url.Content("~/") + "/Views/Shared/_ShellLayout.cshtml";
+
+}
+
+@switch (Model.Scale)
+{
+    case 0:
+        {
+            <div style="width: 39px; height: 100%; background-color: #bdc3c7"></div>
+            <script>var LeftActiveTab = 1;</script>
+            break;
+        }
+    case 1:
+        {
+            <div style="width: 167px; height: 100%; background-color: #bdc3c7">
+                @switch (Model.TabState)
+                {
+                    case 1:
+                    <img src="~/Content/Slide8.png" style="width: 100%; height: 100%; float: right"/>    
+                    <script>var LeftActiveTab = 1;</script>
+                        break;
+                    case 2:
+                    <img src="~/Content/Slide9.png" style="width: 100%; height: 100%; float: right"/>      
+                    <script>var LeftActiveTab = 2;</script>  
+                        break;
+                    case 3:
+                    <img src="~/Content/Slide9-1.png" style="width: 100%; height: 100%; float: right"/>     
+                    <script>var LeftActiveTab = 3;</script>   
+                        break;
+                    case 4:
+                    <img src="~/Content/Slide9-2.png" style="width: 100%; height: 100%; float: right"/>     
+                    <script>var LeftActiveTab = 4;</script>   
+                        break;
+                    case 5:
+                    <img src="~/Content/Slide9-3.png" style="width: 100%; height: 100%; float: right"/>     
+                    <script>var LeftActiveTab = 5;</script>   
+                        break;
+                }
+            </div>
+            <div class="tabButton" style="width: 100px; height: 125px; position: absolute; top: 72px; left: 45px; cursor: pointer" onclick="LeftViewChangeFunction(1, 1)" ontouchstart="LeftViewChangeFunction(1, 1)"></div>
+            <div class="tabButton" style="width: 100px; height: 125px; position: absolute; top: 197px; left: 45px; cursor: pointer" onclick="LeftViewChangeFunction(2, 1)" ontouchstart="LeftViewChangeFunction(2, 1)"></div>
+            <div class="tabButton" style="width: 100px; height: 125px; position: absolute; top: 317px; left: 45px; cursor: pointer" onclick="LeftViewChangeFunction(3, 1)" ontouchstart="LeftViewChangeFunction(3, 1)"></div>
+            <div class="tabButton" style="width: 100px; height: 125px; position: absolute; top: 435px; left: 45px; cursor: pointer" onclick="LeftViewChangeFunction(4, 1)" ontouchstart="LeftViewChangeFunction(4, 1)"></div>
+            <div class="tabButton" style="width: 100px; height: 125px; position: absolute; top: 555px; left: 45px; cursor: pointer" onclick="LeftViewChangeFunction(5, 1)" ontouchstart="LeftViewChangeFunction(5, 1)"></div>
+            break;
+        }
+    case 2:
+        {
+            <div style="width: 712px; height: 100%; background-color: #bdc3c7">
+                @switch (Model.TabState)
+                {
+                    case 1:
+                        <img src="~/Content/Slide1.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; "/>    
+                        <script>var LeftActiveTab = 1;</script>
+                        break;
+                    case 2:
+                        <img src="~/Content/Slide2.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; "/>    
+                        <script>var LeftActiveTab = 2;</script>
+                        break;
+                    case 3:
+                        <img src="~/Content/Slide3.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; "/>    
+                        <script>var LeftActiveTab = 3;</script>
+                        break;
+                    case 4:
+                        <img src="~/Content/Slide4.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; "/>    
+                        <script>var LeftActiveTab = 4;</script>
+                        break;
+                    case 5:
+                        <img src="~/Content/Slide5.png" style="width: 100%; height: 100%; display: table; margin: 0 auto; "/>    
+                        <script>var LeftActiveTab = 5;</script>
+                        break;
+                }
+            </div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 70px; left: 50px; cursor: pointer" onclick="LeftViewChangeFunction(1, 2)" ontouchstart="LeftViewChangeFunction(1, 2)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 197px; left: 50px; cursor: pointer" onclick="LeftViewChangeFunction(2, 2)" ontouchstart="LeftViewChangeFunction(2, 2)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 320px; left: 50px; cursor: pointer" onclick="LeftViewChangeFunction(3, 2)" ontouchstart="LeftViewChangeFunction(3, 2)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 435px; left: 50px; cursor: pointer" onclick="LeftViewChangeFunction(4, 2)" ontouchstart="LeftViewChangeFunction(4, 2)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 550px; left: 50px; cursor: pointer" onclick="LeftViewChangeFunction(5, 2)" ontouchstart="LeftViewChangeFunction(5, 2)"></div>
+            break;
+        }
+    case 3:
+        {
+            <div style="width: 1145px; height: 100%; background-color: #bdc3c7">
+                @switch (Model.TabState)
+                {
+                    case 1:
+                        <img src="~/Content/Slide1.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 1;</script>
+                        break;
+                    case 2:
+                        <img src="~/Content/Slide2.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 2;</script>
+                        break;
+                    case 3:
+                        <img src="~/Content/Slide3.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 3;</script>
+                        break;
+                    case 4:
+                        <img src="~/Content/Slide4.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 4;</script>
+                        break;
+                    case 5:
+                        <img src="~/Content/Slide5.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 5;</script>
+                        break;
+                }
+            </div>
+            <div class="tabButton" style="width: 80px; height: 125px; position: absolute; top: 70px; left: 300px; cursor: pointer" onclick="LeftViewChangeFunction(1, 3)" ontouchstart="LeftViewChangeFunction(1, 3)"></div>
+            <div class="tabButton" style="width: 80px; height: 125px; position: absolute; top: 197px; left: 300px; cursor: pointer" onclick="LeftViewChangeFunction(2, 3)" ontouchstart="LeftViewChangeFunction(2, 3)"></div>
+            <div class="tabButton" style="width: 80px; height: 125px; position: absolute; top: 320px; left: 300px; cursor: pointer" onclick="LeftViewChangeFunction(3, 3)" ontouchstart="LeftViewChangeFunction(3, 3)"></div>
+            <div class="tabButton" style="width: 80px; height: 125px; position: absolute; top: 435px; left: 300px; cursor: pointer" onclick="LeftViewChangeFunction(4, 3)" ontouchstart="LeftViewChangeFunction(4, 3)"></div>
+            <div class="tabButton" style="width: 80px; height: 125px; position: absolute; top: 550px; left: 300px; cursor: pointer" onclick="LeftViewChangeFunction(5, 3)" ontouchstart="LeftViewChangeFunction(5, 3)"></div>
+            break;
+        }
+    case 4:
+        {
+            <div style="width: 1378px; height: 100%; background-color: #bdc3c7">
+                @switch (Model.TabState)
+                {
+                    case 1:
+                        <img src="~/Content/Slide1.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 1;</script>
+                        break;
+                    case 2:
+                        <img src="~/Content/Slide2.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 2;</script>
+                        break;
+                    case 3:
+                        <img src="~/Content/Slide3.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 3;</script>
+                        break;
+                    case 4:
+                        <img src="~/Content/Slide4.png" style="height: 100%; display: table; margin: 0 auto; " />    
+                        <script>var LeftActiveTab = 4;</script>
+                        break;
+                    case 5:
+                        <img src="~/Content/Slide5.png" style="height: 100%; display: table; margin: 0 auto" />    
+                        <script>var LeftActiveTab = 5;</script>
+                        break;
+                }
+            </div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 70px; left: 420px; cursor: pointer" onclick="LeftViewChangeFunction(1, 4)" ontouchstart="LeftViewChangeFunction(1, 4)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 195px; left: 420px; cursor: pointer" onclick="LeftViewChangeFunction(2, 4)" ontouchstart="LeftViewChangeFunction(2, 4)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 320px; left: 420px; cursor: pointer" onclick="LeftViewChangeFunction(3, 4)" ontouchstart="LeftViewChangeFunction(3, 4)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 435px; left: 420px; cursor: pointer" onclick="LeftViewChangeFunction(4, 4)" ontouchstart="LeftViewChangeFunction(4, 4)"></div>
+            <div class="tabButton" style="width: 75px; height: 125px; position: absolute; top: 550px; left: 420px; cursor: pointer" onclick="LeftViewChangeFunction(5, 4)" ontouchstart="LeftViewChangeFunction(5, 4)"></div>
+                break;
+        }
+}
+
