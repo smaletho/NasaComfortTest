@@ -32,7 +32,7 @@
 </head>
 
 
-<body onclick="hideMenu()" style="width:1420px;height:873px;position:relative">
+<body onclick="hideMenu()" style="width:1420px;height:873px;position:relative;border:1px solid">
     <div style="width:100%;height:30px;background-color:silver">
         <div class="menu_button" style="float:left;margin-left:10px;background-color:gray;height:25px;width:100px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px">
             <div style="margin-top:0">MENU</div>
@@ -44,9 +44,9 @@
             <div style="display:table;margin: 0 auto;">
                 <div style="float:left;margin-top:7px;margin-right:10px">COMFORT</div>
                 <div style="float:left;background-color:darkblue;width:450px;height:30px;color:white;">
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">Training</div>
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">Date: 06-01-15</div>
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">ID#: 036</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">Training</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">Date: 06-01-15</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">ID#: 036</div>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
     <div style="position:absolute;top:30px;left:50px;width:70px;height:70px;">
         @RenderSection("NavigationImage", false)
     </div>
-    <div style="width:100%;height:40px;background-color:sandybrown">
+    <div id="colorChangeDiv" style="width:100%;height:40px;background-color:gold">
         <div style="float:left;margin-left:130px;font-size:16pt;color:white;margin-top:9px;width:230px;text-align:center">
             @RenderSection("NavigationTitle", false)
         </div>
@@ -114,7 +114,7 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", 1);
             loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl);
+            $("body").load(loadUrl, loadSuccess);
         });
 
 
@@ -131,7 +131,7 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl);
+            $("body").load(loadUrl, loadSuccess);
 
         });
         $(".header_l3").on("click", function () {
@@ -143,7 +143,7 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", getNavigationC());
-            $("body").load(loadUrl);
+            $("body").load(loadUrl, loadSuccess);
         });
     });
 
@@ -178,6 +178,25 @@
             }
         }
         return -1;
+    }
+
+
+    function loadSuccess() {
+        var navA = getNavigationA();
+        switch (navA) {
+            case 1:
+                $("#colorChangeDiv").css('background-color', 'gold');
+                break;
+            case 2:
+                $("#colorChangeDiv").css('background-color', 'cadetblue');
+                break;
+            case 3:
+                $("#colorChangeDiv").css('background-color', 'darkorange');
+                break;
+            case 4:
+                $("#colorChangeDiv").css('background-color', 'orangered');
+                break;
+        }
     }
 </script>
 
