@@ -14,7 +14,9 @@
         }
 
         .menu_option {
-            clear:left;margin-bottom:10px;overflow:auto;
+            clear:left;
+            margin-bottom:10px;
+            overflow:auto;
             padding:10px;
         }
         .menu_option:hover {
@@ -24,6 +26,12 @@
         .menu_option_selected {
             background-color:silver;
         }
+
+        #main_content {
+            width:1420px;
+            /*height:740px;*/
+            position:relative;
+        }
         
     </style>
 
@@ -32,21 +40,21 @@
 </head>
 
 
-<body onclick="hideMenu()" style="width:1420px;height:873px;position:relative;border:1px solid">
-    <div style="width:100%;height:30px;background-color:silver">
-        <div class="menu_button" style="float:left;margin-left:10px;background-color:gray;height:25px;width:100px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px">
+<body style="width:1420px;height:873px;position:relative;border:1px solid">
+    <div style="width:100%;height:30px;background-color:#d5d5d5">
+        <div class="menu_button" style="float:left;margin-left:10px;background-color:#a7a9ac;height:25px;width:120px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px">
             <div style="margin-top:0">MENU</div>
         </div>
-        <div class="menu" style="position:absolute;top:15px;left:10px;background:gray;z-index:99999;display:none;padding:20px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+        <div class="menu" style="position:absolute;top:15px;left:10px;background:#a7a9ac;z-index:99999;display:none;padding:20px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px">
             @RenderSection("Level1Navigation", false)
         </div>
-        <div style="float:left;width:1250px">
+        <div style="float:left;width:1230px">
             <div style="display:table;margin: 0 auto;">
-                <div style="float:left;margin-top:7px;margin-right:10px">COMFORT</div>
-                <div style="float:left;background-color:darkblue;width:450px;height:30px;color:white;">
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">Training</div>
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">Date: 06-01-15</div>
-                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';margin-top:5px">ID#: 036</div>
+                <img style="float:left;margin-right:10px;height:25px;margin-top:2px" src="~/Content/Images/comfortlogo2.png" />
+                <div style="float:left;background-color:#2c3e50;width:450px;height:30px;color:#d5d5d5;">
+                    <div style="float:left;text-align:center;width:150px;font-family:'Andale Mono';margin-top:5px">Training</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Andale Mono';margin-top:5px">Date: 06-01-15</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Andale Mono';margin-top:5px">ID#: 036</div>
                 </div>
             </div>
         </div>
@@ -54,26 +62,27 @@
             EXIT
         </div>
     </div>
-    <div style="position:absolute;top:30px;left:50px;width:70px;height:70px;">
+    <div style="position:absolute;top:30px;left:50px;width:60px;height:60px;background-color:white;padding:5px">
         @RenderSection("NavigationImage", false)
     </div>
-    <div id="colorChangeDiv" style="width:100%;height:40px;background-color:gold">
-        <div style="float:left;margin-left:130px;font-size:16pt;color:white;margin-top:9px;width:230px;text-align:center">
+    <div onclick="hideMenu()" id="colorChangeDiv" style="width:100%;height:40px;background-color:#FFC314">
+        <div style="float:left;margin-left:130px;font-size:16pt;color:white;margin-top:9px;width:230px;text-align:center;font-family:Optima">
             @RenderSection("NavigationTitle", false)
         </div>
         <div class="level_2_navigation" style="float:left;width:1040px;height:40px;">
             @RenderSection("Level2Navigation", false)
         </div>
     </div>
-    <div style="width:100%;height:30px;background-color:silver">
+    <div onclick="hideMenu()" style="width:100%;height:30px;background-color:#bdc3c7">
         <div class="level_3_navigation" style="float:right;margin-right:50px">
             @RenderSection("Level3Navigation", false)
         </div>
     </div>
 
-
-
-    @RenderSection("Content", false)
+    <div id="main_content" onclick="hideMenu()">
+        @RenderSection("Content", false)
+    </div>
+         
 
     <div style="position:absolute;bottom:0;left:0;width:1420px;height:30px;">
         <div style="float:left;margin-left:20px">&lt; PREVIOUS</div>
@@ -99,6 +108,8 @@
         });
 
         $(".menu_option").on("click", function () {
+            $(".menu").hide("fold");
+
             $(".menu_option").removeClass('menu_option_selected');
             $(this).addClass("menu_option_selected");
 
@@ -148,8 +159,7 @@
     });
 
     function hideMenu() {
-        var disp = $(".menu").css('display');
-        console.log("display", disp);
+        $(".menu").hide("fold");
     }
 
     function getNavigationA() {
@@ -185,16 +195,19 @@
         var navA = getNavigationA();
         switch (navA) {
             case 1:
-                $("#colorChangeDiv").css('background-color', 'gold');
+                $("#colorChangeDiv").css('background-color', '#FFC314');
                 break;
             case 2:
-                $("#colorChangeDiv").css('background-color', 'cadetblue');
+                $("#colorChangeDiv").css('background-color', '#33ACB0');
                 break;
             case 3:
-                $("#colorChangeDiv").css('background-color', 'darkorange');
+                $("#colorChangeDiv").css('background-color', '#FF9A30');
                 break;
             case 4:
-                $("#colorChangeDiv").css('background-color', 'orangered');
+                $("#colorChangeDiv").css('background-color', '#F55014');
+                break;
+            case 5:
+                $("#colorChangeDiv").css('background-color', '#797979');
                 break;
         }
     }

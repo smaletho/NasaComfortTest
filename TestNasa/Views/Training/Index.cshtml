@@ -8,6 +8,7 @@
 @section Styles{
     <style>
         .header_l2 {
+            font-family:Arial, Helvetica, sans-serif;
             float: left;
             border: 1px solid white;
             color: white;
@@ -21,7 +22,7 @@
 
         .header_l2_selected {
             background-color: silver;
-            color: black;
+            color: #2c3e50;
         }
 
         .header_l3 {
@@ -59,29 +60,41 @@
 }
 
 @section NavigationImage{
-
+    @switch (Model.Nav_A)
+    {
+        case 1:
+            <img src="~/Content/Images/fundoscopy.png" style="width:60px;height:60px"/>
+            break;
+        case 2:
+        <img src="~/Content/Images/kidneybladder.png" style="width:60px;height:60px" />
+            break;
+        case 3:
+        <img src="~/Content/Images/intubation.png" style="width:60px;height:60px" />
+            break;
+        case 4:
+        <img src="~/Content/Images/ivinsertion.png" style="width:60px;height:60px" />
+            break;
+        case 5:
+        <img src="~/Content/Images/diagnosis.png" style="width:60px;height:60px" />
+            break;
+    }
 }
 
 @section Level1Navigation{
     <div class="menu_option @if (Model.Nav_A == 1) { WriteLiteral(" menu_option_selected"); }">
-        <div style="float:left;width:70px;height:70px;background-color:gold;margin-right:10px"></div>
-        <div style="float:left;color:white;margin-top:25px">Fundoscopy</div>
+        <img src="~/Content/Images/fundoscopyName.png" style="width:100px;"/>
     </div>
     <div class="menu_option @if (Model.Nav_A == 2) { WriteLiteral(" menu_option_selected"); }">
-        <div style="float:left;width:70px;height:70px;background-color:cadetblue;margin-right:10px"></div>
-        <div style="float:left;color:white;margin-top:25px">Kidney & Bladder</div>
+        <img src="~/Content/Images/kidneybladderName.png" style="width:100px;" />
     </div>
     <div class="menu_option @if (Model.Nav_A == 3) { WriteLiteral(" menu_option_selected"); }">
-        <div style="float:left;width:70px;height:70px;background-color:darkorange;margin-right:10px"></div>
-        <div style="float:left;color:white;margin-top:25px">Intubation I</div>
+        <img src="~/Content/Images/intubationName.png" style="width:100px;" />
     </div>
     <div class="menu_option @if (Model.Nav_A == 4) { WriteLiteral(" menu_option_selected"); }">
-        <div style="float:left;width:70px;height:70px;background-color:orangered;margin-right:10px"></div>
-        <div style="float:left;color:white;margin-top:25px">IV Insertion</div>
+        <img src="~/Content/Images/ivinsertionName.png" style="width:100px;" />
     </div>
-    <div class="menu_option @if (Model.Nav_A == 5) { WriteLiteral(" menu_option_selected"); }">
-        <div style="float:left;width:70px;height:70px;background-color:gold;margin-right:10px"></div>
-        <div style="float:left;color:white;margin-top:25px">Patient Data</div>
+    <div style="margin-bottom:0" class="menu_option @if (Model.Nav_A == 5) { WriteLiteral(" menu_option_selected"); }">
+        <img src="~/Content/Images/diagnosisName.png" style="width:100px;" />
     </div>
 }
 
@@ -415,5 +428,5 @@
 }
 
 @section Content {
-    <div style="margin-top:300px;width:100%;text-align:center">Page @Model.Nav_A, @Model.Nav_B, @Model.Nav_C</div>
+    <div style="display:table;margin:0 auto;margin-top:200px">Page @Model.Nav_A, @Model.Nav_B, @Model.Nav_C</div>
 }
