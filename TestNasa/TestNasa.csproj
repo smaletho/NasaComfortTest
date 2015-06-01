@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -122,6 +123,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\arrows\blue-down.png" />
+    <Content Include="Content\arrows\blue-right.png" />
+    <Content Include="Content\arrows\orange-down.png" />
+    <Content Include="Content\arrows\orange-up.png" />
+    <Content Include="Content\arrows\light-orange-down.png" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\Slide1.jpg" />
     <Content Include="Content\Slide1.png" />
@@ -198,6 +204,11 @@
     <Content Include="Scripts\jquery.min.map" />
     <Content Include="Views\Home\Left.cshtml" />
     <Content Include="Views\Home\Right.cshtml" />
+    <Content Include="Views\Shared\_NavigationShell.cshtml" />
+    <Content Include="Views\Navigation\Index.cshtml" />
+    <Content Include="Views\Navigation\ViewController.cshtml" />
+    <Content Include="Views\Navigation\MenuB.cshtml" />
+    <Content Include="Views\Navigation\MenuC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

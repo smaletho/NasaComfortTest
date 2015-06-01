@@ -1,0 +1,31 @@
+﻿@model TestNasa.Controllers.PageVariables
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Url.Content("~/") + "/Views/Shared/_NavigationShell.cshtml";
+}
+
+@section Scripts{
+    <script>
+    $(function () {
+
+        SetCurrentTab_A(1);
+        
+        var urlGo = '@Html.Raw(Url.Action("SetTutorialState", new { nav_a = 1, nav_b = 1, nav_c = 1 }))';
+        $("#renderViewsHere").load(urlGo);
+
+        urlGo = '@Html.Raw(Url.Action("LoadMenuB", new { id=1 }))';
+        $(".navigation_B").load(urlGo, function () {
+            SetCurrentTab_B(1)
+        });
+
+        urlGo = '@Html.Raw(Url.Action("LoadMenuC", new { nav_a=1, nav_b=1 }))';
+        $(".navigation_C").load(urlGo, function () {
+            SetCurrentTab_C(1)
+        });
+
+        //SetCurrentTabs_A(1, 1, 1);
+
+    });
+    </script>
+}

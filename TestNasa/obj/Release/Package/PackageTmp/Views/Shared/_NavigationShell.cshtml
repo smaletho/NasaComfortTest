@@ -1,0 +1,502 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/highslide.css" rel="stylesheet" />
+
+    <style>
+        html {
+            -ms-touch-action: none; /* Direct all pointer events to JavaScript code. */
+            touch-action: none;
+        }
+
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            position: relative;
+            background-color: white;
+            width: 1420px;
+            height: 854px;
+            border: 1px solid black;
+            font-family: Arial;
+        }
+
+        .content {
+            width:1418px;
+            display:table;
+            margin: 0 auto;
+            border: 1px solid sandybrown;
+            height: 778px;
+            /*position:relative;*/
+        }
+
+        .grayHeader {
+            display: table;
+            margin: 0 auto;
+            width: 100%;
+            background-color: darkgray;
+            font-family: 'Courier New';
+        }
+
+        .exitButton {
+            color: purple;
+            cursor: pointer;
+            float: left;
+            padding: 5px;
+            width: 40px;
+        }
+
+        .infoBox {
+            float: left;
+            padding: 2px;
+            width: 1360px;
+            margin: 0 auto;
+        }
+
+            .infoBox table {
+                margin: 0 auto;
+                text-align: center;
+            }
+
+                .infoBox table td {
+                    width: 400px;
+                }
+
+        .navigation_A {
+            display: table;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom:-8px;
+        }
+            .navigation_A .content_A {
+                float: left;
+                margin-right: 50px;
+                margin-left: 50px;
+                cursor: pointer;
+            }
+
+            .navigation_A .content_A .title {
+                display:table;margin:0 auto;
+            }
+
+            .navigation_A .content_A .no-arrow {
+                background-image: none;
+                display:table;
+                margin: 0 auto;
+                width:30px;
+                height:30px;
+            }
+            .navigation_A .content_A .arrow {
+                display:table;
+                margin: 0 auto;
+                background-image: url('@Url.Content("~/")/Content/arrows/light-orange-down.png');
+                width:30px;
+                height:30px;
+                background-size:100%;
+            }
+
+
+        .navigation_B {
+            display: table;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #F5D9C1;
+            padding:10px;
+            padding-bottom:0;
+            width:1400px;
+        }
+
+            .navigation_B .menuObject {
+                display: inline-block;
+            }
+
+            .navigation_B .menuObject .tab {
+                border: 1px sandybrown solid;
+                /*float: left;*/
+                padding: 10px;
+                margin-right: 20px;
+                margin-left: 20px;
+                color: sandybrown;
+                border-radius: 10px;
+                width: 150px;
+                font-size:10pt;
+                cursor: pointer;
+            }
+            .navigation_B .menuObject .no-arrow{
+                background-image: none;
+                display:table;
+                margin: 0 auto;
+                width:30px;
+                height:30px;
+            }
+            .navigation_B .menuObject .arrow {
+                display:table;
+                margin: 0 auto;
+                background-image: url('@Url.Content("~/")/Content/arrows/orange-down.png');
+                width:30px;
+                height:30px;
+                background-size:100%;
+            }
+
+            .navigation_B .menuObject .tab_select {
+                color:white;
+                background-color:sandybrown;
+            }
+
+        
+        .navigation_C {
+            display: table;
+            margin: 0 auto;
+            margin-top:-8px;
+            text-align: center;
+            background-color: sandybrown;
+            padding:10px;
+            width:1400px;
+            padding-bottom:0;
+        }
+
+            .navigation_C .tab {
+                border: 1px solid white;
+                float: left;
+                padding: 10px;
+                margin-right: 20px;
+                margin-left: 20px;
+                color: white;
+                border-radius: 10px;
+                width: 130px;
+                font-size:10pt;
+                margin-bottom:-8px;
+                cursor: pointer;
+            }
+
+            .navigation_C .tab_select {
+                color:sandybrown;
+                background-color:white;
+            }
+
+
+        .footer {
+            display:table;
+            margin: 0 auto;
+            width:1420px;
+            margin-top:10px
+        }
+    </style>
+</head>
+<body>
+    <div class="grayHeader">
+        <div class="exitButton">EXIT</div>
+        <div class="infoBox">
+            <table>
+                <tr>
+                    <td>Session: 1</td>
+                    <td>Date: 05-30-15</td>
+                    <td>ID #036</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="summaryBar" style="display:table;text-align:center;margin-top:10px;margin-bottom:10px;">
+        <img id="blueArrow" src="~/Content/arrows/blue-down.png" style="margin-left: 20px; margin-right: 20px; float: left; width: 25px; height: 25px;" onclick="displayWholeNavigation()"/>
+        <div style="float:left">
+            <div id="collapseNav1" onclick="displaySpecialNavigation(1)" style="float:left;margin-right:20px;font-size:16pt">Fundoscopy &gt;</div>
+            <div id="collapseNav2" onclick="displaySpecialNavigation(2)" style="float:left;margin-right:20px;font-size:16pt">OBJECTIVE &gt;</div>
+            <div id="collapseNav3" onclick="displaySpecialNavigation(3)" style="float:left;margin-right:20px;font-size:16pt">Equipment</div>
+        </div>
+    </div>
+    <div class="wholeNavigation" style="position:absolute;background-color:white;width:1420px">
+
+        <div class="navigation_A">
+            <div class="content_A">
+                <div class="title">Fundoscopy</div>
+                <div style="display:table;margin:0 auto;width:100px;height:100px;background-color:gold"></div>
+                <div class="no-arrow"></div>
+            </div>
+            <div class="content_A">
+                <div class="title">Kidney & Bladder</div>
+                <div style="display:table;margin:0 auto;width:100px;height:100px;background-color:cadetblue"></div>
+                <div class="no-arrow"></div>
+            </div>
+            <div class="content_A">
+                <div class="title">Intubation I</div>
+                <div style="display:table;margin:0 auto;width:100px;height:100px;background-color:darkorange"></div>
+                <div class="no-arrow"></div>
+            </div>
+            <div class="content_A">
+                <div class="title">Intubation II</div>
+                <div style="display:table;margin:0 auto;width:100px;height:100px;background-color:orangered"></div>
+                <div class="no-arrow"></div>
+            </div>
+        </div>
+        <div class="navigation_B">
+
+            
+
+        </div>
+
+        <!--navigation_C should be generated by a View and Action-->
+        <div class="navigation_C">
+            
+        </div>
+    </div>
+
+    <div id="renderViewsHere" class="content"></div>
+
+    
+</body>
+</html>
+
+
+<script>var urlRoot = '@Url.Content("~/")';</script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+
+@RenderSection("Scripts", false)
+
+<script>
+    var current_navigation_a, current_navigation_b, current_navigation_c;
+
+    var clickingTimeout;
+
+    $(function () {
+
+        clearTimeout(clickingTimeout);
+        clickingTimeout = setTimeout(function () {
+            $(".wholeNavigation").toggle('fold', 'slow', function () {
+                $("#blueArrow").prop('src', '@Url.Content("~/")/Content/arrows/blue-right.png');
+            });
+        }, 3000);
+
+        AddAllListeners();
+
+    });
+
+
+    function SetTopNavigation(str, index) {
+        var s;
+
+        if (index != 3)
+            s = str + " >";
+        else
+            s = str;
+
+        $("#collapseNav" + index).text(s);
+    }
+
+    function displayWholeNavigation() {
+        $("#blueArrow").prop('src', '@Url.Content("~/")/Content/arrows/blue-down.png');
+
+        $(".navigation_A").show();
+        $(".navigation_B").show();
+        $(".navigation_C").show();
+
+        $(".wholeNavigation").show('fold', 'slow');
+        clearTimeout(clickingTimeout);
+        clickingTimeout = setTimeout(function () {
+            $(".wholeNavigation").hide('fold', 'slow', function () {
+                $("#blueArrow").prop('src', '@Url.Content("~/")/Content/arrows/blue-right.png');
+            });
+        }, 5000);
+    }
+
+    function displaySpecialNavigation(index) {
+        $(".navigation_A").show();
+        $(".navigation_B").show();
+        $(".navigation_C").show();
+
+        switch (index) {
+            case 1:
+                $(".wholeNavigation").show('fold');
+                clearTimeout(clickingTimeout);
+                clickingTimeout = setTimeout(function () {
+                    $(".wholeNavigation").hide('fold');
+                }, 5000);
+                break;
+            case 2:
+                $(".navigation_A").hide();
+                $(".wholeNavigation").show('fold');
+
+                clearTimeout(clickingTimeout);
+                clickingTimeout = setTimeout(function () {
+                    $(".wholeNavigation").hide('fold', function () {
+                        $(".navigation_A").show();
+                    });
+                }, 5000);
+                break;
+            case 3:
+                $(".navigation_A").hide();
+                $(".navigation_B").hide();
+                $(".wholeNavigation").show('fold');
+
+                clearTimeout(clickingTimeout);
+                clickingTimeout = setTimeout(function () {
+                    $(".wholeNavigation").hide('fold', function () {
+                        $(".navigation_A").show();
+                        $(".navigation_B").show();
+                        $(".navigation_C").show();
+                    });
+                }, 5000);
+                break;
+        }
+    }
+
+
+
+
+    function SetCurrentTab_A(index) {
+        current_navigation_a = index;
+
+        //set selected tabs
+        var arr = $(".navigation_A").find(".content_A");
+        //remove all "arrow"
+        $(".navigation_A").find(".no-arrow").removeClass("arrow");
+        //add to proper index
+        $(arr[index - 1]).find(".no-arrow").addClass("arrow");
+    }
+    function SetCurrentTab_B(index) {
+        current_navigation_b = index;
+
+        var arr = $(".navigation_B").find(".menuObject");
+        $(".navigation_B").find(".no-arrow").removeClass("arrow");
+        $(".navigation_B").find(".tab").removeClass("tab_select");
+
+        $(arr[index - 1]).find(".no-arrow").addClass("arrow");
+        $(arr[index - 1]).find(".tab").addClass("tab_select");
+    }
+    function SetCurrentTab_C(index) {
+        current_navigation_c = index;
+
+        var arr = $(".navigation_C").find(".tab");
+        $(".navigation_C").find(".tab").removeClass("tab_select");
+        $(arr[index - 1]).addClass("tab_select");
+    }
+
+    function AddAllListeners() {
+        $(".navigation_A .content_A").on("click", function () {
+            //need index of content_A in navigation
+            var arr = $(".navigation_A").find(".content_A");
+            var index = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if ($(this)[0] === $(arr[i])[0])
+                    index = i + 1;
+            }
+
+            //$(this).parent(".navigation_A").find(".no-arrow").removeClass("arrow");
+            //$(this).children(".no-arrow").addClass("arrow");
+
+            SetTopNavigation($(this).children(".title").text(), 1);
+
+            clearTimeout(clickingTimeout);
+            clickingTimeout = setTimeout(function () {
+                $(".wholeNavigation").hide('fold');
+            }, 5000);
+
+            SetCurrentTab_A(index);
+
+            var newUrl = '@Html.Raw(Url.Action("SetTutorialState", new { nav_a = 99999, nav_b = 1, nav_c = 1 }))';
+            newUrl = newUrl.replace("99999", index);
+            $("#renderViewsHere").load(newUrl);
+
+            //load menu B1, C1
+            newUrl = '@Html.Raw(Url.Action("LoadMenuB", new { id=99999 }))';
+            newUrl = newUrl.replace("99999", index);
+            $(".navigation_B").load(newUrl, function () {
+                SetCurrentTab_B(1)
+            });
+
+            newUrl = '@Html.Raw(Url.Action("LoadMenuC", new { nav_a = 99999, nav_b = 1 }))';
+            newUrl = newUrl.replace("99999", index);
+            $(".navigation_C").load(newUrl, function () {
+                SetCurrentTab_C(1)
+            });
+
+        });
+
+        $(".navigation_B .menuObject").on("click", function () {
+            var arr = $(".navigation_B").find(".menuObject");
+            var index = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if ($(this)[0] === $(arr[i])[0])
+                    index = i + 1;
+            }
+
+
+            //$(this).parent(".navigation_B").find(".no-arrow").removeClass("arrow");
+            //$(this).parent(".navigation_B").find(".tab").removeClass("tab_select");
+
+
+            //$(this).children('.tab').addClass("tab_select");
+            //$(this).children('.no-arrow').addClass("arrow");
+
+            SetTopNavigation($(this).children(".tab").text(), 2);
+
+            clearTimeout(clickingTimeout);
+            clickingTimeout = setTimeout(function () {
+                $(".wholeNavigation").hide('fold', function () {
+                    $(".navigation_A").show();
+                });
+            }, 5000);
+
+            var newUrl = '@Html.Raw(Url.Action("SetTutorialState", new { nav_a = 99999, nav_b = 88888, nav_c = 1 }))';
+            newUrl = newUrl.replace("99999", current_navigation_a);
+            newUrl = newUrl.replace("88888", index);
+            $("#renderViewsHere").load(newUrl, function () {
+                SetCurrentTab_B(index)
+            });
+
+            //load menu A(current), B(this), C1
+            newUrl = '@Html.Raw(Url.Action("LoadMenuC", new { nav_a = 99999, nav_b = 1 }))';
+            newUrl = newUrl.replace("99999", index);
+            $(".navigation_C").load(newUrl, function () {
+                SetCurrentTab_C(1)
+            });
+
+        });
+        $(".navigation_C .tab").on("click", function () {
+            var arr = $(".navigation_C").find(".tab");
+            var index = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if ($(this)[0] === $(arr[i])[0])
+                    index = i + 1;
+            }
+
+
+            //$(this).parent(".navigation_C").find(".tab").removeClass("tab_select");
+            //$(this).addClass("tab_select");
+
+            SetTopNavigation($(this).text(), 3);
+
+            clearTimeout(clickingTimeout);
+            clickingTimeout = setTimeout(function () {
+                $(".wholeNavigation").hide('fold', function () {
+                    $(".navigation_A").show();
+                    $(".navigation_B").show();
+                });
+            }, 5000);
+
+            var newUrl = '@Html.Raw(Url.Action("SetTutorialState", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+            newUrl = newUrl.replace("99999", current_navigation_a);
+            newUrl = newUrl.replace("88888", current_navigation_b);
+            newUrl = newUrl.replace("77777", index);
+            $("#renderViewsHere").load(newUrl, function () {
+                SetCurrentTab_C(index)
+            });
+
+            //no menus to load here
+        });
+    }
+
+</script>
+
+
+
+
