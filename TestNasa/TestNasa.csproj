@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,8 @@
     <Content Include="Views\Navigation\ViewController.cshtml" />
     <Content Include="Views\Navigation\MenuB.cshtml" />
     <Content Include="Views\Navigation\MenuC.cshtml" />
+    <Content Include="Views\Shared\_TrainingShell.cshtml" />
+    <Content Include="Views\Training\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

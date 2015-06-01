@@ -1,0 +1,190 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewBag.Title</title>
+
+    <style>
+        div{
+            font-family:Arial;
+        }
+
+        .menu_option {
+            clear:left;margin-bottom:10px;overflow:auto;
+            padding:10px;
+        }
+        .menu_option:hover {
+            background-color:#ebebeb;
+            color:black;
+        }
+        .menu_option_selected {
+            background-color:silver;
+        }
+        
+    </style>
+
+    @RenderSection("Styles", false)
+
+</head>
+
+
+<body onclick="hideMenu()" style="width:1420px;height:873px;position:relative">
+    <div style="width:100%;height:30px;background-color:silver">
+        <div class="menu_button" style="float:left;margin-left:10px;background-color:gray;height:25px;width:100px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px">
+            <div style="margin-top:0">MENU</div>
+        </div>
+        <div class="menu" style="position:absolute;top:15px;left:10px;background:gray;z-index:99999;display:none;padding:20px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+            @RenderSection("Level1Navigation", false)
+        </div>
+        <div style="float:left;width:1250px">
+            <div style="display:table;margin: 0 auto;">
+                <div style="float:left;margin-top:7px;margin-right:10px">COMFORT</div>
+                <div style="float:left;background-color:darkblue;width:450px;height:30px;color:white;">
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">Training</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">Date: 06-01-15</div>
+                    <div style="float:left;text-align:center;width:150px;font-family:'Courier New';font-weight:bold;margin-top:7px">ID#: 036</div>
+                </div>
+            </div>
+        </div>
+        <div style="float:right;margin-top:8px;margin-right:20px">
+            EXIT
+        </div>
+    </div>
+    <div style="position:absolute;top:30px;left:50px;width:70px;height:70px;">
+        @RenderSection("NavigationImage", false)
+    </div>
+    <div style="width:100%;height:40px;background-color:sandybrown">
+        <div style="float:left;margin-left:130px;font-size:16pt;color:white;margin-top:9px;width:230px;text-align:center">
+            @RenderSection("NavigationTitle", false)
+        </div>
+        <div class="level_2_navigation" style="float:left;width:1040px;height:40px;">
+            @RenderSection("Level2Navigation", false)
+        </div>
+    </div>
+    <div style="width:100%;height:30px;background-color:silver">
+        <div class="level_3_navigation" style="float:right;margin-right:50px">
+            @RenderSection("Level3Navigation", false)
+        </div>
+    </div>
+
+
+
+    @RenderSection("Content", false)
+
+    <div style="position:absolute;bottom:0;left:0;width:1420px;height:30px;">
+        <div style="float:left;margin-left:20px">&lt; PREVIOUS</div>
+        <div style="float:right;margin-right:20px">NEXT &gt;</div>
+    </div>
+
+</body>
+
+
+</html>
+
+
+<script>var urlRoot = '@Url.Content("~/")';</script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+
+<script>
+    var showingMenu = false;
+
+    $(function () {
+        $(".menu_button").on("click", function () {
+            $(".menu").toggle("fold");
+        });
+
+        $(".menu_option").on("click", function () {
+            $(".menu_option").removeClass('menu_option_selected');
+            $(this).addClass("menu_option_selected");
+
+            $(".header_l3").removeClass("header_l3_selected");
+            $(".header_l3").first().addClass("header_l3_selected");
+            $(".header_l2").removeClass("header_l2_selected")
+            $(".header_l2").first().addClass("header_l2_selected");
+
+
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", 1);
+            loadUrl = loadUrl.replace("77777", 1);
+            $("body").load(loadUrl);
+        });
+
+
+        $(".header_l2").on("click", function () {
+            $(".header_l3").removeClass("header_l3_selected");
+            $(".header_l3").first().addClass("header_l3_selected");
+            $(".header_l2").removeClass("header_l2_selected")
+            $(this).addClass("header_l2_selected");
+
+            
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", getNavigationB());
+            loadUrl = loadUrl.replace("77777", 1);
+            $("body").load(loadUrl);
+
+        });
+        $(".header_l3").on("click", function () {
+            $(".header_l3").removeClass("header_l3_selected")
+            $(this).addClass("header_l3_selected");
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", getNavigationB());
+            loadUrl = loadUrl.replace("77777", getNavigationC());
+            $("body").load(loadUrl);
+        });
+    });
+
+    function hideMenu() {
+        var disp = $(".menu").css('display');
+        console.log("display", disp);
+    }
+
+    function getNavigationA() {
+        var arr = $(".menu").find(".menu_option");
+        for (var i = 0; i < arr.length; i++) {
+            if ($(arr[i]).hasClass('menu_option_selected')) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+    function getNavigationB() {
+        var arr = $(".level_2_navigation").find(".header_l2");
+        for (var i = 0; i < arr.length; i++) {
+            if ($(arr[i]).hasClass('header_l2_selected')) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+    function getNavigationC() {
+        var arr = $(".level_3_navigation").find(".header_l3");
+        for (var i = 0; i < arr.length; i++) {
+            if ($(arr[i]).hasClass('header_l3_selected')) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+</script>
+
+@RenderSection("Scripts", false)
+
+
+
+
+
+
