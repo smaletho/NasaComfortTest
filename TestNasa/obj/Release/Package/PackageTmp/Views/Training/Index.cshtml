@@ -1,0 +1,419 @@
+﻿@model TestNasa.Controllers.TrainingModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Url.Content("~/") + "/Views/Shared/_TrainingShell.cshtml";
+}
+
+@section Styles{
+    <style>
+        .header_l2 {
+            float: left;
+            border: 1px solid white;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 7px;
+            font-size: 10pt;
+            margin-right: 15px;
+            padding: 5px 20px 5px 20px;
+        }
+
+        .header_l2_selected {
+            background-color: silver;
+            color: black;
+        }
+
+        .header_l3 {
+            float: left;
+            margin-bottom: 0;
+            padding: 5px 20px 0 20px;
+            margin-top: 7px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-right:10px
+        }
+
+        .header_l3_selected {
+            background-color: white;
+        }
+    </style>
+}
+
+@section NavigationTitle{
+    @switch (Model.Nav_A)
+    {
+        case 1:
+            @:FUNDOSCOPY
+            break;
+        case 2:
+        @:KIDNEY & BLADDER
+            break;
+        case 3:
+        @:INTUBATION
+            break;
+        case 4:
+        @:IV INSERTION
+            break;
+    }
+}
+
+@section NavigationImage{
+
+}
+
+@section Level1Navigation{
+    <div class="menu_option @if (Model.Nav_A == 1) { WriteLiteral(" menu_option_selected"); }">
+        <div style="float:left;width:70px;height:70px;background-color:gold;margin-right:10px"></div>
+        <div style="float:left;color:white;margin-top:25px">Fundoscopy</div>
+    </div>
+    <div class="menu_option @if (Model.Nav_A == 2) { WriteLiteral(" menu_option_selected"); }">
+        <div style="float:left;width:70px;height:70px;background-color:cadetblue;margin-right:10px"></div>
+        <div style="float:left;color:white;margin-top:25px">Kidney & Bladder</div>
+    </div>
+    <div class="menu_option @if (Model.Nav_A == 3) { WriteLiteral(" menu_option_selected"); }">
+        <div style="float:left;width:70px;height:70px;background-color:darkorange;margin-right:10px"></div>
+        <div style="float:left;color:white;margin-top:25px">Intubation I</div>
+    </div>
+    <div class="menu_option @if (Model.Nav_A == 4) { WriteLiteral(" menu_option_selected"); }">
+        <div style="float:left;width:70px;height:70px;background-color:orangered;margin-right:10px"></div>
+        <div style="float:left;color:white;margin-top:25px">IV Insertion</div>
+    </div>
+    <div class="menu_option @if (Model.Nav_A == 5) { WriteLiteral(" menu_option_selected"); }">
+        <div style="float:left;width:70px;height:70px;background-color:gold;margin-right:10px"></div>
+        <div style="float:left;color:white;margin-top:25px">Patient Data</div>
+    </div>
+}
+
+@section Level2Navigation{
+    @switch (Model.Nav_A)
+    {
+        case 1:
+            //FUNDOSCOPY
+            <div class="header_l2 @if (Model.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+                OBJECTIVE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+                FOUNDATION
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+                SET UP
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+                EXAM PROCEDURE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+                TIPS
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+                QUIZ
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 7) { WriteLiteral(" header_l2_selected"); }">
+                PATHOLOGY
+            </div>
+            break;
+        case 2:
+            //Kidney & Bladder
+            <div class="header_l2 @if (Model.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+                OBJECTIVE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+                FOUNDATION
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+                SETUP
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+                RIGHT KIDNEY
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+                LEFT KIDNEY
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+                BLADDER
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 7) { WriteLiteral(" header_l2_selected"); }">
+                PATHOLOGY
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 8) { WriteLiteral(" header_l2_selected"); }">
+                QUIZ
+            </div>
+            break;
+        case 3:
+            //INTUBATION
+            <div class="header_l2 @if (Model.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+                OBJECTIVE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+                FOUNDATION
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+                SETUP
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+                EXAM PROCEDURE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+                QUIZ
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+                TIPS
+            </div>
+                break;
+        case 4:
+            //IV Insertion
+            <div class="header_l2 @if (Model.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+                OBJECTIVE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+                FOUNDATION
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+                SETUP
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+                EXAM PROCEDURE
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+                QUIZ
+            </div>
+            <div class="header_l2 @if (Model.Nav_B == 7) { WriteLiteral(" header_l2_selected"); }">
+                TROUBLESHOOTING
+            </div>
+                break;
+    }
+
+}
+
+@section Level3Navigation{
+    @switch (Model.Nav_A)
+    {
+        case 1:
+            //FUNDOSCOPY
+            switch (Model.Nav_B)
+            {
+                case 1:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Overview
+                    </div>
+                    break;
+                case 2:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Items
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        The CellScope
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
+                        Imaging
+                    </div>
+                    break;
+                case 3:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Room & Subject
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        CellScope
+                    </div>
+                    break;
+                case 4:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 5:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Tips
+                    </div>
+                    break;
+                case 6:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Quiz
+                    </div>
+                    break;
+                case 7:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Pathology
+                    </div>
+                    break;
+            }
+            break;
+        case 2:
+            //Kidney/Bladder
+            switch (Model.Nav_B)
+            {
+                case 1:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Overview
+                    </div>
+                    break;
+                case 2:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Probe handling
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Imaging
+                    </div>
+                    break;
+                case 3:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Room & subject
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Ultrasound machine
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
+                        Image acquisition
+                    </div>
+                    break;
+                case 4:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 5:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 6:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 7:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Pathology
+                    </div>
+                    break;
+                case 8:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Quiz
+                    </div>
+                    break;
+            }
+            break;
+        case 3:
+            //Intubation
+            switch (Model.Nav_B)
+            {
+                case 1:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Overview
+                    </div>
+                    break;
+                case 2:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Airway management
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        ILMA
+                    </div>
+                    break;
+                case 3:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Room & subject
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Equipment
+                    </div>
+                    break;
+                case 4:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 5:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Quiz
+                    </div>
+                    break;
+                case 6:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Tips
+                    </div>
+                    break;
+            }
+            break;
+        case 4:
+            //IV Insertion
+            switch (Model.Nav_B)
+            {
+                case 1:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Overview
+                    </div>
+                    break;
+                case 2:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Quick start
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Probe handling
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
+                        Imaging
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 4) { WriteLiteral(" header_l3_selected"); }">
+                        Needle handling
+                    </div>
+                    break;
+                case 3:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Subject
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Ultrasound machine
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
+                        Procedure supplies
+                    </div>
+                    break;
+                case 4:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Video
+                    </div>
+                    <div class="header_l3 @if (Model.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                        Step-by-step
+                    </div>
+                    break;
+                case 5:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Troubleshooting
+                    </div>
+                    break;
+                case 6:
+                    <div class="header_l3 @if (Model.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                        Quiz
+                    </div>
+                    break;
+            }
+            break;
+        case 5:
+            //PATIENT DATA
+            break;
+    }
+
+
+
+
+}
+
+@section Content {
+    <div style="margin-top:300px;width:100%;text-align:center">Page @Model.Nav_A, @Model.Nav_B, @Model.Nav_C</div>
+}
