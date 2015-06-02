@@ -11,6 +11,17 @@
     <script src="//use.edgefonts.net/quicksand;forum.js"></script>
 
     <style>
+        html {
+          box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing:border-box;
+        }
+        *, *:before, *:after {
+          box-sizing: inherit;
+          -moz-box-sizing: inherit;
+          -webkit-box-sizing: inherit;
+        }
+
         body {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -57,7 +68,7 @@
         <div class="menu_button" style="float:left;margin-left:10px;background-color:#a7a9ac;height:30px;width:120px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px;cursor:pointer">
             <div style="margin-top:2px;cursor:pointer">MENU</div>
         </div>
-        <div class="menu" style="position:absolute;top:18px;left:10px;background:#a7a9ac;z-index:99999;display:none;padding:15px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;width:90px">
+        <div class="menu" style="position:absolute;top:18px;left:10px;background:#a7a9ac;z-index:99999;display:none;padding:15px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;width:120px">
             @RenderSection("Level1Navigation", false)
         </div>
         <div style="float:left;width:1230px">
@@ -74,7 +85,7 @@
             EXIT
         </div>
     </div>
-    <div style="position:absolute;top:30px;left:140px;width:60px;height:60px;background-color:white;padding:5px">
+    <div style="position:absolute;top:30px;left:140px;width:71px;height:71px;background-color:white;padding:5px">
         @RenderSection("NavigationImage", false)
     </div>
     <div onclick="hideMenu()" id="colorChangeDiv" style="width:100%;height:40px;background-color:#FFC314;clear:left">
@@ -101,6 +112,8 @@
         <div style="float:right;margin-right:20px">NEXT &gt;</div>
     </div>
 
+    <div id="windowHeightTest" style="position:absolute;bottom:100px"></div>
+
 </body>
 
 
@@ -110,17 +123,31 @@
 <script>var urlRoot = '@Url.Content("~/")';</script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/ClickPlugin.js"></script>
 
 <script>
     var showingMenu = false;
 
     $(function () {
-        $(".menu_button").on("click", function () {
-            $(".menu").toggle("fold");
+        $("#testButton").on("touchstart touchend mousedown mouseup mouseover mouseout", function (e) {
+            console.log("event", e.type);
         });
 
-        $(".menu_option").on("click", function () {
-            $(".menu").hide("fold");
+
+        var h = window.outerHeight;
+        var w = window.outerWidth;
+        var str = "h: " + h + " - w: " + w;
+        $("#windowHeightTest").text(str);
+
+        $(".menu_button").tomclick("", function () {
+            $(".menu").toggle("blind");
+        });
+        //$(".menu_button").on("click", function () {
+        //    $(".menu").toggle("blind");
+        //});
+
+        $(".menu_option").tomclick("", function () {
+            $(".menu").hide("blind");
 
             $(".menu_option").removeClass('menu_option_selected');
             $(this).addClass("menu_option_selected");
@@ -140,14 +167,49 @@
             $("body").load(loadUrl, loadSuccess);
         });
 
+        @*$(".menu_option").on("click", function () {
+            $(".menu").hide("blind");
 
-        $(".header_l2").on("click", function () {
+            $(".menu_option").removeClass('menu_option_selected');
+            $(this).addClass("menu_option_selected");
+
+            $(".header_l3").removeClass("header_l3_selected");
+            $(".header_l3").first().addClass("header_l3_selected");
+            $(".header_l2").removeClass("header_l2_selected")
+            $(".header_l2").first().addClass("header_l2_selected");
+
+
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", 1);
+            loadUrl = loadUrl.replace("77777", 1);
+            $("body").load(loadUrl, loadSuccess);
+        });*@
+
+        $(".header_l2").tomclick("", function () {
             $(".header_l3").removeClass("header_l3_selected");
             $(".header_l3").first().addClass("header_l3_selected");
             $(".header_l2").removeClass("header_l2_selected")
             $(this).addClass("header_l2_selected");
 
-            
+
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", getNavigationB());
+            loadUrl = loadUrl.replace("77777", 1);
+            $("body").load(loadUrl, loadSuccess);
+        });
+        @*$(".header_l2").on("click", function () {
+            $(".header_l3").removeClass("header_l3_selected");
+            $(".header_l3").first().addClass("header_l3_selected");
+            $(".header_l2").removeClass("header_l2_selected")
+            $(this).addClass("header_l2_selected");
+
+
 
             //load w/ parameters
             var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
@@ -156,8 +218,9 @@
             loadUrl = loadUrl.replace("77777", 1);
             $("body").load(loadUrl, loadSuccess);
 
-        });
-        $(".header_l3").on("click", function () {
+        });*@
+
+        $(".header_l3").tomclick("", function () {
             $(".header_l3").removeClass("header_l3_selected")
             $(this).addClass("header_l3_selected");
 
@@ -168,10 +231,21 @@
             loadUrl = loadUrl.replace("77777", getNavigationC());
             $("body").load(loadUrl, loadSuccess);
         });
+        @*$(".header_l3").on("click", function () {
+            $(".header_l3").removeClass("header_l3_selected")
+            $(this).addClass("header_l3_selected");
+
+            //load w/ parameters
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", getNavigationA());
+            loadUrl = loadUrl.replace("88888", getNavigationB());
+            loadUrl = loadUrl.replace("77777", getNavigationC());
+            $("body").load(loadUrl, loadSuccess);
+        });*@
     });
 
     function hideMenu() {
-        $(".menu").hide("fold");
+        $(".menu").hide("blind");
     }
 
     function getNavigationA() {

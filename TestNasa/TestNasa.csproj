@@ -197,6 +197,7 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\Pub.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\ClickPlugin.js" />
     <Content Include="Scripts\highslide-full.min.js" />
     <Content Include="Scripts\highslide.config.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
