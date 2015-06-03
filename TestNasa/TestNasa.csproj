@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlRenderer">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net40-client\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.WinForms">
+      <HintPath>..\packages\HtmlRenderer.Mono.1.5.0.6\lib\net40-client\HtmlRenderer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -49,6 +55,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -142,6 +149,7 @@
     <Content Include="Content\Images\kidneybladder.png" />
     <Content Include="Content\Images\kidneybladderName.png" />
     <Content Include="Content\Images\reference.png" />
+    <Content Include="Content\Screenshots\1-1-1.png" />
     <Content Include="Content\Slide1.jpg" />
     <Content Include="Content\Slide1.png" />
     <Content Include="Content\Slide2.jpg" />
@@ -225,6 +233,7 @@
     <Content Include="Views\Navigation\MenuC.cshtml" />
     <Content Include="Views\Shared\_TrainingShell.cshtml" />
     <Content Include="Views\Training\Index.cshtml" />
+    <Content Include="Views\Training\ImageEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
