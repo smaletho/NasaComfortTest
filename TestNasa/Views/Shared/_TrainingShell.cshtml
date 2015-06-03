@@ -12,9 +12,12 @@
 
     <style>
         html {
-          box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          -webkit-box-sizing:border-box;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            transform-origin: top left;
+            -moz-transform-origin: top left;
+            -webkit-transform-origin: top left;
         }
         *, *:before, *:after {
           box-sizing: inherit;
@@ -29,6 +32,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            /*overflow:hidden;*/
         }
 
         div{
@@ -64,6 +68,8 @@
 
 
 <body style="width:1420px;height:854px;position:relative;border:1px solid">
+    <div id="measuringDiv" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-999999"></div>
+
     <div style="width:100%;height:30px;background-color:#d5d5d5">
         <div class="menu_button" style="float:left;margin-left:10px;background-color:#a7a9ac;height:30px;width:120px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px;cursor:pointer">
             <div style="margin-top:2px;cursor:pointer">MENU</div>
@@ -108,11 +114,14 @@
          
 
     <div style="position:absolute;bottom:0;left:0;width:1420px;height:30px;">
-        <div style="float:left;margin-left:20px">&lt; PREVIOUS</div>
-        <div style="float:right;margin-right:20px">NEXT &gt;</div>
+        <div id="previous_button" style="float:left;margin-left:20px">&lt; PREVIOUS</div>
+        <div id="next_button" style="float:right;margin-right:20px;border:1px solid">NEXT &gt;</div>
     </div>
 
     <div id="windowHeightTest" style="position:absolute;bottom:100px"></div>
+    <div id="windowHeightTest1" style="position:absolute;bottom:120px"></div>
+    <div id="windowHeightTest2" style="position:absolute;bottom:80px"></div>
+    <div id="windowHeightTest3" style="position:absolute;bottom:60px"></div>
 
 </body>
 
@@ -126,31 +135,172 @@
 <script src="~/Scripts/ClickPlugin.js"></script>
 
 <script>
+    //set this variable
+    var USE_THIS_SCALE;
     var showingMenu = false;
+    var nav_l1_max = 5;
 
     $(function () {
-        $("#testButton").on("touchstart touchend mousedown mouseup mouseover mouseout", function (e) {
-            console.log("event", e.type);
+        $("#previous_button").tomclick("", function () {
+            var current_a = getNavigationA();
+            var current_b = getNavigationB();
+            var current_c = getNavigationC();
+
+            var use_a = 0;
+            var use_b = 0;
+            var use_c = 0;
+
+
+            var consoleLog;
+
+            if (current_a > 1) {
+                //next page = current_a, current_b, a+1
+                consoleLog = current_a + ", " + current_b + ", " + (current_c - 1);
+                use_a = current_a;
+                use_b = current_b;
+                use_c = current_c - 1;
+            } else {
+                //no more l3 pages, go up to l2
+                if (current_b > 1) {
+                    //next page = current_a, b+1, 1
+                    consoleLog = current_a + ", " + (current_b - 1) + ", 1";
+                    use_a = current_a;
+                    use_b = current_b - 1;
+                    use_c = 1;
+                } else {
+                    //no more l2 pages, go up to l1
+                    if (current_a > 1) {
+                        //next page = a+1, 1, 1
+                        consoleLog = (current_a - 1) + ", 1, 1";
+                        use_a = current_a - 1;
+                        use_b = 1;
+                        use_c = 1;
+                    } else {
+                        consoleLog = "no more pages";
+                    }
+                }
+            }
+
+            console.log(consoleLog);
+            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+            loadUrl = loadUrl.replace("99999", use_a);
+            loadUrl = loadUrl.replace("88888", use_b);
+            loadUrl = loadUrl.replace("77777", use_c);
+            $("body").load(loadUrl, loadSuccess);
+        });
+        $("#next_button").tomclick("", function () {
+            var current_a = getNavigationA();
+            var current_b = getNavigationB();
+            var current_c = getNavigationC();
+
+            var use_a = 0;
+            var use_b = 0;
+            var use_c = 0;
+
+            var okayToLoad = true;
+
+            var consoleLog;
+
+            if (current_a < nav_l3_max) {
+                //next page = current_a, current_b, a+1
+                consoleLog = current_a + ", " + current_b + ", " + (current_c + 1);
+                use_a = current_a;
+                use_b = current_b;
+                use_c = current_c + 1;
+            } else {
+                //no more l3 pages, go up to l2
+                if (current_b < nav_l2_max) {
+                    //next page = current_a, b+1, 1
+                    consoleLog = current_a + ", " + (current_b + 1) + ", 1";
+                    use_a = current_a;
+                    use_b = current_b + 1;
+                    use_c = 1;
+                } else {
+                    //no more l2 pages, go up to l1
+                    if (current_a < nav_l3_max) {
+                        //next page = a+1, 1, 1
+                        consoleLog = (current_a + 1) + ", 1, 1";
+                        use_a = current_a + 1;
+                        use_b = 1;
+                        use_c = 1;
+                    } else {
+                        consoleLog = "no more pages";
+                        okayToLoad = false;
+                    }
+                }
+            }
+
+            console.log(consoleLog);
+            if (okayToLoad) {
+                var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
+                loadUrl = loadUrl.replace("99999", use_a);
+                loadUrl = loadUrl.replace("88888", use_b);
+                loadUrl = loadUrl.replace("77777", use_c);
+                $("body").load(loadUrl, loadSuccess);
+            }
+            
         });
 
+        var outerHeight = window.outerHeight;
+        var outerWidth = window.outerWidth;
+
+        var heightRatio = outerHeight / 937;
+        var widthRatio = outerWidth / 1455;
+        var testStr = "h: " + heightRatio + " - w: " + widthRatio;
+
+
+        $("#windowHeightTest1").text(testStr);
+        //$("#windowHeightTest3").text();
+
+        //var scale = 'scale(' + heightRatio + ')';
+        //$("html").css('transform', scale);
+        //$("#windowHeightTest2").text("scaling by: " + heightRatio);
+
+        if (heightRatio != 1 && widthRatio != 1) {
+            if (heightRatio < widthRatio) {
+                //use heightRatio for scale
+                heightRatio -= 0.015;
+                USE_THIS_SCALE = heightRatio;
+                var scale = 'scale(' + heightRatio + ')';
+                $("html").css('transform', scale);
+                $("#windowHeightTest2").text("scaling by: " + heightRatio);
+            } else {
+                //use widthRatio for scale
+                widthRatio -= 0.015;
+                USE_THIS_SCALE = heightRatio;
+                var scale = 'scale(' + widthRatio + ')';
+                $("html").css('transform', scale);
+                $("#windowHeightTest2").text("scaling by: " + widthRatio);
+            }
+        }
+
+        
+        
+
+        //$("#testButton").on("mousedown mouseup mouseover mouseout touchstart touchend ", function (e) {
+        //    console.log("event", e.type);
+        //});
+        $("#testButton").tomclick("", function () {
+
+        });
 
         var h = window.outerHeight;
         var w = window.outerWidth;
         var str = "h: " + h + " - w: " + w;
         $("#windowHeightTest").text(str);
 
-        $(".menu_button").tomclick("", function () {
+        $(".menu_button").tomclick("", function (element) {
             $(".menu").toggle("blind");
         });
         //$(".menu_button").on("click", function () {
         //    $(".menu").toggle("blind");
         //});
 
-        $(".menu_option").tomclick("", function () {
+        $(".menu_option").tomclick("", function (element) {
             $(".menu").hide("blind");
 
             $(".menu_option").removeClass('menu_option_selected');
-            $(this).addClass("menu_option_selected");
+            $(element).addClass("menu_option_selected");
 
             $(".header_l3").removeClass("header_l3_selected");
             $(".header_l3").first().addClass("header_l3_selected");
@@ -188,11 +338,11 @@
             $("body").load(loadUrl, loadSuccess);
         });*@
 
-        $(".header_l2").tomclick("", function () {
+        $(".header_l2").tomclick("", function (element) {
             $(".header_l3").removeClass("header_l3_selected");
             $(".header_l3").first().addClass("header_l3_selected");
             $(".header_l2").removeClass("header_l2_selected")
-            $(this).addClass("header_l2_selected");
+            $(element).addClass("header_l2_selected");
 
 
 
@@ -220,9 +370,9 @@
 
         });*@
 
-        $(".header_l3").tomclick("", function () {
+        $(".header_l3").tomclick("", function (element) {
             $(".header_l3").removeClass("header_l3_selected")
-            $(this).addClass("header_l3_selected");
+            $(element).addClass("header_l3_selected");
 
             //load w/ parameters
             var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
@@ -278,6 +428,10 @@
 
 
     function loadSuccess() {
+
+        var scale = 'scale(' + USE_THIS_SCALE + ')';
+        $("html").css('transform', scale);
+
         var navA = getNavigationA();
         switch (navA) {
             case 1:
