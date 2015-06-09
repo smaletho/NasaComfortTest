@@ -9,30 +9,30 @@
     <title>@ViewBag.Title</title>
 
     <script src="//use.edgefonts.net/quicksand;forum.js"></script>
+    
 
     <style>
         html {
-            box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
-            transform-origin: top left;
+            box-sizing: border-box;
+            -moz-transform-origin: top left;
             -moz-transform-origin: top left;
             -webkit-transform-origin: top left;
+            transform-origin: top left;
         }
         *, *:before, *:after {
-          box-sizing: inherit;
           -moz-box-sizing: inherit;
           -webkit-box-sizing: inherit;
+          box-sizing: inherit;
         }
 
         body {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
-            -khtml-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            /*overflow:hidden;*/
         }
 
         div{
@@ -56,10 +56,61 @@
 
         #main_content {
             width:1420px;
-            /*height:740px;*/
+            height:710px;
             position:relative;
         }
         
+        .next_previous_btn {
+            background: #cfd0d1;
+            background-image: -webkit-linear-gradient(top, #cfd0d1, #696969);
+            background-image: -moz-linear-gradient(top, #cfd0d1, #696969);
+            background-image: -ms-linear-gradient(top, #cfd0d1, #696969);
+            background-image: -o-linear-gradient(top, #cfd0d1, #696969);
+            background-image: linear-gradient(to bottom, #cfd0d1, #696969);
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+            color: #ffffff;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            font-size:10pt;
+            font-family:quicksand;
+        }
+
+        .next_previous_btn_hover {
+            background: #696969;
+            background-image: -webkit-linear-gradient(top, #696969, #cfd0d1);
+            background-image: -moz-linear-gradient(top, #696969, #cfd0d1);
+            background-image: -ms-linear-gradient(top, #696969, #cfd0d1);
+            background-image: -o-linear-gradient(top, #696969, #cfd0d1);
+            background-image: linear-gradient(to bottom, #696969, #cfd0d1);
+            text-decoration: none;
+        }
+
+
+        .page-fold-button:hover {
+            background-color:lightblue;
+            opacity: 0.4;
+        }
+
+
+
+        .menu {
+            width:120px;
+        }
+
+        .bookmarkItem {
+            display:block;margin:20px;overflow:auto;
+        }
+
+        .bookmarkTitle {
+            color:white;font-weight:bold;font-size:14pt
+        }
+
+        .bookmarkNavigation {
+            text-align:center;color:#ebebeb
+        }
+
     </style>
 
     @RenderSection("Styles", false)
@@ -73,7 +124,7 @@
         <div class="menu_button" style="float:left;margin-left:10px;background-color:#a7a9ac;height:30px;width:120px;text-align:center;border-bottom-right-radius:10px;border-bottom-left-radius:10px;cursor:pointer">
             <div style="margin-top:2px;cursor:pointer">MENU</div>
         </div>
-        <div class="menu" style="position:absolute;top:18px;left:10px;background:#a7a9ac;z-index:99999;display:none;padding:15px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;width:120px">
+        <div class="menu" style="position:absolute;top:18px;left:10px;background:#a7a9ac;z-index:99999;display:none;padding:15px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;width:120px;">
             @RenderSection("Level1Navigation", false)
         </div>
         <div style="float:left;width:1230px">
@@ -84,8 +135,15 @@
                     <div style="float: left; text-align: center; width: 150px; font-family: quicksand, sans-serif; margin-top: 5px; ">Date: 06-01-15</div>
                     <div style="float: left; text-align: center; width: 150px; font-family: quicksand, sans-serif; margin-top: 5px; ">ID#: 036</div>
                 </div>
+                <div onclick="toggleBookmarks()" style="float:left;margin-left:125px;cursor:pointer;background-color:red;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:white;padding:5px 20px 5px 20px">
+                    bookmarks
+                </div>
+                <div id="bookmarks" style="position:absolute;width:300px;background:red;right:86px;top:20px;display:none;border-bottom-right-radius:10px;border-bottom-left-radius:10px;border-top-right-radius:10px;padding:10px;z-index:9999">
+                    @RenderSection("Bookmarks", false)
+                </div>
             </div>
         </div>
+
         <div style="float:right;margin-top:8px;margin-right:20px;cursor:pointer;">
             EXIT
         </div>
@@ -97,7 +155,7 @@
         <div style="float:left;margin-left:230px;font-size:16pt;color:white;margin-top:9px;text-align:center;font-family:forum, sans-serif;margin-right:20px">
             @RenderSection("NavigationTitle", false)
         </div>
-        <div class="level_2_navigation" style="float:right;width:900px;height:40px;margin-right:100px">
+        <div class="level_2_navigation" style="float:right;width:890px;height:40px;margin-right:100px">
             @RenderSection("Level2Navigation", false)
         </div>
     </div>
@@ -110,19 +168,19 @@
     <div id="main_content" onclick="hideMenu()">
         @RenderSection("Content", false)
     </div>
-         
 
-    <div style="position:absolute;bottom:0;left:0;width:1420px;height:30px;">
-        <div id="previous_button" style="float:left;margin-left:20px">&lt; PREVIOUS</div>
-        <div id="next_button" style="float:right;margin-right:20px;border:1px solid">NEXT &gt;</div>
+
+    <div style="position:absolute;bottom:0;left:0;width:1420px;height:40px;">
+        <div id="previous_button" class="next_previous_btn" style="float:left;margin-left:20px">&lt; previous</div>
+        <div id="next_button" class="next_previous_btn" style="float:right;margin-right:20px;">next &gt;</div>
     </div>
 
-    <div id="screenshot-button" style="position:absolute;bottom:200px;border: 1px solid;">test screenshot</div>
+    @*<div id="screenshot-button" style="position:absolute;bottom:200px;left:200px;border: 1px solid;padding:50px;background-color:blue;color:white;font-weight:bold">test screenshot</div>
 
-    <div id="windowHeightTest" style="position:absolute;bottom:100px"></div>
-    <div id="windowHeightTest1" style="position:absolute;bottom:120px"></div>
-    <div id="windowHeightTest2" style="position:absolute;bottom:80px"></div>
-    <div id="windowHeightTest3" style="position:absolute;bottom:60px"></div>
+        <div id="windowHeightTest" style="position:absolute;bottom:100px"></div>
+        <div id="windowHeightTest1" style="position:absolute;bottom:120px"></div>
+        <div id="windowHeightTest2" style="position:absolute;bottom:80px"></div>
+        <div id="windowHeightTest3" style="position:absolute;bottom:60px"></div>*@
 
 </body>
 
@@ -132,7 +190,8 @@
 
 <script>var urlRoot = '@Url.Content("~/")';</script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
-<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+@*<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
 <script src="~/Scripts/ClickPlugin.js"></script>
 
 <script>
@@ -143,7 +202,7 @@
 
     $(function () {
 
-        $("#screenshot-button").tomclick("", function (el) {
+        $("#screenshot-button").tomclick("", "", function (el) {
             var a = getNavigationA();
             var b = getNavigationB();
             var c = getNavigationC();
@@ -158,7 +217,7 @@
         });
 
 
-        $("#previous_button").tomclick("", function () {
+        $("#previous_button").tomclick("", "", function () {
             var current_a = getNavigationA();
             var current_b = getNavigationB();
             var current_c = getNavigationC();
@@ -211,7 +270,7 @@
             }
 
         });
-        $("#next_button").tomclick("", function () {
+        $("#next_button").tomclick("", "", function () {
             var current_a = getNavigationA();
             var current_b = getNavigationB();
             var current_c = getNavigationC();
@@ -305,7 +364,7 @@
         //$("#testButton").on("mousedown mouseup mouseover mouseout touchstart touchend ", function (e) {
         //    console.log("event", e.type);
         //});
-        $("#testButton").tomclick("", function () {
+        $("#testButton").tomclick("", "", function () {
 
         });
 
@@ -314,15 +373,16 @@
         var str = "h: " + h + " - w: " + w;
         $("#windowHeightTest").text(str);
 
-        $(".menu_button").tomclick("", function (element) {
-            $(".menu").toggle("blind");
+        $(".menu_button").tomclick("", "", function (element) {
+            if ($(".menu").css('display') == "none") {
+                $(".menu").slideDown();
+            } else {
+                $(".menu").slideUp();
+            }
         });
-        //$(".menu_button").on("click", function () {
-        //    $(".menu").toggle("blind");
-        //});
 
-        $(".menu_option").tomclick("", function (element) {
-            $(".menu").hide("blind");
+        $(".menu_option").tomclick("", "", function (element) {
+            $(".menu").slideUp();
 
             $(".menu_option").removeClass('menu_option_selected');
             $(element).addClass("menu_option_selected");
@@ -339,31 +399,14 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", 1);
             loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl, loadSuccess);
+
+            //$("body").load(loadUrl, loadSuccess);
+            $("body").hide("slide", { direction: "left" }, 1000).load(loadUrl, loadSuccess).show("slide", { direction: "right" }, 1000);
+            //$("body").hide("slow").load(loadUrl, loadSuccess).fadeIn("500");
         });
 
-        @*$(".menu_option").on("click", function () {
-            $(".menu").hide("blind");
 
-            $(".menu_option").removeClass('menu_option_selected');
-            $(this).addClass("menu_option_selected");
-
-            $(".header_l3").removeClass("header_l3_selected");
-            $(".header_l3").first().addClass("header_l3_selected");
-            $(".header_l2").removeClass("header_l2_selected")
-            $(".header_l2").first().addClass("header_l2_selected");
-
-
-
-            //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", 1);
-            loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl, loadSuccess);
-        });*@
-
-        $(".header_l2").tomclick("", function (element) {
+        $(".header_l2").tomclick("", "", function (element) {
             $(".header_l3").removeClass("header_l3_selected");
             $(".header_l3").first().addClass("header_l3_selected");
             $(".header_l2").removeClass("header_l2_selected")
@@ -376,26 +419,15 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl, loadSuccess);
+
+            //$("body").load(loadUrl, loadSuccess);
+            //$("body").hide("slide", { direction: "left" }, 1000).load(loadUrl, loadSuccess).show("slide", { direction: "right" }, 1000);
+            //$("body").hide("slide", { direction: "left" }, 1000).load(loadUrl).show("slide", { direction: "right" }, 1000);
+            $("body").hide().load(loadUrl, loadSuccess).show();
         });
-        @*$(".header_l2").on("click", function () {
-            $(".header_l3").removeClass("header_l3_selected");
-            $(".header_l3").first().addClass("header_l3_selected");
-            $(".header_l2").removeClass("header_l2_selected")
-            $(this).addClass("header_l2_selected");
 
 
-
-            //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", getNavigationB());
-            loadUrl = loadUrl.replace("77777", 1);
-            $("body").load(loadUrl, loadSuccess);
-
-        });*@
-
-        $(".header_l3").tomclick("", function (element) {
+        $(".header_l3").tomclick("", "", function (element) {
             $(".header_l3").removeClass("header_l3_selected")
             $(element).addClass("header_l3_selected");
 
@@ -404,23 +436,14 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", getNavigationC());
+
             $("body").load(loadUrl, loadSuccess);
         });
-        @*$(".header_l3").on("click", function () {
-            $(".header_l3").removeClass("header_l3_selected")
-            $(this).addClass("header_l3_selected");
 
-            //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", getNavigationB());
-            loadUrl = loadUrl.replace("77777", getNavigationC());
-            $("body").load(loadUrl, loadSuccess);
-        });*@
     });
 
     function hideMenu() {
-        $(".menu").hide("blind");
+        $(".menu").slideUp();
     }
 
     function getNavigationA() {
@@ -475,6 +498,301 @@
                 $("#colorChangeDiv").css('background-color', '#797979');
                 break;
         }
+    }
+
+    function togglePageFold(pg, element) {
+        var pre = $(element).prev();
+        
+        var a = getNavigationA();
+        var b = getNavigationB();
+        var c = getNavigationC();
+
+        var idStr = "bookmark_" + a + "_" + b + "_" + c;
+
+        if ($(pre).css('display') == "none") {
+
+            var nav_title = getNavDescription(a, b, c);
+
+            //add title and text
+            var user_title = prompt("Please enter a bookmark title", "Page Title");
+
+            //save bookmark
+            var loadUrl = '@Html.Raw(Url.Action("AddRemoveBookmark", new { a=99999, b=88888, c=77777, isAdd=true }))';
+            loadUrl = loadUrl.replace("99999", a);
+            loadUrl = loadUrl.replace("88888", b);
+            loadUrl = loadUrl.replace("77777", c);
+
+            //ajax
+            $.ajax({
+                url: '@Url.Action("AddRemoveBookmark")',
+                data: {
+                    a: a,
+                    b: b,
+                    c: c,
+                    isAdd: true,
+                    user_title: user_title,
+                    nav_title: nav_title,
+                    notes: notes
+                },
+                type: 'POST',
+                success: function (data) {
+                    console.log('success', data);
+                }
+            });
+
+            var content = "<div id='" + idStr + "' class='bookmarkItem'>\
+                        <div class='bookmarkTitle'>" + user_title + "</div>\
+                        <div class='bookmarkNavigation'>" + nav_title + "</div>\
+                        <div style='overflow:auto'>\
+                            <div style='float:left'>view notes</div>\
+                            <div style='float:right;cursor:pointer' onclick='window.location = \"" + loadUrl + "\";'>view page</div>\
+                        </div>\
+                    </div>";
+
+            $(content).appendTo("#bookmarks");
+
+        } else {
+            //removing fold
+            $("#" + idStr).remove();
+
+            //if #bookmarks is empty, add "no bookmarks" thing
+        }
+
+        $("#" + pg).slideToggle();
+
+        
+    }
+
+    function toggleBookmarks() {
+        if ($("#bookmarks").css('display') == "none") {
+            var len = $.trim($('#bookmarks').html()).length;
+            if (len == 0) {
+                var addDiv = "<div style='color:white;font-style:italic;text-align:center'>you currently have no bookmarks</div>";
+                $("#bookmarks").append($(addDiv));
+            }
+            $("#bookmarks").slideDown();
+        } else {
+            $("#bookmarks").slideUp();
+            $("#bookmarks").empty();
+        }
+    }
+
+    function getNavDescription(a, b, c) {
+        var ret_str = "";
+        
+        switch (a) {
+            case 1:
+                ret_str += "Fundoscopy > ";
+                switch (b) {
+                    case 1:
+                        ret_str += "Objective > Overview";
+                        break;
+                    case 2:
+                        ret_str += "Foundation > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Items";
+                                break;
+                            case 2:
+                                ret_str += "CellScope";
+                                break;
+                            case 3:
+                                ret_str += "Imaging";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        ret_str += "Setup > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Room & Subject";
+                                break;
+                            case 2:
+                                ret_str += "CellScope";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        ret_str += "Exam procedure > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Video";
+                                break;
+                            case 2:
+                                ret_str += "Step-by-step";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        ret_str += "Tips > Tips";
+                        break;
+                    case 6:
+                        ret_str += "Quiz > Quiz";
+                        break;
+                    case 7:
+                        ret_str += "Pathology > Pathology";5
+                        break;
+                }
+                break;
+            case 2:
+                ret_str += "Kidney & Bladder >";
+                switch (b) {
+                    case 1:
+                        ret_str += "Objective > Overview";
+                        break;
+                    case 2:
+                        ret_str += "Foundation > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Probe handling";
+                                break;
+                            case 2:
+                                ret_str += "Imaging";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        ret_str += "Setup > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Room & subject";
+                                break;
+                            case 2:
+                                ret_str += "Ultrasound machine";
+                                break;
+                            case 3:
+                                ret_str += "Image acquisition";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        ret_str += "Exam procedure > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Right Kidney";
+                                break;
+                            case 2:
+                                ret_str += "Left Kidney";
+                                break;
+                            case 3:
+                                ret_str += "Bladder";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        ret_str += "Pathology > Pathology";
+                        break;
+                    case 6:
+                        ret_str += "Quiz > Quiz";
+                        break;
+                }
+                break;
+            case 3:
+                ret_str += "Intubation >";
+                switch (b) {
+                    case 1:
+                        ret_str += "Objective > Overview";
+                        break;
+                    case 2:
+                        ret_str += "Foundation > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Airway management";
+                                break;
+                            case 2:
+                                ret_str += "ILMA";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        ret_str += "Setup > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "ItemsRoom & subject";
+                                break;
+                            case 2:
+                                ret_str += "Equipment";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        ret_str += "Exam procedure > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Video";
+                                break;
+                            case 2:
+                                ret_str += "Step-by-step";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        ret_str += "Quiz > Quiz";
+                        break;
+                    case 6:
+                        ret_str += "Tips > Tips";
+                        break;
+                }
+                break;
+            case 4:
+                ret_str += "IV Insertion >";
+                switch (b) {
+                    case 1:
+                        ret_str += "Objective > Overview";
+                        break;
+                    case 2:
+                        ret_str += "Foundation > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Quick start";
+                                break;
+                            case 2:
+                                ret_str += "Probe handling";
+                                break;
+                            case 3:
+                                ret_str += "Imaging";
+                                break;
+                            case 4:
+                                ret_str += "Needle handling";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        ret_str += "Setup > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Subject";
+                                break;
+                            case 2:
+                                ret_str += "Ultrasound machine";
+                                break;
+                            case 3:
+                                ret_str += "Procedure supplies";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        ret_str += "Exam procedure > ";
+                        switch (c) {
+                            case 1:
+                                ret_str += "Video";
+                                break;
+                            case 2:
+                                ret_str += "Step-by-step";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        ret_str += "Quiz > Quiz";
+                        break;
+                    case 6:
+                        ret_str += "Troubleshooting > Troubleshooting";
+                        break;
+                }
+                break;
+        }
+
+        return ret_str;
     }
 </script>
 

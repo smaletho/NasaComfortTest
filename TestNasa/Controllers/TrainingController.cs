@@ -278,6 +278,10 @@ namespace TestNasa.Controllers
                 string checkBookmark = "bookmark_" + nav_a.ToString() + "_" + nav_b.ToString() + "_" + nav_c.ToString();
 
                 model.PageIsBookmarked = IsPageBookmarked(model.NewBookmarkList, checkBookmark);
+                if (model.PageIsBookmarked)
+                {
+                    ViewBag.BookmarkNotes = GetBookmarkNotes(model.NewBookmarkList, checkBookmark);
+                }
             }
             else
             {
@@ -392,7 +396,27 @@ namespace TestNasa.Controllers
             Session["CurrentPageModel"] = model;
             return Content("success");
         }
+        public ActionResult GetBookmarkNotesAjax(string id)
+        {
+            string retStr = "";
+            TrainingModel model = new TrainingModel();
+            if (Session["CurrentPageModel"] != null)
+            {
+                model = (TrainingModel)Session["CurrentPageModel"];
+                foreach(var bookmark in model.NewBookmarkList)
+                {
+                    if(bookmark.BookmarkId == id)
+                        retStr = bookmark.UserNotes;
+                }
+            }
+            else
+            {
+                retStr = "An issue occurred.";
 
+            }
+
+            return Content(retStr);
+        }
 
         public bool IsPageBookmarked(List<BookmarkObject> ls, string checkBookmark)
         {
@@ -403,6 +427,16 @@ namespace TestNasa.Controllers
             }
 
             return false;
+        }
+        public string GetBookmarkNotes(List<BookmarkObject> ls, string checkBookmark)
+        {
+            foreach (var bookmark in ls)
+            {
+                if (bookmark.BookmarkId == checkBookmark)
+                    return bookmark.UserNotes;
+            }
+
+            return "N/A";
         }
     }
 

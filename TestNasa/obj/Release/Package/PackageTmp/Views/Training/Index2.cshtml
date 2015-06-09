@@ -1,0 +1,53 @@
+﻿@model TestNasa.Controllers.TrainingModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Url.Content("~/") + "/Views/Shared/_TrainingShell2.cshtml";
+}
+
+@section Styles{
+    <style>
+        
+    </style>
+}
+
+@section NavigationTitle{
+    @Html.Action("GetNavigationTitle", new { nav=Model.Nav_A })
+
+}
+
+@section Bookmarks {
+    @Html.Action("RenderBookmarks")
+    
+    @*@foreach (var bookmark in Model.BookmarkList)
+    {
+        <div id='@bookmark' class='bookmarkItem'>
+            <div class='bookmarkTitle'>title</div>
+            <div class='bookmarkNavigation'>nav title</div>
+            <div style='overflow:auto'>
+                <div style='float:left'>view notes</div>
+                <div style='float:right;cursor:pointer'>view page</div>
+            </div>
+        </div>
+    }*@
+}
+
+@section NavigationImage{
+    @Html.Action("GetNavigationImage", new { nav=Model.Nav_A })
+}
+
+@section Level1Navigation{
+    @Html.Action("GetLevel1Navigation", new { nav = Model.Nav_A })
+}
+
+@section Level2Navigation{
+    @Html.Action("GetLevel2Navigation", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B })
+}
+
+@section Level3Navigation{
+    @Html.Action("GetLevel3Navigation", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C })
+}
+
+@section Content {
+    @Html.Action("GetContent", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C })
+}

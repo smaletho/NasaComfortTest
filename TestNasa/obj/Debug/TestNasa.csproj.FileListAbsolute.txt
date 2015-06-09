@@ -122,7 +122,6 @@ C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\System.Web.Razor.xml
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\System.Web.WebPages.xml
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\System.Web.WebPages.Razor.xml
-C:\Users\Administrator\Desktop\TestNasa\TestNasa\obj\Debug\TestNasa.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\obj\Debug\TestNasa.dll
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\obj\Debug\TestNasa.pdb
 C:\Users\Ryan Kinnen\Desktop\NasaComfortTest\TestNasa\bin\HtmlRenderer.dll
@@ -134,3 +133,4 @@ C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\HtmlRenderer.WinForms.dll
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\HtmlRenderer.pdb
 C:\Users\Administrator\Desktop\TestNasa\TestNasa\bin\HtmlRenderer.WinForms.pdb
 C:\Users\Ryan Kinnen\Desktop\NasaComfortTest\TestNasa\obj\Debug\TestNasa.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\TestNasa\TestNasa\obj\Debug\TestNasa.csprojResolveAssemblyReference.cache

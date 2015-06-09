@@ -1,4 +1,4 @@
-﻿$.fn.tomclick = function (hoverClass, callback) {
+﻿$.fn.tomclick = function (activeClass, hoverClass, callback) {
 
     var timeoutClick;
     var didTouch = false;

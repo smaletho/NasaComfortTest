@@ -1,0 +1,19 @@
+﻿@{
+    int nav = ViewBag.Nav;
+}
+
+<div class="menu_option @if (nav == 1) { WriteLiteral(" menu_option_selected"); }">
+    <img src="~/Content/Images/fundoscopyName.png" style="width:75px;display:table;margin:0 auto;margin-top:5px" />
+</div>
+<div class="menu_option @if (nav == 2) { WriteLiteral(" menu_option_selected"); }">
+    <img src="~/Content/Images/kidneybladderName.png" style="width: 75px; display: table; margin: 0 auto; margin-top: 5px" />
+</div>
+<div class="menu_option @if (nav == 3) { WriteLiteral(" menu_option_selected"); }">
+    <img src="~/Content/Images/intubationName.png" style="width: 75px; display: table; margin: 0 auto; margin-top: 5px" />
+</div>
+<div class="menu_option @if (nav == 4) { WriteLiteral(" menu_option_selected"); }">
+    <img src="~/Content/Images/ivinsertionName.png" style="width: 75px; display: table; margin: 0 auto; margin-top: 5px" />
+</div>
+<div style="margin-bottom:0" class="menu_option @if (nav == 5) { WriteLiteral(" menu_option_selected"); }">
+    <img src="~/Content/Images/diagnosisName.png" style="width: 75px; display: table; margin: 0 auto; margin-top: 5px" />
+</div>
