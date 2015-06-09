@@ -149,6 +149,7 @@
     <Content Include="Content\Images\kidneybladder.png" />
     <Content Include="Content\Images\kidneybladderName.png" />
     <Content Include="Content\Images\reference.png" />
+    <Content Include="Content\page-fold.png" />
     <Content Include="Content\Screenshots\1-1-1.png" />
     <Content Include="Content\Slide1.jpg" />
     <Content Include="Content\Slide1.png" />
@@ -234,6 +235,14 @@
     <Content Include="Views\Shared\_TrainingShell.cshtml" />
     <Content Include="Views\Training\Index.cshtml" />
     <Content Include="Views\Training\ImageEdit.cshtml" />
+    <Content Include="Views\Training\Index2.cshtml" />
+    <Content Include="Views\Shared\_TrainingShell2.cshtml" />
+    <Content Include="Views\Training\Level1Navigation.cshtml" />
+    <Content Include="Views\Training\Level2Navigation.cshtml" />
+    <Content Include="Views\Training\NavigationImage.cshtml" />
+    <Content Include="Views\Training\Level3Navigation.cshtml" />
+    <Content Include="Views\Training\ContentView.cshtml" />
+    <Content Include="Views\Training\BookmarksView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,99 @@
+﻿
+
+@switch ((int)ViewBag.Nav_A)
+{
+    case 1:
+        //FUNDOSCOPY
+        <div class="header_l2 @if (ViewBag.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+            OBJECTIVE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+            FOUNDATION
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+            SETUP
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+            EXAM PROCEDURE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+            TIPS
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+            QUIZ
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 7) { WriteLiteral(" header_l2_selected"); }">
+            PATHOLOGY
+        </div>
+        <script>var nav_l2_max = 7;</script>
+        
+        break;
+    case 2:
+            //Kidney & Bladder
+        <div class="header_l2 @if (ViewBag.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+            OBJECTIVE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+            FOUNDATION
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+            SETUP
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+            EXAM PROCEDURE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+            PATHOLOGY
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+            QUIZ
+        </div>
+        <script>var nav_l2_max = 6;</script>
+        
+        break;
+    case 3:
+            //INTUBATION
+        <div class="header_l2 @if (ViewBag.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+            OBJECTIVE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+            FOUNDATION
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+            SETUP
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+            EXAM PROCEDURE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+            QUIZ
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+            TIPS
+        </div>
+        <script>var nav_l2_max = 6;</script>
+            
+        break;
+    case 4:
+            //IV Insertion
+        <div class="header_l2 @if (ViewBag.Nav_B == 1) { WriteLiteral(" header_l2_selected"); }">
+            OBJECTIVE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 2) { WriteLiteral(" header_l2_selected"); }">
+            FOUNDATION
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 3) { WriteLiteral(" header_l2_selected"); }">
+            SETUP
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 4) { WriteLiteral(" header_l2_selected"); }">
+            EXAM PROCEDURE
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 5) { WriteLiteral(" header_l2_selected"); }">
+            QUIZ
+        </div>
+        <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
+            TROUBLESHOOTING
+        </div>
+        <script>var nav_l2_max = 6;</script>
+            break;
+}

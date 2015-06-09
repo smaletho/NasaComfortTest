@@ -1,0 +1,18 @@
+﻿@{string foldId = "page_" + ViewBag.Nav_A + "_" + ViewBag.Nav_B + "_" + ViewBag.Nav_C;
+}
+
+@if ((bool)ViewBag.IsBookmarked == true)
+{
+    <img id="@foldId" class="page-fold-image" src="~/Content/page-fold.png" style="position:absolute;top:0;right:2px;width:65px;" />
+}
+else
+{
+    <img id="@foldId" class="page-fold-image" src="~/Content/page-fold.png" style="position:absolute;top:0;right:2px;width:65px;display:none;" />
+}
+
+    
+
+<div onclick="togglePageFold('@foldId', this)" class="page-fold-button" style="position:absolute;top:0;right:2px;width:65px;height:65px;"></div>
+
+
+<div style="width:100%;height:100%;display:block">Page @ViewBag.Nav_A, @ViewBag.Nav_B, @ViewBag.Nav_C</div>

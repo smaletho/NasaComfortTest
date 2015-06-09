@@ -1,0 +1,13 @@
+﻿@model TestNasa.Controllers.TrainingModel
+
+@foreach (var bookmark in Model.NewBookmarkList)
+{
+    <div id='@bookmark.BookmarkId' class='bookmarkItem'>
+        <div class='bookmarkTitle'>@bookmark.UserTitle</div>
+        <div class='bookmarkNavigation'>@bookmark.NavTitle</div>
+        <div style='overflow:auto'>
+            <div style='float:left'>view notes</div>
+            <div style='float:right;cursor:pointer' onclick="window.location = '@Url.Action("NewSetPageString", new { id=bookmark.BookmarkId })'">view page</div>
+        </div>
+    </div>
+}

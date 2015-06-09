@@ -9,14 +9,13 @@
     <title>@ViewBag.Title</title>
 
     <script src="//use.edgefonts.net/quicksand;forum.js"></script>
-    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <style>
         html {
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
-            -moz-transform-origin: top left;
             -moz-transform-origin: top left;
             -webkit-transform-origin: top left;
             transform-origin: top left;
@@ -93,6 +92,11 @@
             opacity: 0.4;
         }
 
+        .page-fold-image {
+            -moz-transform-origin: top right;
+            -webkit-transform-origin: top right;
+            transform-origin: top right;
+        }
 
 
         .menu {
@@ -109,6 +113,49 @@
 
         .bookmarkNavigation {
             text-align:center;color:#ebebeb
+        }
+
+        .header_l2 {
+            cursor: pointer;
+            font-family: quicksand, sans-serif;
+            float: left;
+            border: 1px solid white;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 7px;
+            font-size: 10pt;
+            margin-right: 15px;
+            padding: 5px 20px 5px 20px;
+        }
+
+        .header_l2_selected {
+            background-color: silver;
+            color: #2c3e50;
+        }
+
+        .header_l3 {
+            cursor:pointer;
+            font-family: quicksand, sans-serif;
+            float: left;
+            margin-bottom: 0;
+            padding: 5px 20px 0 20px;
+            margin-top: 7px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-right:10px
+        }
+
+        .header_l3_selected {
+            background-color: white;
+        }
+
+        .ui-widget-overlay  {
+            position:absolute;
+        }
+
+        .ui-dialog-titlebar-close {
+          visibility: hidden;
         }
 
     </style>
@@ -138,7 +185,7 @@
                 <div onclick="toggleBookmarks()" style="float:left;margin-left:125px;cursor:pointer;background-color:red;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:white;padding:5px 20px 5px 20px">
                     bookmarks
                 </div>
-                <div id="bookmarks" style="position:absolute;width:300px;background:red;right:86px;top:20px;display:none;border-bottom-right-radius:10px;border-bottom-left-radius:10px;border-top-right-radius:10px;padding:10px;z-index:9999">
+                <div id="bookmarks" style="position:absolute;width:376px;background:red;right:10px;top:20px;display:none;border-bottom-right-radius:10px;border-bottom-left-radius:10px;border-top-right-radius:10px;padding:10px;z-index:9999">
                     @RenderSection("Bookmarks", false)
                 </div>
             </div>
@@ -148,11 +195,11 @@
             EXIT
         </div>
     </div>
-    <div style="position:absolute;top:30px;left:140px;width:71px;height:71px;background-color:white;padding:5px">
+    <div class="navigation_image" style="position:absolute;top:30px;left:140px;width:71px;height:71px;background-color:white;padding:5px">
         @RenderSection("NavigationImage", false)
     </div>
     <div onclick="hideMenu()" id="colorChangeDiv" style="width:100%;height:40px;background-color:#FFC314;clear:left">
-        <div style="float:left;margin-left:230px;font-size:16pt;color:white;margin-top:9px;text-align:center;font-family:forum, sans-serif;margin-right:20px">
+        <div class="navigation_title" style="float:left;margin-left:230px;font-size:16pt;color:white;margin-top:9px;text-align:center;font-family:forum, sans-serif;margin-right:20px">
             @RenderSection("NavigationTitle", false)
         </div>
         <div class="level_2_navigation" style="float:right;width:890px;height:40px;margin-right:100px">
@@ -182,6 +229,15 @@
         <div id="windowHeightTest2" style="position:absolute;bottom:80px"></div>
         <div id="windowHeightTest3" style="position:absolute;bottom:60px"></div>*@
 
+    <div id="bookmarkPopup">
+        <input id="bookmark_title" type="text" placeholder="enter a page title..."/>
+        <textarea id="bookmark_notes" placeholder="add notes..."></textarea>
+        <input id="bookmark_string" style="display:none" type="text" />
+        <input id="bookmark_a" style="display:none" type="text" />
+        <input id="bookmark_b" style="display:none" type="text" />
+        <input id="bookmark_c" style="display:none" type="text" />
+    </div>
+
 </body>
 
 
@@ -190,8 +246,8 @@
 
 <script>var urlRoot = '@Url.Content("~/")';</script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
-@*<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
-<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+@*<script src="~/Scripts/jquery-ui-1.11.4.js"></script>*@
 <script src="~/Scripts/ClickPlugin.js"></script>
 
 <script>
@@ -199,8 +255,44 @@
     var USE_THIS_SCALE;
     var showingMenu = false;
     var nav_l1_max = 5;
+    var WaitingForLoad = 0;
+    var LoadCounter = 0;
 
-    $(function () {
+    function unbindAll() {
+        $("#screenshot-button").unbind();
+        $("#previous_button").unbind();
+        $("#next_button").unbind();
+        $(".menu_button").unbind();
+        $(".menu_option").unbind();
+        $(".header_l2").unbind();
+        $(".header_l3").unbind();
+    }
+
+    function init() {
+        WaitingForLoad = 0;
+        LoadCounter = 0;
+        unbindAll();
+
+
+        //change color
+        var a = getNavigationA();
+        switch (a) {
+            case 1:
+                $("#colorChangeDiv").css('background-color', '#FFC314');
+                break;
+            case 2:
+                $("#colorChangeDiv").css('background-color', '#33ACB0');
+                break;
+            case 3:
+                $("#colorChangeDiv").css('background-color', '#FF9A30');
+                break;
+            case 4:
+                $("#colorChangeDiv").css('background-color', '#F55014');
+                break;
+            case 5:
+                $("#colorChangeDiv").css('background-color', '#797979');
+                break;
+        }
 
         $("#screenshot-button").tomclick("", "", function (el) {
             var a = getNavigationA();
@@ -212,7 +304,7 @@
             loadUrl = loadUrl.replace("88888", b);
             loadUrl = loadUrl.replace("77777", c);
             loadUrl = loadUrl.replace("66666", USE_THIS_SCALE);
-            
+
             window.open(loadUrl);
         });
 
@@ -262,11 +354,21 @@
             console.log(consoleLog);
 
             if (okayToLoad) {
-                var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-                loadUrl = loadUrl.replace("99999", use_a);
-                loadUrl = loadUrl.replace("88888", use_b);
-                loadUrl = loadUrl.replace("77777", use_c);
-                $("body").load(loadUrl, loadSuccess);
+
+                if (current_a == use_a && current_b == use_b) {
+
+                    //only need to load level 3 and content
+                    NavigateLevel3(use_a, use_b, use_c);
+
+                } else if (current_a == use_a) {
+                    //load level 2 and level 3 and content
+                    NavigateLevel2(use_a, use_b);
+
+                } else {
+                    //load all
+                    NavigateLevel1(use_a);
+
+                }
             }
 
         });
@@ -299,7 +401,7 @@
                     use_c = 1;
                 } else {
                     //no more l2 pages, go up to l1
-                    if (current_a < nav_l3_max) {
+                    if (current_a < nav_l1_max) {
                         //next page = a+1, 1, 1
                         consoleLog = (current_a + 1) + ", 1, 1";
                         use_a = current_a + 1;
@@ -314,11 +416,21 @@
 
             console.log(consoleLog);
             if (okayToLoad) {
-                var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-                loadUrl = loadUrl.replace("99999", use_a);
-                loadUrl = loadUrl.replace("88888", use_b);
-                loadUrl = loadUrl.replace("77777", use_c);
-                $("body").load(loadUrl, loadSuccess);
+
+                if (current_a == use_a && current_b == use_b) {
+
+                    //only need to load level 3 and content
+                    NavigateLevel3(use_a, use_b, use_c);
+
+                } else if (current_a == use_a) {
+                    //load level 2 and level 3 and content
+                    NavigateLevel2(use_a, use_b);
+
+                } else {
+                    //load all
+                    NavigateLevel1(use_a);
+
+                }
             }
 
         });
@@ -359,11 +471,6 @@
         }
 
 
-
-
-        //$("#testButton").on("mousedown mouseup mouseover mouseout touchstart touchend ", function (e) {
-        //    console.log("event", e.type);
-        //});
         $("#testButton").tomclick("", "", function () {
 
         });
@@ -395,14 +502,8 @@
 
 
             //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", 1);
-            loadUrl = loadUrl.replace("77777", 1);
+            NavigateLevel1(getNavigationA());
 
-            //$("body").load(loadUrl, loadSuccess);
-            $("body").hide("slide", { direction: "left" }, 1000).load(loadUrl, loadSuccess).show("slide", { direction: "right" }, 1000);
-            //$("body").hide("slow").load(loadUrl, loadSuccess).fadeIn("500");
         });
 
 
@@ -415,15 +516,8 @@
 
 
             //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", getNavigationB());
-            loadUrl = loadUrl.replace("77777", 1);
+            NavigateLevel2(getNavigationA(), getNavigationB());
 
-            //$("body").load(loadUrl, loadSuccess);
-            //$("body").hide("slide", { direction: "left" }, 1000).load(loadUrl, loadSuccess).show("slide", { direction: "right" }, 1000);
-            //$("body").hide("slide", { direction: "left" }, 1000).load(loadUrl).show("slide", { direction: "right" }, 1000);
-            $("body").hide().load(loadUrl, loadSuccess).show();
         });
 
 
@@ -432,18 +526,82 @@
             $(element).addClass("header_l3_selected");
 
             //load w/ parameters
-            var loadUrl = '@Html.Raw(Url.Action("SetPage", new { a=99999, b=88888, c=77777 }))';
-            loadUrl = loadUrl.replace("99999", getNavigationA());
-            loadUrl = loadUrl.replace("88888", getNavigationB());
-            loadUrl = loadUrl.replace("77777", getNavigationC());
+            NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC());
 
-            $("body").load(loadUrl, loadSuccess);
+        });
+    }
+
+    $(function () {
+
+        init();
+
+        $("#bookmarkPopup").dialog({
+            autoOpen: false,
+            modal: true,
+            close: function () {
+                $("#bookmark_string").val('');
+                $("#bookmark_title").val('');
+                $("#bookmark_notes").val('');
+                $("#bookmark_a").val('');
+                $("#bookmark_b").val('');
+                $("#bookmark_c").val('');
+            },
+            buttons: [{
+                text: "Cancel",
+                click: function () {
+                    var a = getNavigationA();
+                    var b = getNavigationB();
+                    var c = getNavigationC();
+
+                    var str = "page_" + a + "_" + b + "_" + c;
+                    PageFoldAnimate(str, false);
+
+                    $(this).dialog("close");
+                }
+            }, {
+                text: "Add Bookmark",
+                click: function () {
+                    var user_title = $("#bookmark_title").val();
+                    var nav_title = $("#bookmark_string").val();
+                    var notes = $("#bookmark_notes").val();
+                    var a = $("#bookmark_a").val();
+                    var b = $("#bookmark_b").val();
+                    var c = $("#bookmark_c").val();
+
+                    $.ajax({
+                        url: '@Url.Action("AddBookmark")',
+                        data: {
+                            a: a,
+                            b: b,
+                            c: c,
+                            user_title: user_title,
+                            nav_title: nav_title,
+                            notes: notes
+                        },
+                        type: 'POST',
+                        success: function (data) {
+                            console.log('success', data);
+                            //render bookmarks id
+                            $("#bookmarks").empty();
+                            $("#bookmarks").load('@Url.Action("RenderBookmarks")');
+                            $("#bookmarkPopup").dialog("close");
+                        }
+                    });
+                }
+            }]
         });
 
     });
 
     function hideMenu() {
         $(".menu").slideUp();
+        var len = $.trim($('#bookmarks').html()).length;
+
+        if ($("#bookmarks").css('display') != "none") {
+            $("#bookmarks").slideUp();
+            if (len == 0)
+                $("#bookmarks").empty();
+        }
     }
 
     function getNavigationA() {
@@ -502,70 +660,52 @@
 
     function togglePageFold(pg, element) {
         var pre = $(element).prev();
-        
+
         var a = getNavigationA();
         var b = getNavigationB();
         var c = getNavigationC();
-
+        
         var idStr = "bookmark_" + a + "_" + b + "_" + c;
 
         if ($(pre).css('display') == "none") {
 
+            PageFoldAnimate(pg, true);
+
             var nav_title = getNavDescription(a, b, c);
 
-            //add title and text
-            var user_title = prompt("Please enter a bookmark title", "Page Title");
+            $("#bookmark_string").val(nav_title);
+            $("#bookmark_a").val(a);
+            $("#bookmark_b").val(b);
+            $("#bookmark_c").val(c);
+            $("#bookmarkPopup").dialog("open");
 
-            //save bookmark
-            var loadUrl = '@Html.Raw(Url.Action("AddRemoveBookmark", new { a=99999, b=88888, c=77777, isAdd=true }))';
-            loadUrl = loadUrl.replace("99999", a);
-            loadUrl = loadUrl.replace("88888", b);
-            loadUrl = loadUrl.replace("77777", c);
-
-            //ajax
-            $.ajax({
-                url: '@Url.Action("AddRemoveBookmark")',
-                data: {
-                    a: a,
-                    b: b,
-                    c: c,
-                    isAdd: true,
-                    user_title: user_title,
-                    nav_title: nav_title,
-                    notes: notes
-                },
-                type: 'POST',
-                success: function (data) {
-                    console.log('success', data);
-                }
-            });
-
-            var content = "<div id='" + idStr + "' class='bookmarkItem'>\
-                        <div class='bookmarkTitle'>" + user_title + "</div>\
-                        <div class='bookmarkNavigation'>" + nav_title + "</div>\
-                        <div style='overflow:auto'>\
-                            <div style='float:left'>view notes</div>\
-                            <div style='float:right;cursor:pointer' onclick='window.location = \"" + loadUrl + "\";'>view page</div>\
-                        </div>\
-                    </div>";
-
-            $(content).appendTo("#bookmarks");
 
         } else {
-            //removing fold
-            $("#" + idStr).remove();
-
-            //if #bookmarks is empty, add "no bookmarks" thing
+            var c = confirm("This will remove your bookmark, and delete your notes on this page, is that okay?");
+            if (c) {
+                PageFoldAnimate(pg, false);
+                $.ajax({
+                    url: '@Url.Action("RemoveBookmark")',
+                    data: {
+                        id: idStr
+                    },
+                    type: 'POST',
+                    success: function (data) {
+                        console.log('success', data);
+                        //render bookmarks id
+                        $("#bookmarks").empty();
+                        $("#bookmarks").load('@Url.Action("RenderBookmarks")');
+                    }
+                });
+            }
         }
 
-        $("#" + pg).slideToggle();
-
-        
     }
 
     function toggleBookmarks() {
+        var len = $.trim($('#bookmarks').html()).length;
+
         if ($("#bookmarks").css('display') == "none") {
-            var len = $.trim($('#bookmarks').html()).length;
             if (len == 0) {
                 var addDiv = "<div style='color:white;font-style:italic;text-align:center'>you currently have no bookmarks</div>";
                 $("#bookmarks").append($(addDiv));
@@ -573,13 +713,14 @@
             $("#bookmarks").slideDown();
         } else {
             $("#bookmarks").slideUp();
-            $("#bookmarks").empty();
+            if (len == 0)
+                $("#bookmarks").empty();
         }
     }
 
     function getNavDescription(a, b, c) {
         var ret_str = "";
-        
+
         switch (a) {
             case 1:
                 ret_str += "Fundoscopy > ";
@@ -630,7 +771,7 @@
                         ret_str += "Quiz > Quiz";
                         break;
                     case 7:
-                        ret_str += "Pathology > Pathology";5
+                        ret_str += "Pathology > Pathology"; 5
                         break;
                 }
                 break;
@@ -793,6 +934,133 @@
         }
 
         return ret_str;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function NavigateLevel1(a) {
+        LoadCounter = 1;
+        WaitingForLoad = 6;
+
+        var loadUrl = '@Html.Raw(Url.Action("GetNavigationTitle", new { nav = 99999 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        $(".navigation_title").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetNavigationImage", new { nav = 99999 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        $(".navigation_image").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetLevel1Navigation", new { nav = 99999 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        $(".menu").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 1}))';
+        loadUrl = loadUrl.replace("99999", a);
+        $(".level_2_navigation").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 1, nav_c = 1 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 1, nav_c = 1 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        $("#main_content").load(loadUrl, NewLoadFinish);
+    }
+    function NavigateLevel2(a, b) {
+        LoadCounter = 1;
+        WaitingForLoad = 3;
+
+        var loadUrl = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 88888}))';
+        loadUrl = loadUrl.replace("99999", a);
+        loadUrl = loadUrl.replace("88888", b);
+        $(".level_2_navigation").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 1 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        loadUrl = loadUrl.replace("88888", b);
+        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 1 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        loadUrl = loadUrl.replace("88888", b);
+        $("#main_content").load(loadUrl, NewLoadFinish);
+    }
+    function NavigateLevel3(a, b, c) {
+        LoadCounter = 1;
+        WaitingForLoad = 2;
+
+        var loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        loadUrl = loadUrl.replace("88888", b);
+        loadUrl = loadUrl.replace("77777", c);
+        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
+
+        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+        loadUrl = loadUrl.replace("99999", a);
+        loadUrl = loadUrl.replace("88888", b);
+        loadUrl = loadUrl.replace("77777", c);
+        $("#main_content").load(loadUrl, NewLoadFinish);
+    }
+
+
+    function NewLoadFinish() {
+        console.log('counter', LoadCounter);
+        console.log('waiting', WaitingForLoad);
+
+        if (WaitingForLoad == LoadCounter)
+            init();
+        else
+            LoadCounter++;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function PageFoldAnimate(id, isShow) {
+        //set width to 15, animate width to 65
+        if (isShow) {
+            $("#" + id).width(15);
+            $("#" + id).show();
+            $("#" + id).animate({
+                width: 65
+            });
+        } else {
+            $("#" + id).animate({
+                width: 15
+            });
+            $("#" + id).fadeOut();
+            $("#" + id).width(65);
+        }
+        
     }
 </script>
 
