@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <style>
+
+        /*using box sizing model
+            see: http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+        */
         html {
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -84,12 +88,6 @@
             background-image: -o-linear-gradient(top, #696969, #cfd0d1);
             background-image: linear-gradient(to bottom, #696969, #cfd0d1);
             text-decoration: none;
-        }
-
-
-        .page-fold-button:hover {
-            background-color:lightblue;
-            opacity: 0.4;
         }
 
         .page-fold-image {
@@ -245,26 +243,39 @@
 <script>var urlRoot = '@Url.Content("~/")';</script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-@*<script src="~/Scripts/jquery-ui-1.11.4.js"></script>*@
 <script src="~/Scripts/ClickPlugin.js"></script>
 
 <script>
-    //set this variable
+    //Global Variables
     var USE_THIS_SCALE;
     var showingMenu = false;
     var nav_l1_max = 5;
     var WaitingForLoad = 0;
     var LoadCounter = 0;
+    //var CurrentPageIsBookmarked = false;
 
-    function unbindAll() {
-        $("#screenshot-button").unbind();
-        $("#previous_button").unbind();
-        $("#next_button").unbind();
-        $(".menu_button").unbind();
-        $(".menu_option").unbind();
-        $(".header_l2").unbind();
-        $(".header_l3").unbind();
-    }
+    //URL Variables, begin with URL_ then Controller Action
+    var URL_NewSetPageInt = '@Html.Raw(Url.Action("NewSetPageInt", new { a=99999,b=88888,c=77777 }))';
+    var URL_AddBookmark = '@Url.Action("AddBookmark")';
+    var URL_RenderBookmarks = '@Url.Action("RenderBookmarks")';
+    var URL_GetContent = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+    var URL_RemoveBookmark = '@Url.Action("RemoveBookmark")';
+    var URL_GetNavigationTitle = '@Html.Raw(Url.Action("GetNavigationTitle", new { nav = 99999 }))';
+    var URL_GetNavigationImage = '@Html.Raw(Url.Action("GetNavigationImage", new { nav = 99999 }))';
+    var URL_GetLevel1Navigation = '@Html.Raw(Url.Action("GetLevel1Navigation", new { nav = 99999 }))';
+    var URL_GetLevel2Navigation = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 88888}))';
+    var URL_GetLevel3Navigation = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+    var URL_GetBookmarkNotesAjax = '@Url.Action("GetBookmarkNotesAjax")';
+    var URL_SaveNotes = '@Url.Action("SaveNotes")';
+</script>
+
+<script src="~/Scripts/ShellFunctions.js"></script>
+
+<script>
+    //set this variable
+    
+
+    
 
     function init() {
         WaitingForLoad = 0;
@@ -272,7 +283,7 @@
         unbindAll();
 
         if (window.history && window.history.pushState) {
-            var loadUrl = '@Html.Raw(Url.Action("NewSetPageInt", new { a=99999,b=88888,c=77777 }))';
+            var loadUrl = URL_NewSetPageInt;
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", getNavigationC());
@@ -299,161 +310,13 @@
                 break;
         }
 
-        $("#screenshot-button").tomclick("", "", function (el) {
-            var a = getNavigationA();
-            var b = getNavigationB();
-            var c = getNavigationC();
-
-            var loadUrl = '@Html.Raw(Url.Action("CreateImage", new { a=99999, b=88888, c=77777, scale=66666 }))';
-            loadUrl = loadUrl.replace("99999", a);
-            loadUrl = loadUrl.replace("88888", b);
-            loadUrl = loadUrl.replace("77777", c);
-            loadUrl = loadUrl.replace("66666", USE_THIS_SCALE);
-
-            window.open(loadUrl);
-        });
-
-
-        $("#previous_button").tomclick("", "", function () {
-            var current_a = getNavigationA();
-            var current_b = getNavigationB();
-            var current_c = getNavigationC();
-
-            var use_a = 0;
-            var use_b = 0;
-            var use_c = 0;
-
-            var okayToLoad = true;
-
-            var consoleLog;
-
-            if (current_c > 1) {
-                //next page = current_a, current_b, a+1
-                consoleLog = current_a + ", " + current_b + ", " + (current_c - 1);
-                use_a = current_a;
-                use_b = current_b;
-                use_c = current_c - 1;
-            } else {
-                //no more l3 pages, go up to l2
-                if (current_b > 1) {
-                    //next page = current_a, b+1, 1
-                    consoleLog = current_a + ", " + (current_b - 1) + ", 1";
-                    use_a = current_a;
-                    use_b = current_b - 1;
-                    use_c = 1;
-                } else {
-                    //no more l2 pages, go up to l1
-                    if (current_a > 1) {
-                        //next page = a+1, 1, 1
-                        consoleLog = (current_a - 1) + ", 1, 1";
-                        use_a = current_a - 1;
-                        use_b = 1;
-                        use_c = 1;
-                    } else {
-                        consoleLog = "no more pages";
-                        okayToLoad = false;
-                    }
-                }
-            }
-
-            console.log(consoleLog);
-
-            if (okayToLoad) {
-
-                if (current_a == use_a && current_b == use_b) {
-
-                    //only need to load level 3 and content
-                    NavigateLevel3(use_a, use_b, use_c);
-
-                } else if (current_a == use_a) {
-                    //load level 2 and level 3 and content
-                    NavigateLevel2(use_a, use_b);
-
-                } else {
-                    //load all
-                    NavigateLevel1(use_a);
-
-                }
-            }
-
-        });
-        $("#next_button").tomclick("", "", function () {
-            var current_a = getNavigationA();
-            var current_b = getNavigationB();
-            var current_c = getNavigationC();
-
-            var use_a = 0;
-            var use_b = 0;
-            var use_c = 0;
-
-            var okayToLoad = true;
-
-            var consoleLog;
-
-            if (current_c < nav_l3_max) {
-                //next page = current_a, current_b, a+1
-                consoleLog = current_a + ", " + current_b + ", " + (current_c + 1);
-                use_a = current_a;
-                use_b = current_b;
-                use_c = current_c + 1;
-            } else {
-                //no more l3 pages, go up to l2
-                if (current_b < nav_l2_max) {
-                    //next page = current_a, b+1, 1
-                    consoleLog = current_a + ", " + (current_b + 1) + ", 1";
-                    use_a = current_a;
-                    use_b = current_b + 1;
-                    use_c = 1;
-                } else {
-                    //no more l2 pages, go up to l1
-                    if (current_a < nav_l1_max) {
-                        //next page = a+1, 1, 1
-                        consoleLog = (current_a + 1) + ", 1, 1";
-                        use_a = current_a + 1;
-                        use_b = 1;
-                        use_c = 1;
-                    } else {
-                        consoleLog = "no more pages";
-                        okayToLoad = false;
-                    }
-                }
-            }
-
-            console.log(consoleLog);
-            if (okayToLoad) {
-
-                if (current_a == use_a && current_b == use_b) {
-
-                    //only need to load level 3 and content
-                    NavigateLevel3(use_a, use_b, use_c);
-
-                } else if (current_a == use_a) {
-                    //load level 2 and level 3 and content
-                    NavigateLevel2(use_a, use_b);
-
-                } else {
-                    //load all
-                    NavigateLevel1(use_a);
-
-                }
-            }
-
-        });
+        CreateListeners();
 
         var outerHeight = window.outerHeight;
         var outerWidth = window.outerWidth;
 
         var heightRatio = outerHeight / 937;
         var widthRatio = outerWidth / 1455;
-        var testStr = "h: " + heightRatio + " - w: " + widthRatio;
-
-
-        $("#windowHeightTest1").text(testStr);
-        //$("#windowHeightTest3").text();
-
-        //var scale = 'scale(' + heightRatio + ')';
-        //$("html").css('transform', scale);
-        //$("#windowHeightTest2").text("scaling by: " + heightRatio);
 
         if (heightRatio != 1 && widthRatio != 1) {
             if (heightRatio < widthRatio) {
@@ -475,65 +338,7 @@
             USE_THIS_SCALE = 1;
         }
 
-
-        $("#testButton").tomclick("", "", function () {
-
-        });
-
-        var h = window.outerHeight;
-        var w = window.outerWidth;
-        var str = "h: " + h + " - w: " + w;
-        $("#windowHeightTest").text(str);
-
-        $(".menu_button").tomclick("", "", function (element) {
-            if ($(".menu").css('display') == "none") {
-                $(".menu").slideDown();
-            } else {
-                $(".menu").slideUp();
-            }
-        });
-
-        $(".menu_option").tomclick("", "", function (element) {
-            $(".menu").slideUp();
-
-            $(".menu_option").removeClass('menu_option_selected');
-            $(element).addClass("menu_option_selected");
-
-            $(".header_l3").removeClass("header_l3_selected");
-            $(".header_l3").first().addClass("header_l3_selected");
-            $(".header_l2").removeClass("header_l2_selected")
-            $(".header_l2").first().addClass("header_l2_selected");
-
-
-
-            //load w/ parameters
-            NavigateLevel1(getNavigationA());
-
-        });
-
-
-        $(".header_l2").tomclick("", "", function (element) {
-            $(".header_l3").removeClass("header_l3_selected");
-            $(".header_l3").first().addClass("header_l3_selected");
-            $(".header_l2").removeClass("header_l2_selected")
-            $(element).addClass("header_l2_selected");
-
-
-
-            //load w/ parameters
-            NavigateLevel2(getNavigationA(), getNavigationB());
-
-        });
-
-
-        $(".header_l3").tomclick("", "", function (element) {
-            $(".header_l3").removeClass("header_l3_selected")
-            $(element).addClass("header_l3_selected");
-
-            //load w/ parameters
-            NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC());
-
-        });
+        
     }
 
     $(function () {
@@ -577,7 +382,7 @@
                     var c = $("#bookmark_c").val();
 
                     $.ajax({
-                        url: '@Url.Action("AddBookmark")',
+                        url: URL_AddBookmark,
                         data: {
                             a: a,
                             b: b,
@@ -591,13 +396,13 @@
                             console.log('success', data);
                             //render bookmarks id
                             $("#bookmarks").empty();
-                            $("#bookmarks").load('@Url.Action("RenderBookmarks")');
+                            $("#bookmarks").load(URL_RenderBookmarks);
                             $("#bookmarkPopup").dialog("close");
 
                             //re-render content
                             LoadCounter = 1;
                             WaitingForLoad = 1;
-                            var loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+                            var loadUrl = URL_GetContent;
                             loadUrl = loadUrl.replace("99999", getNavigationA());
                             loadUrl = loadUrl.replace("88888", getNavigationB());
                             loadUrl = loadUrl.replace("77777", getNavigationC());
@@ -610,538 +415,7 @@
 
     });
 
-    function hideMenu() {
-        $(".menu").slideUp();
-        var len = $.trim($('#bookmarks').html()).length;
-
-        if ($("#bookmarks").css('display') != "none") {
-            $("#bookmarks").slideUp();
-            if (len == 0)
-                $("#bookmarks").empty();
-        }
-    }
-
-    function getNavigationA() {
-        var arr = $(".menu").find(".menu_option");
-        for (var i = 0; i < arr.length; i++) {
-            if ($(arr[i]).hasClass('menu_option_selected')) {
-                return i + 1;
-            }
-        }
-        return -1;
-    }
-    function getNavigationB() {
-        var arr = $(".level_2_navigation").find(".header_l2");
-        for (var i = 0; i < arr.length; i++) {
-            if ($(arr[i]).hasClass('header_l2_selected')) {
-                return i + 1;
-            }
-        }
-        return -1;
-    }
-    function getNavigationC() {
-        var arr = $(".level_3_navigation").find(".header_l3");
-        for (var i = 0; i < arr.length; i++) {
-            if ($(arr[i]).hasClass('header_l3_selected')) {
-                return i + 1;
-            }
-        }
-        return -1;
-    }
-
-
-    function loadSuccess() {
-
-        var scale = 'scale(' + USE_THIS_SCALE + ')';
-        $("html").css('transform', scale);
-
-        var navA = getNavigationA();
-        switch (navA) {
-            case 1:
-                $("#colorChangeDiv").css('background-color', '#FFC314');
-                break;
-            case 2:
-                $("#colorChangeDiv").css('background-color', '#33ACB0');
-                break;
-            case 3:
-                $("#colorChangeDiv").css('background-color', '#FF9A30');
-                break;
-            case 4:
-                $("#colorChangeDiv").css('background-color', '#F55014');
-                break;
-            case 5:
-                $("#colorChangeDiv").css('background-color', '#797979');
-                break;
-        }
-    }
-
-    function togglePageFold(pg, element) {
-        var pre = $(element).prev();
-
-        var a = getNavigationA();
-        var b = getNavigationB();
-        var c = getNavigationC();
-        
-        var idStr = "bookmark_" + a + "_" + b + "_" + c;
-
-        if ($(pre).css('display') == "none") {
-
-            PageFoldAnimate(pg, true);
-
-            var nav_title = getNavDescription(a, b, c);
-
-            $("#bookmark_string").val(nav_title);
-            $("#bookmark_a").val(a);
-            $("#bookmark_b").val(b);
-            $("#bookmark_c").val(c);
-            $("#bookmarkPopup").dialog("open");
-
-
-        } else {
-            var c = confirm("This will remove your bookmark, and delete your notes on this page, is that okay?");
-            if (c) {
-                PageFoldAnimate(pg, false);
-                $.ajax({
-                    url: '@Url.Action("RemoveBookmark")',
-                    data: {
-                        id: idStr
-                    },
-                    type: 'POST',
-                    success: function (data) {
-                        console.log('success', data);
-                        //render bookmarks id
-                        $("#bookmarks").empty();
-                        $("#bookmarks").load('@Url.Action("RenderBookmarks")');
-
-                        LoadCounter = 1;
-                        WaitingForLoad = 1;
-                        var loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
-                        loadUrl = loadUrl.replace("99999", getNavigationA());
-                        loadUrl = loadUrl.replace("88888", getNavigationB());
-                        loadUrl = loadUrl.replace("77777", getNavigationC());
-                        $("#main_content").load(loadUrl, NewLoadFinish);
-                    }
-                });
-            }
-        }
-
-    }
-
-    function toggleBookmarks() {
-        var len = $.trim($('#bookmarks').html()).length;
-
-        if ($("#bookmarks").css('display') == "none") {
-            if (len == 0) {
-                var addDiv = "<div style='color:white;font-style:italic;text-align:center'>you currently have no bookmarks</div>";
-                $("#bookmarks").append($(addDiv));
-            }
-            $("#bookmarks").slideDown();
-        } else {
-            $("#bookmarks").slideUp();
-            if (len == 0)
-                $("#bookmarks").empty();
-        }
-    }
-
-    function getNavDescription(a, b, c) {
-        var ret_str = "";
-
-        switch (a) {
-            case 1:
-                ret_str += "Fundoscopy > ";
-                switch (b) {
-                    case 1:
-                        ret_str += "Objective > Overview";
-                        break;
-                    case 2:
-                        ret_str += "Foundation > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Items";
-                                break;
-                            case 2:
-                                ret_str += "CellScope";
-                                break;
-                            case 3:
-                                ret_str += "Imaging";
-                                break;
-                        }
-                        break;
-                    case 3:
-                        ret_str += "Setup > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Room & Subject";
-                                break;
-                            case 2:
-                                ret_str += "CellScope";
-                                break;
-                        }
-                        break;
-                    case 4:
-                        ret_str += "Exam procedure > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Video";
-                                break;
-                            case 2:
-                                ret_str += "Step-by-step";
-                                break;
-                        }
-                        break;
-                    case 5:
-                        ret_str += "Tips > Tips";
-                        break;
-                    case 6:
-                        ret_str += "Quiz > Quiz";
-                        break;
-                    case 7:
-                        ret_str += "Pathology > Pathology"; 5
-                        break;
-                }
-                break;
-            case 2:
-                ret_str += "Kidney & Bladder >";
-                switch (b) {
-                    case 1:
-                        ret_str += "Objective > Overview";
-                        break;
-                    case 2:
-                        ret_str += "Foundation > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Probe handling";
-                                break;
-                            case 2:
-                                ret_str += "Imaging";
-                                break;
-                        }
-                        break;
-                    case 3:
-                        ret_str += "Setup > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Room & subject";
-                                break;
-                            case 2:
-                                ret_str += "Ultrasound machine";
-                                break;
-                            case 3:
-                                ret_str += "Image acquisition";
-                                break;
-                        }
-                        break;
-                    case 4:
-                        ret_str += "Exam procedure > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Right Kidney";
-                                break;
-                            case 2:
-                                ret_str += "Left Kidney";
-                                break;
-                            case 3:
-                                ret_str += "Bladder";
-                                break;
-                        }
-                        break;
-                    case 5:
-                        ret_str += "Pathology > Pathology";
-                        break;
-                    case 6:
-                        ret_str += "Quiz > Quiz";
-                        break;
-                }
-                break;
-            case 3:
-                ret_str += "Intubation >";
-                switch (b) {
-                    case 1:
-                        ret_str += "Objective > Overview";
-                        break;
-                    case 2:
-                        ret_str += "Foundation > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Airway management";
-                                break;
-                            case 2:
-                                ret_str += "ILMA";
-                                break;
-                        }
-                        break;
-                    case 3:
-                        ret_str += "Setup > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "ItemsRoom & subject";
-                                break;
-                            case 2:
-                                ret_str += "Equipment";
-                                break;
-                        }
-                        break;
-                    case 4:
-                        ret_str += "Exam procedure > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Video";
-                                break;
-                            case 2:
-                                ret_str += "Step-by-step";
-                                break;
-                        }
-                        break;
-                    case 5:
-                        ret_str += "Quiz > Quiz";
-                        break;
-                    case 6:
-                        ret_str += "Tips > Tips";
-                        break;
-                }
-                break;
-            case 4:
-                ret_str += "IV Insertion >";
-                switch (b) {
-                    case 1:
-                        ret_str += "Objective > Overview";
-                        break;
-                    case 2:
-                        ret_str += "Foundation > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Quick start";
-                                break;
-                            case 2:
-                                ret_str += "Probe handling";
-                                break;
-                            case 3:
-                                ret_str += "Imaging";
-                                break;
-                            case 4:
-                                ret_str += "Needle handling";
-                                break;
-                        }
-                        break;
-                    case 3:
-                        ret_str += "Setup > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Subject";
-                                break;
-                            case 2:
-                                ret_str += "Ultrasound machine";
-                                break;
-                            case 3:
-                                ret_str += "Procedure supplies";
-                                break;
-                        }
-                        break;
-                    case 4:
-                        ret_str += "Exam procedure > ";
-                        switch (c) {
-                            case 1:
-                                ret_str += "Video";
-                                break;
-                            case 2:
-                                ret_str += "Step-by-step";
-                                break;
-                        }
-                        break;
-                    case 5:
-                        ret_str += "Quiz > Quiz";
-                        break;
-                    case 6:
-                        ret_str += "Troubleshooting > Troubleshooting";
-                        break;
-                }
-                break;
-        }
-
-        return ret_str;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function NavigateLevel1(a) {
-        LoadCounter = 1;
-        WaitingForLoad = 6;
-
-        var loadUrl = '@Html.Raw(Url.Action("GetNavigationTitle", new { nav = 99999 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        $(".navigation_title").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetNavigationImage", new { nav = 99999 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        $(".navigation_image").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetLevel1Navigation", new { nav = 99999 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        $(".menu").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 1}))';
-        loadUrl = loadUrl.replace("99999", a);
-        $(".level_2_navigation").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 1, nav_c = 1 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 1, nav_c = 1 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        $("#main_content").load(loadUrl, NewLoadFinish);
-    }
-    function NavigateLevel2(a, b) {
-        LoadCounter = 1;
-        WaitingForLoad = 3;
-
-        var loadUrl = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 88888}))';
-        loadUrl = loadUrl.replace("99999", a);
-        loadUrl = loadUrl.replace("88888", b);
-        $(".level_2_navigation").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 1 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        loadUrl = loadUrl.replace("88888", b);
-        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 1 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        loadUrl = loadUrl.replace("88888", b);
-        $("#main_content").load(loadUrl, NewLoadFinish);
-    }
-    function NavigateLevel3(a, b, c) {
-        LoadCounter = 1;
-        WaitingForLoad = 2;
-
-        var loadUrl = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        loadUrl = loadUrl.replace("88888", b);
-        loadUrl = loadUrl.replace("77777", c);
-        $(".level_3_navigation").load(loadUrl, NewLoadFinish);
-
-        loadUrl = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
-        loadUrl = loadUrl.replace("99999", a);
-        loadUrl = loadUrl.replace("88888", b);
-        loadUrl = loadUrl.replace("77777", c);
-        $("#main_content").load(loadUrl, NewLoadFinish);
-    }
-
-
-    function NewLoadFinish() {
-        console.log('counter', LoadCounter);
-        console.log('waiting', WaitingForLoad);
-
-        if (WaitingForLoad == LoadCounter)
-            init();
-        else
-            LoadCounter++;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function PageFoldAnimate(id, isShow) {
-        //set width to 15, animate width to 65
-        if (isShow) {
-            $("#" + id).width(15);
-            $("#" + id).show();
-            $("#" + id).animate({
-                width: 65
-            });
-        } else {
-            $("#" + id).animate({
-                width: 15
-            });
-            $("#" + id).fadeOut();
-            $("#" + id).width(65);
-        }
-        
-    }
-
-    function ExpandShrinkNotes(isExpand) {
-        if (isExpand) {
-            $("#maximized_notes").css('z-index', '500');
-            $("#minimized_notes").css('z-index', '499');
-
-            $("#maximized_notes").width(275);
-            $("#maximized_notes").css('opacity', '0');
-            $("#maximized_notes").show();
-            $("#minimized_notes").animate({
-                width: 275,
-                height: 275,
-                opacity: 0
-            });
-            $("#maximized_notes").animate({
-                width: 500,
-                height: 500,
-                opacity: 1
-            });
-            //minimized_notes animate width/height, fadeout
-            //maximized_notes fadeIn, animate width/height
-        } else {
-            $("#maximized_notes").css('z-index', '499');
-            $("#minimized_notes").css('z-index', '500');
-
-            $("#minimized_notes").width(275);
-            $("#minimized_notes").css('opacity', '0');
-            $("#minimized_notes").show();
-            $("#maximized_notes").animate({
-                width: 275,
-                height: 275,
-                opacity: 0
-            });
-            $("#minimized_notes").animate({
-                width: 50,
-                height: 50,
-                opacity: 1
-            });
-        }
-    }
-
-
-    function ShowNotes(id) {
-        $.ajax({
-            url: '@Url.Action("GetBookmarkNotesAjax")',
-            data: {
-                id: id
-            },
-            type: 'POST',
-            success: function (data) {
-                console.log('success', data);
-                alert(data);
-            }
-        });
-    }
+    
 </script>
 
 @RenderSection("Scripts", false)
