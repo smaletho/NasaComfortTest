@@ -283,6 +283,7 @@ namespace TestNasa.Controllers
                 if (model.PageIsBookmarked)
                 {
                     ViewBag.BookmarkNotes = GetBookmarkNotes(model.NewBookmarkList, checkBookmark);
+                    ViewBag.BookmarkTitle = GetBookmarkTitle(model.NewBookmarkList, checkBookmark);
                 }
             }
             else
@@ -456,6 +457,16 @@ namespace TestNasa.Controllers
             {
                 if (bookmark.BookmarkId == checkBookmark)
                     return bookmark.UserNotes;
+            }
+
+            return "N/A";
+        }
+        public string GetBookmarkTitle(List<BookmarkObject> ls, string checkBookmark)
+        {
+            foreach (var bookmark in ls)
+            {
+                if (bookmark.BookmarkId == checkBookmark)
+                    return bookmark.UserTitle;
             }
 
             return "N/A";
