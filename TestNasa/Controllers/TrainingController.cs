@@ -269,13 +269,15 @@ namespace TestNasa.Controllers
         }
         public ActionResult GetContent(int nav_a, int nav_b, int nav_c)
         {
+            string checkBookmark = "bookmark_" + nav_a.ToString() + "_" + nav_b.ToString() + "_" + nav_c.ToString();
+
             TrainingModel model = new TrainingModel();
             if (Session["CurrentPageModel"] != null)
             {
                 model = (TrainingModel)Session["CurrentPageModel"];
 
                 //check if page is bookmarked
-                string checkBookmark = "bookmark_" + nav_a.ToString() + "_" + nav_b.ToString() + "_" + nav_c.ToString();
+                
 
                 model.PageIsBookmarked = IsPageBookmarked(model.NewBookmarkList, checkBookmark);
                 if (model.PageIsBookmarked)
@@ -301,6 +303,7 @@ namespace TestNasa.Controllers
             ViewBag.Nav_B = nav_b;
             ViewBag.Nav_C = nav_c;
             ViewBag.IsBookmarked = model.PageIsBookmarked;
+            ViewBag.BookmarkId = checkBookmark;
 
             return View("ContentView");
         }
@@ -416,6 +419,25 @@ namespace TestNasa.Controllers
             }
 
             return Content(retStr);
+        }
+
+        public ActionResult SaveNotes(string notes, string id)
+        {
+            TrainingModel model = new TrainingModel();
+            if (Session["CurrentPageModel"] != null)
+            {
+                model = (TrainingModel)Session["CurrentPageModel"];
+
+                foreach (var bookmark in model.NewBookmarkList)
+                {
+                    if (bookmark.BookmarkId == id)
+                        bookmark.UserNotes = notes;
+                }
+            }
+
+            Session["CurrentPageModel"] = model;
+
+            return Content("success");
         }
 
         public bool IsPageBookmarked(List<BookmarkObject> ls, string checkBookmark)

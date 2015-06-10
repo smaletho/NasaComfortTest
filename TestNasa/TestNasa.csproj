@@ -149,6 +149,7 @@
     <Content Include="Content\Images\kidneybladder.png" />
     <Content Include="Content\Images\kidneybladderName.png" />
     <Content Include="Content\Images\reference.png" />
+    <Content Include="Content\legal-pad.jpg" />
     <Content Include="Content\page-fold.png" />
     <Content Include="Content\Screenshots\1-1-1.png" />
     <Content Include="Content\Slide1.jpg" />
@@ -213,6 +214,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\ShellFunctions.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

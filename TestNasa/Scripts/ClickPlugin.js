@@ -3,7 +3,7 @@
     var timeoutClick;
     var didTouch = false;
 
-    $(this).on("touchstart", function () {
+    $(this).on("touchstart", function (event) {
         //event.preventDefault();
         didTouch = true;
 
@@ -19,7 +19,7 @@
 
     });
 
-    $(this).on("touchend", function () {
+    $(this).on("touchend", function (event) {
         //event.preventDefault();
         didTouch = true;
         if (timeoutClick) {
@@ -27,11 +27,11 @@
             $(this).removeClass(hoverClass);
             clearTimeout(timeoutClick);
             console.log("touchend");
-            callback(this);
+            callback(this, event);
         }
     });
 
-    $(this).on("mousedown", function () {
+    $(this).on("mousedown", function (event) {
         if (!didTouch) {
             console.log("mousedown");
 
@@ -45,7 +45,7 @@
         }
     });
 
-    $(this).on("mouseup", function () {
+    $(this).on("mouseup", function (event) {
 
         if (!didTouch) {
             if (timeoutClick) {
@@ -53,7 +53,7 @@
                 $(this).removeClass(hoverClass);
                 clearTimeout(timeoutClick);
                 console.log("mouseup");
-                callback(this);
+                callback(this, event);
             }
         }
         didTouch = false;
