@@ -563,7 +563,7 @@ function ExpandShrinkNotes(isExpand) {
             width: 275,
             height: 275,
             opacity: 0
-        });
+        }, function () { $("#maximized_notes").hide(); });
         $("#minimized_notes").animate({
             width: 60,
             height: 40,
