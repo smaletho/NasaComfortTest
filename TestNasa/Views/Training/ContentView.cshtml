@@ -15,7 +15,7 @@ else
     </script>
     <img id="@foldId" class="page-fold-image" src="~/Content/page-fold.png" style="position:absolute;top:0;right:2px;width:65px;display:none;z-index:899" />
 }
-<div onclick="togglePageFold('@foldId', this)" class="page-fold-button" style="position:absolute;top:0;right:2px;width:65px;height:65px;z-index:900"></div>
+<div data-foldid="@foldId" class="page-fold-button" style="position:absolute;top:0;right:2px;width:65px;height:65px;z-index:900"></div>
 
 
 <div style="width: 1418px; height: 710px; display: block; position: absolute; top: 0; left: 0;background-color:mintcream">
@@ -28,7 +28,7 @@ else
     <div id="maximized_notes" style="position:absolute;bottom:10px;right:10px;padding:10px;width:500px;height:500px;z-index:500;background-image:url(@Url.Content("~/")Content/legal-pad.jpg);background-size:100%">
         <div style="color:white;width:475px;text-align:center;font-size:16pt">@ViewBag.BookmarkTitle</div>
         <div style="margin-top:20px;margin-left:-10px">
-            <div style="font-size:10pt;border:1px solid;width:75px;height:60px;padding-top:20px;padding-left:10px;border-radius:10px;float:left;background:#ebebeb" onclick="ExpandShrinkNotes(false);">minimize</div>
+            <div id="minimize-notes-button" style="font-size:10pt;border:1px solid;width:75px;height:60px;padding-top:20px;padding-left:10px;border-radius:10px;float:left;background:#ebebeb" >minimize</div>
             <div id="save-button" style="float:left;border:1px solid;margin-left:115px;width:200px;height:40px;margin-top:10px;padding: 10px 0 0 80px;background-color:lightgreen;font-weight:bold">saved</div>
             <div id="edit-button" style="float:left;border:1px solid;margin-left:115px;width:200px;height:40px;margin-top:10px;display:none;background-color:lightcoral;font-weight:bold;text-align:center">
                 <div>edited...</div>
@@ -37,7 +37,7 @@ else
         </div>
         <textarea class="textarea-notes" style="margin-top:5px;margin-left:80px;width:398px;height:355px;background-color:rgba(0,0,0, 0);border-radius:10px">@ViewBag.BookmarkNotes</textarea>
     </div>
-    <div id="minimized_notes" style="position: absolute; bottom: 10px; right: 10px; padding: 10px; width: 60px; height: 40px; z-index: 499; display: none;background-image:url(@Url.Content("~/")Content/legal-pad.jpg);background-size:100% " onclick="ExpandShrinkNotes(true);">
+    <div id="minimized_notes" style="position: absolute; bottom: 10px; right: 10px; padding: 10px; width: 60px; height: 40px; z-index: 499; display: none;background-image:url(@Url.Content("~/")Content/legal-pad.jpg);background-size:100%" >
         <div>notes</div>
     </div>
 }

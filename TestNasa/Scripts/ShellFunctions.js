@@ -42,9 +42,34 @@ function CreateListeners() {
                 $("#save-button").show();
             }
         });
+    });
 
+    $("#bookmarks-button").tomclick("", "", toggleBookmarks);
+    $("#colorChangeDiv").tomclick("", "", hideMenu);
+    $("#belowColorChange").tomclick("", "", hideMenu);
+    $("#main_content").tomclick("", "", hideMenu);
 
-        
+    $("#minimize-notes-button").tomclick("", "", function () {
+        ExpandShrinkNotes(false);
+    });
+    $("#minimized_notes").tomclick("", "", function () {
+        ExpandShrinkNotes(true);
+    });
+
+    $(".page-fold-button").tomclick("", "", function (el, evt) {
+        var attr = $(el).data('foldid');
+        togglePageFold(attr, $(el));
+    });
+
+    $(".bookmark-show-notes").tomclick("", "", function (el, evt) {
+        var id = $(el).data('bookmarkid');
+        ShowNotes(id);
+    });
+    $(".bookmark-show-notes").tomclick("", "", function (el, evt) {
+        var id = $(el).data('bookmarkid');
+        var loadUrl = URL_NewSetPageString;
+        loadUrl = loadUrl.replace("99999", id);
+        window.location = loadUrl;
     });
 
     $(".textarea-notes").on("change keyup paste cut", function () {
@@ -89,6 +114,7 @@ function CreateListeners() {
                     use_c = 1;
                 } else {
                     consoleLog = "no more pages";
+                    alert("This is the beginning of the module.");
                     okayToLoad = false;
                 }
             }
@@ -152,6 +178,7 @@ function CreateListeners() {
                     use_c = 1;
                 } else {
                     consoleLog = "no more pages";
+                    alert("This is the end of the module.");
                     okayToLoad = false;
                 }
             }
