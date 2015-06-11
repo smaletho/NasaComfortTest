@@ -283,6 +283,10 @@
         LoadCounter = 0;
         unbindAll();
 
+        $.ajaxSetup({
+            cache: false
+        });
+
         if (window.history && window.history.pushState) {
             var loadUrl = URL_NewSetPageInt;
             loadUrl = loadUrl.replace("99999", getNavigationA());
