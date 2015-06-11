@@ -1,5 +1,24 @@
 ﻿function unbindAll() {
-    $("#screenshot-button").unbind();
+    //$("#screenshot-button").unbind();
+    //$("#previous_button").unbind();
+    //$("#next_button").unbind();
+    //$(".menu_button").unbind();
+    //$(".menu_option").unbind();
+    //$(".header_l2").unbind();
+    //$(".header_l3").unbind();
+
+
+    $("#edit-button").unbind();
+    $("#bookmarks-button").unbind();
+    $("#colorChangeDiv").unbind();
+    $("#belowColorChange").unbind();
+    $("#main_content").unbind();
+    $("#minimize-notes-button").unbind();
+    $("#minimized_notes").unbind();
+    $(".page-fold-button").unbind();
+    $(".bookmark-show-notes").unbind();
+    $(".bookmark-show-notes").unbind();
+    $(".textarea-notes").unbind();
     $("#previous_button").unbind();
     $("#next_button").unbind();
     $(".menu_button").unbind();
@@ -553,8 +572,10 @@ function NewLoadFinish() {
     console.log('counter', LoadCounter);
     console.log('waiting', WaitingForLoad);
 
-    if (WaitingForLoad == LoadCounter)
+    if (WaitingForLoad == LoadCounter){
         init();
+        console.log("doing init now");
+    }
     else
         LoadCounter++;
 }
