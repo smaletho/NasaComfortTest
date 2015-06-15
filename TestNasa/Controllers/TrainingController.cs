@@ -413,14 +413,17 @@ namespace TestNasa.Controllers
                     if (bookmark.BookmarkId == id)
                     {
                         model.NewBookmarkList.Remove(bookmark);
-                        break;
+                        Session["CurrentPageModel"] = model;
+
+                        return Content("actual success");
+                        
                     }
                 }
 
             }
 
             Session["CurrentPageModel"] = model;
-            return Content("success");
+            return Content("not really success");
         }
         public ActionResult GetBookmarkNotesAjax(string id)
         {

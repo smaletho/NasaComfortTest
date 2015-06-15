@@ -734,7 +734,7 @@ function togglePageFold(pg, element) {
                 type: 'POST',
                 success: function (data) {
                     console.log('success', data);
-                    alert(data);
+                    //alert(data);
                     //render bookmarks id
                     $("#bookmarks").empty();
                     $("#bookmarks").load(URL_RenderBookmarks);

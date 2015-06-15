@@ -180,7 +180,7 @@
                     <div style="float: left; text-align: center; width: 150px; font-family: quicksand, sans-serif; margin-top: 5px; ">Date: 06-01-15</div>
                     <div style="float: left; text-align: center; width: 150px; font-family: quicksand, sans-serif; margin-top: 5px; ">ID#: 036</div>
                 </div>
-                <div onclick="toggleBookmarks()" style="float:left;margin-left:125px;cursor:pointer;background-color:red;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:white;padding:5px 20px 5px 20px">
+                <div id="bookmarks-button" style="float:left;margin-left:125px;cursor:pointer;background-color:red;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:white;padding:5px 20px 5px 20px">
                     bookmarks
                 </div>
                 <div id="bookmarks" style="position:absolute;width:376px;background:red;right:10px;top:20px;display:none;border-bottom-right-radius:10px;border-bottom-left-radius:10px;border-top-right-radius:10px;padding:10px;z-index:9999">
@@ -196,7 +196,7 @@
     <div class="navigation_image" style="position:absolute;top:30px;left:140px;width:71px;height:71px;background-color:white;padding:5px">
         @RenderSection("NavigationImage", false)
     </div>
-    <div onclick="hideMenu()" id="colorChangeDiv" style="width:100%;height:40px;background-color:#FFC314;clear:left">
+    <div id="colorChangeDiv" style="width:100%;height:40px;background-color:#FFC314;clear:left">
         <div class="navigation_title" style="float:left;margin-left:230px;font-size:16pt;color:white;margin-top:9px;text-align:center;font-family:forum, sans-serif;margin-right:20px">
             @RenderSection("NavigationTitle", false)
         </div>
@@ -204,13 +204,13 @@
             @RenderSection("Level2Navigation", false)
         </div>
     </div>
-    <div onclick="hideMenu()" style="width:100%;height:30px;background-color:#bdc3c7">
+    <div id="belowColorChange" style="width:100%;height:30px;background-color:#bdc3c7">
         <div class="level_3_navigation" style="display:table;margin:0 auto;">
             @RenderSection("Level3Navigation", false)
         </div>
     </div>
 
-    <div id="main_content" onclick="hideMenu()">
+    <div id="main_content">
         @RenderSection("Content", false)
     </div>
 
@@ -256,6 +256,7 @@
 
     //URL Variables, begin with URL_ then Controller Action
     var URL_NewSetPageInt = '@Html.Raw(Url.Action("NewSetPageInt", new { a=99999,b=88888,c=77777 }))';
+    var URL_NewSetPageString = '@Html.Raw(Url.Action("NewSetPageString", new { id=99999 }))';
     var URL_AddBookmark = '@Url.Action("AddBookmark")';
     var URL_RenderBookmarks = '@Url.Action("RenderBookmarks")';
     var URL_GetContent = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
@@ -281,6 +282,10 @@
         WaitingForLoad = 0;
         LoadCounter = 0;
         unbindAll();
+
+        $.ajaxSetup({
+            cache: false
+        });
 
         if (window.history && window.history.pushState) {
             var loadUrl = URL_NewSetPageInt;
