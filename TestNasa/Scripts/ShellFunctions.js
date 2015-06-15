@@ -675,11 +675,6 @@ function ExpandShrinkNotes(isExpand) {
 
 
 
-
-
-
-
-
 function togglePageFold(pg, element) {
     var pre = $(element).prev();
 
@@ -798,18 +793,21 @@ function NavigateLevel1(a, b, c, d, isNext) {
         if (isNext) {
             $("#main_content").fadeOut(function () {
                 $("#main_content").load(loadUrl, NewLoadFinish);
-                $("#main_content").effect('slide', { direction: "right" });
+                $("#main_content").fadeIn();
+                //$("#main_content").effect('slide', { direction: "right" });
             });
         } else {
             $("#main_content").fadeOut(function () {
                 $("#main_content").load(loadUrl, NewLoadFinish);
-                $("#main_content").effect('slide', { direction: "left" });
+                $("#main_content").fadeIn();
+                //$("#main_content").effect('slide', { direction: "right" });
             });
         }
     } else {
         $("#main_content").fadeOut(function () {
             $("#main_content").load(loadUrl, NewLoadFinish);
-            $("#main_content").effect('slide', { direction: "right" });
+            $("#main_content").fadeIn();
+            //$("#main_content").effect('slide', { direction: "right" });
         });
     }
 

@@ -325,6 +325,20 @@ namespace TestNasa.Controllers
             ViewBag.IsBookmarked = model.PageIsBookmarked;
             ViewBag.BookmarkId = checkBookmark;
 
+            ViewBag.EdgeClass = "EDGE-8837070";
+            ViewBag.FileName = "guide_" + nav_a.ToString() + nav_b.ToString() + nav_c.ToString() + nav_d.ToString();
+
+            if (ViewBag.FileName == "guide_2111"
+                || ViewBag.FileName == "guide_2211"
+                || ViewBag.FileName == "guide_2212")
+            {
+                ViewBag.HasContent = true;
+            }
+            else
+            {
+                ViewBag.HasContent = false;
+            }
+
             return View("ContentView");
         }
         public ActionResult RenderBookmarks()
@@ -496,6 +510,24 @@ namespace TestNasa.Controllers
 
             return "N/A";
         }
+
+
+
+
+
+        public string GetHeadContent(int a, int b, int c, int d)
+        {
+            string buildFileName = "guide_" + a.ToString() + b.ToString() + c.ToString() + d.ToString();
+
+            return "";
+        }
+        public string GetBodyDiv(int a, int b, int c, int d)
+        {
+            string buildFileName = "guide_" + a.ToString() + b.ToString() + c.ToString() + d.ToString();
+
+            return "";
+        }
+        
     }
 
     [Serializable]
@@ -524,5 +556,23 @@ namespace TestNasa.Controllers
     {
         public string ImageString { get; set; }
         public double DocumentScale { get; set; }
+    }
+
+    public class ContentModel
+    {
+        public int Nav_A { get; set; }
+        public int Nav_B { get; set; }
+        public int Nav_C { get; set; }
+        public int Nav_D { get; set; }
+
+        public bool IsBookmarked { get; set; }
+        public string BookmarkId { get; set; }
+        public string BookmarkNotes { get; set; }
+        public string BookmarkTitle { get; set; }
+
+        public List<BookmarkObject> NewBookmarkList { get; set; }
+
+        public string EdgeClass { get; set; }
+        public string FileName { get; set; }
     }
 }

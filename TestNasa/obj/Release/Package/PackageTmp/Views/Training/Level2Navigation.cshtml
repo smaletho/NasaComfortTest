@@ -25,7 +25,7 @@
         <div class="header_l2 @if (ViewBag.Nav_B == 7) { WriteLiteral(" header_l2_selected"); }">
             PATHOLOGY
         </div>
-        <script>var nav_l2_max = 7;</script>
+        <script>var nav_l2_max = 7; var previous_nav_l2_max = 1;</script>
         
         break;
     case 2:
@@ -48,7 +48,7 @@
         <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
             QUIZ
         </div>
-        <script>var nav_l2_max = 6;</script>
+        <script>var nav_l2_max = 6; var previous_nav_l2_max = 7;</script>
         
         break;
     case 3:
@@ -71,7 +71,7 @@
         <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
             TIPS
         </div>
-        <script>var nav_l2_max = 6;</script>
+        <script>var nav_l2_max = 6; var previous_nav_l2_max = 6;</script>
             
         break;
     case 4:
@@ -94,6 +94,6 @@
         <div class="header_l2 @if (ViewBag.Nav_B == 6) { WriteLiteral(" header_l2_selected"); }">
             TROUBLESHOOTING
         </div>
-        <script>var nav_l2_max = 6;</script>
+        <script>var nav_l2_max = 6; var previous_nav_l2_max = 6;</script>
             break;
 }

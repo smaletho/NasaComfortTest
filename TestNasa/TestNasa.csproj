@@ -136,6 +136,17 @@
     <Content Include="Content\arrows\orange-down.png" />
     <Content Include="Content\arrows\orange-up.png" />
     <Content Include="Content\arrows\light-orange-down.png" />
+    <Content Include="Content\EdgeFiles\edge_includes\edge.5.0.1.js" />
+    <Content Include="Content\EdgeFiles\edge_includes\edge.5.0.1.min.js" />
+    <Content Include="Content\EdgeFiles\guide_2111.html" />
+    <Content Include="Content\EdgeFiles\guide_2111_edge.js" />
+    <Content Include="Content\EdgeFiles\guide_2111_edgeActions.js" />
+    <Content Include="Content\EdgeFiles\guide_2211.html" />
+    <Content Include="Content\EdgeFiles\guide_2211_edge.js" />
+    <Content Include="Content\EdgeFiles\guide_2211_edgeActions.js" />
+    <Content Include="Content\EdgeFiles\guide_2212.html" />
+    <Content Include="Content\EdgeFiles\guide_2212_edge.js" />
+    <Content Include="Content\EdgeFiles\guide_2212_edgeActions.js" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\Images\comfortlogo2.png" />
     <Content Include="Content\Images\diagnosis.png" />
@@ -205,6 +216,9 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
+    <Content Include="Content\EdgeFiles\guide_2111.an" />
+    <Content Include="Content\EdgeFiles\guide_2211.an" />
+    <Content Include="Content\EdgeFiles\guide_2212.an" />
     <None Include="Properties\PublishProfiles\Pub.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\ClickPlugin.js" />

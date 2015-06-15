@@ -1,4 +1,5 @@
-﻿@{string foldId = "page_" + ViewBag.Nav_A + "_" + ViewBag.Nav_B + "_" + ViewBag.Nav_C + "_" + ViewBag.Nav_D;
+﻿
+@{string foldId = "page_" + ViewBag.Nav_A + "_" + ViewBag.Nav_B + "_" + ViewBag.Nav_C + "_" + ViewBag.Nav_D;
 }
 
 @if ((bool)ViewBag.IsBookmarked == true)
@@ -19,7 +20,26 @@ else
 
 @*Actual content starts here*@
 <div style="width: 1418px; height: 710px; display: block; position: absolute; top: 0; left: 0;background-color:mintcream">
-    <div style="margin-top:50px;margin-left:50px">Page @ViewBag.Nav_A, @ViewBag.Nav_B, @ViewBag.Nav_C, @ViewBag.Nav_D</div>
+    @if ((bool)ViewBag.HasContent)
+    {
+        <!--Adobe Edge Runtime-->
+        <script type="text/javascript" charset="utf-8" src="~/Content/EdgeFiles/edge_includes/edge.5.0.1.js"></script>
+        <style>
+            .edgeLoad-@ViewBag.EdgeClass {
+                visibility: hidden;
+            }
+        </style>
+        <script>   AdobeEdge.loadComposition('@ViewBag.FileName', '@ViewBag.EdgeClass', { scaleToFit: "none", centerStage: "none", minW: "0", maxW: "undefined", width: "550px", height: "400px" }, { dom: [] }, { dom: [] });    </script> 
+        <!--Adobe Edge Runtime End-->
+        <div id="stage" class="@ViewBag.EdgeClass"></div> 
+    
+    }
+    else
+    {
+        <div style="margin-top:50px;margin-left:50px">Page @ViewBag.Nav_A, @ViewBag.Nav_B, @ViewBag.Nav_C, @ViewBag.Nav_D</div>
+    }
+    
+    <!--Insert Edge End-->
 </div>
 @*Actual content ends here*@
 

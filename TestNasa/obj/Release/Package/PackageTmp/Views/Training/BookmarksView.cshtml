@@ -6,8 +6,8 @@
         <div class='bookmarkTitle'>@bookmark.UserTitle</div>
         <div class='bookmarkNavigation'>@bookmark.NavTitle</div>
         <div style='overflow:auto'>
-            <div class="bookmark-show-notes" data-bookmarkid="@bookmark.BookmarkId" style='float: left; cursor: pointer' @*onclick="ShowNotes('@bookmark.BookmarkId');"*@>view notes</div>
-            <div class="bookmark-view-page" data-bookmarkid="@bookmark.BookmarkId" style='float:right;cursor:pointer' @*onclick="window.location = '@Url.Action("NewSetPageString", new { id=bookmark.BookmarkId })'"*@>view page</div>
+            <div class="bookmark-show-notes" data-bookmarkid="@bookmark.BookmarkId" style='float: left; cursor: pointer' >view notes</div>
+            <div class="bookmark-view-page" data-bookmarkid="@bookmark.BookmarkId" style='float:right;cursor:pointer' >view page</div>
         </div>
     </div>
 }
