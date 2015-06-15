@@ -1,0 +1,311 @@
+﻿@switch ((int)ViewBag.Nav_A) {
+        case 1:
+            //Fundoscopy
+            switch ((int)ViewBag.Nav_B) {
+                case 1:
+                    //objective > overview
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 2:
+                    //Foundation
+                    switch ((int)ViewBag.Nav_C) {
+                        case 1:
+                            //Items
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <div class="header_l4 @if (ViewBag.Nav_D == 2) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 2; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //CellScope
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 3:
+                            //Imaging
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 3:
+                    //Setup
+                    switch ((int)ViewBag.Nav_C) {
+                        case 1:
+                            //Room & Subject
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //CellScope
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 4:
+                    //Exam procedure
+                    switch ((int)ViewBag.Nav_C) {
+                        case 1:
+                            //Video";
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Step-by-step
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <div class="header_l4 @if (ViewBag.Nav_D == 2) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <div class="header_l4 @if (ViewBag.Nav_D == 3) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <div class="header_l4 @if (ViewBag.Nav_D == 4) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 4; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 5:
+                    //Tips > Tips
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 4;</script>
+                    break;
+                case 6:
+                    //Quiz > Quiz
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <div class="header_l4 @if (ViewBag.Nav_D == 2) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <div class="header_l4 @if (ViewBag.Nav_D == 3) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <div class="header_l4 @if (ViewBag.Nav_D == 4) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 4; var previous_l4_max = 1;</script>
+                    break;
+                case 7:
+                    //Pathology > Pathology
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 4;</script>
+                    break;
+            }
+            break;
+        case 2:
+            //Kidney & Bladder >";
+            switch ((int)ViewBag.Nav_B) {
+                case 1:
+                    //Objective > Overview";
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 2:
+                    //Foundation
+                    switch ((int)ViewBag.Nav_C) {
+                        case 1:
+                            //Probe handling
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Imaging
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 3:
+                    //Setup
+                    switch ((int)ViewBag.Nav_C) {
+                        case 1:
+                            //Room & subject
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Ultrasound machine
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 3:
+                            //Image acquisition
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 4:
+                    //Exam procedure
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Right Kidney
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Left Kidney
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 3:
+                            //Bladder
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 5:
+                    //Pathology > Pathology
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 6:
+                    //Quiz > Quiz
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+            }
+            break;
+        case 3:
+            //Intubation
+            switch ((int)ViewBag.Nav_B) {
+                case 1:
+                    //Objective > Overview
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 2:
+                    //Foundation
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Airway management
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //ILMA
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 3:
+                    //Setup
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //ItemsRoom & subject
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Equipment
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 4:
+                    //Exam procedure
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Video
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Step-by-step
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 5:
+                    //Quiz > Quiz
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 6:
+                    //Tips > Tips
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+            }
+            break;
+        case 4:
+            //IV Insertion
+            switch ((int)ViewBag.Nav_B) {
+                case 1:
+                    //Objective > Overview
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 2:
+                    //Foundation
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Quick start
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Probe handling
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 3:
+                            //Imaging
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 4:
+                            //Needle handling
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 3:
+                    //Setup
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Subject
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Ultrasound machine
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 3:
+                            //Procedure supplies
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 4:
+                    //Exam procedure
+                    switch ((int)ViewBag.Nav_C)
+                    {
+                        case 1:
+                            //Video
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                        case 2:
+                            //Step-by-step
+                            <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                            <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                            break;
+                    }
+                    break;
+                case 5:
+                    //Quiz > Quiz
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+                case 6:
+                    //Troubleshooting > Troubleshooting";
+                    <div class="header_l4 @if (ViewBag.Nav_D == 1) { WriteLiteral(" header_l4_selected"); }"></div>
+                    <script>var nav_l4_max = 1; var previous_l4_max = 1;</script>
+                    break;
+            }
+            break;
+    }
