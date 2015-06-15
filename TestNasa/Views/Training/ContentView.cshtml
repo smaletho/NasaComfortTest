@@ -1,4 +1,4 @@
-﻿@{string foldId = "page_" + ViewBag.Nav_A + "_" + ViewBag.Nav_B + "_" + ViewBag.Nav_C;
+﻿@{string foldId = "page_" + ViewBag.Nav_A + "_" + ViewBag.Nav_B + "_" + ViewBag.Nav_C + "_" + ViewBag.Nav_D;
 }
 
 @if ((bool)ViewBag.IsBookmarked == true)
@@ -17,10 +17,11 @@ else
 }
 <div data-foldid="@foldId" class="page-fold-button" style="position:absolute;top:0;right:2px;width:65px;height:65px;z-index:900"></div>
 
-
+@*Actual content starts here*@
 <div style="width: 1418px; height: 710px; display: block; position: absolute; top: 0; left: 0;background-color:mintcream">
-    <div style="margin-top:50px;margin-left:50px">Page @ViewBag.Nav_A, @ViewBag.Nav_B, @ViewBag.Nav_C</div>
+    <div style="margin-top:50px;margin-left:50px">Page @ViewBag.Nav_A, @ViewBag.Nav_B, @ViewBag.Nav_C, @ViewBag.Nav_D</div>
 </div>
+@*Actual content ends here*@
 
 @if ((bool)ViewBag.IsBookmarked == true)
 {

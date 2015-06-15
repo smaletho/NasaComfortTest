@@ -148,6 +148,27 @@
             background-color: white;
         }
 
+        .header_l4{
+            float:left;
+            border: 1px solid red;
+            border-radius:50px;
+            width:25px;
+            height:25px;
+            margin-top:7px;
+            margin-left:20px;
+        }
+
+        .header_l4_selected {
+            float:left;
+            border: 1px solid red;
+            background-color: red;
+            border-radius:50px;
+            width:25px;
+            height:25px;
+            margin-top:7px;
+            margin-left:20px;
+        }
+
         .ui-widget-overlay  {
             position:absolute;
         }
@@ -215,10 +236,28 @@
     </div>
 
 
-    <div style="position:absolute;bottom:0;left:0;width:1420px;height:40px;">
-        <div id="previous_button" class="next_previous_btn" style="float:left;margin-left:20px">&lt; previous</div>
-        <div id="next_button" class="next_previous_btn" style="float:right;margin-right:20px;">next &gt;</div>
-    </div>
+        <table style="margin: 0 auto;position:absolute;bottom:0;left:0;width:1420px;height:40px;">
+            <tr>
+                <td>
+                    <div id="previous_button" class="next_previous_btn" style="float:left;margin-left:20px">&lt; previous</div>
+                </td>
+                <td width="1080">
+                    <div id="level_4_navigation" style="display: table; margin: 0 auto;">
+                        @RenderSection("Level4Navigation", false)
+                    </div>
+                </td>
+                <td>
+                    <div id="next_button" class="next_previous_btn" style="float:right;margin-right:20px;">next &gt;</div>
+                </td>
+            </tr>
+        </table>
+
+
+        @*<div id="previous_button" class="next_previous_btn" style="float:left;margin-left:20px">&lt; previous</div>
+        <div id="level_4_navigation" style="float:left;width:1080px;height:38px;margin-left:50px">
+            @RenderSection("Level4Navigation", false)
+        </div>
+        <div id="next_button" class="next_previous_btn" style="float:right;margin-right:20px;">next &gt;</div>*@
 
     <div id="bookmarkPopup" title="Add Bookmark">
         <input id="bookmark_title" type="text" placeholder="enter a page title..." style="width:100%;margin-bottom:20px"/>
@@ -227,6 +266,7 @@
         <input id="bookmark_a" style="display:none" type="text" />
         <input id="bookmark_b" style="display:none" type="text" />
         <input id="bookmark_c" style="display:none" type="text" />
+        <input id="bookmark_d" style="display:none" type="text" />
     </div>
 
     @*<div id="quickBookmarkNotes" title="Notes">
@@ -255,17 +295,18 @@
     //var CurrentPageIsBookmarked = false;
 
     //URL Variables, begin with URL_ then Controller Action
-    var URL_NewSetPageInt = '@Html.Raw(Url.Action("NewSetPageInt", new { a=99999,b=88888,c=77777 }))';
+    var URL_NewSetPageInt = '@Html.Raw(Url.Action("NewSetPageInt", new { a = 99999, b = 88888, c = 77777, d = 66666 }))';
     var URL_NewSetPageString = '@Html.Raw(Url.Action("NewSetPageString", new { id=99999 }))';
     var URL_AddBookmark = '@Url.Action("AddBookmark")';
     var URL_RenderBookmarks = '@Url.Action("RenderBookmarks")';
-    var URL_GetContent = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+    var URL_GetContent = '@Html.Raw(Url.Action("GetContent", new { nav_a = 99999, nav_b = 88888, nav_c = 77777, nav_d = 66666 }))';
     var URL_RemoveBookmark = '@Url.Action("RemoveBookmark")';
     var URL_GetNavigationTitle = '@Html.Raw(Url.Action("GetNavigationTitle", new { nav = 99999 }))';
     var URL_GetNavigationImage = '@Html.Raw(Url.Action("GetNavigationImage", new { nav = 99999 }))';
     var URL_GetLevel1Navigation = '@Html.Raw(Url.Action("GetLevel1Navigation", new { nav = 99999 }))';
     var URL_GetLevel2Navigation = '@Html.Raw(Url.Action("GetLevel2Navigation", new { nav_a = 99999, nav_b = 88888}))';
     var URL_GetLevel3Navigation = '@Html.Raw(Url.Action("GetLevel3Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 77777 }))';
+    var URL_GetLevel4Navigation = '@Html.Raw(Url.Action("GetLevel4Navigation", new { nav_a = 99999, nav_b = 88888, nav_c = 77777, nav_d = 66666 }))';
     var URL_GetBookmarkNotesAjax = '@Url.Action("GetBookmarkNotesAjax")';
     var URL_SaveNotes = '@Url.Action("SaveNotes")';
 </script>
@@ -288,6 +329,7 @@
             loadUrl = loadUrl.replace("99999", getNavigationA());
             loadUrl = loadUrl.replace("88888", getNavigationB());
             loadUrl = loadUrl.replace("77777", getNavigationC());
+            loadUrl = loadUrl.replace("66666", getNavigationD());
             window.history.pushState(null, null, loadUrl);
         }
 
@@ -359,6 +401,7 @@
                 $("#bookmark_a").val('');
                 $("#bookmark_b").val('');
                 $("#bookmark_c").val('');
+                $("#bookmark_d").val('');
             },
             buttons: [{
                 text: "Cancel",
@@ -366,8 +409,9 @@
                     var a = getNavigationA();
                     var b = getNavigationB();
                     var c = getNavigationC();
+                    var d = getNavigationD();
 
-                    var str = "page_" + a + "_" + b + "_" + c;
+                    var str = "page_" + a + "_" + b + "_" + c + "_" + d;
                     PageFoldAnimate(str, false);
 
                     $(this).dialog("close");
@@ -381,6 +425,7 @@
                     var a = $("#bookmark_a").val();
                     var b = $("#bookmark_b").val();
                     var c = $("#bookmark_c").val();
+                    var d = $("#bookmark_d").val();
 
                     $.ajax({
                         url: URL_AddBookmark,
@@ -388,6 +433,7 @@
                             a: a,
                             b: b,
                             c: c,
+                            d: d,
                             user_title: user_title,
                             nav_title: nav_title,
                             notes: notes
@@ -407,6 +453,7 @@
                             loadUrl = loadUrl.replace("99999", getNavigationA());
                             loadUrl = loadUrl.replace("88888", getNavigationB());
                             loadUrl = loadUrl.replace("77777", getNavigationC());
+                            loadUrl = loadUrl.replace("66666", getNavigationD());
                             $("#main_content").load(loadUrl, NewLoadFinish);
                         }
                     });

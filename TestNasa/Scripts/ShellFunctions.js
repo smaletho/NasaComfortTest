@@ -1,13 +1,4 @@
 ﻿function unbindAll() {
-    //$("#screenshot-button").unbind();
-    //$("#previous_button").unbind();
-    //$("#next_button").unbind();
-    //$(".menu_button").unbind();
-    //$(".menu_option").unbind();
-    //$(".header_l2").unbind();
-    //$(".header_l3").unbind();
-
-
     $("#edit-button").unbind();
     $("#bookmarks-button").unbind();
     $("#colorChangeDiv").unbind();
@@ -25,6 +16,7 @@
     $(".menu_option").unbind();
     $(".header_l2").unbind();
     $(".header_l3").unbind();
+    $(".header_l4").unbind();
 }
 
 function CreateListeners() {
@@ -84,7 +76,7 @@ function CreateListeners() {
         var id = $(el).data('bookmarkid');
         ShowNotes(id);
     });
-    $(".bookmark-show-notes").tomclick("", "", function (el, evt) {
+    $(".bookmark-view-page").tomclick("", "", function (el, evt) {
         var id = $(el).data('bookmarkid');
         var loadUrl = URL_NewSetPageString;
         loadUrl = loadUrl.replace("99999", id);
@@ -100,61 +92,82 @@ function CreateListeners() {
         var current_a = getNavigationA();
         var current_b = getNavigationB();
         var current_c = getNavigationC();
+        var current_d = getNavigationD();
 
         var use_a = 0;
         var use_b = 0;
         var use_c = 0;
+        var use_d = 0;
 
         var okayToLoad = true;
 
         var consoleLog;
 
-        if (current_c > 1) {
-            //next page = current_a, current_b, a+1
-            consoleLog = current_a + ", " + current_b + ", " + (current_c - 1);
+        if (current_d > 1) {
+            //next page = current_a, current_ b, current_c, d-1
+            consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d - 1);
             use_a = current_a;
             use_b = current_b;
-            use_c = current_c - 1;
+            use_c = current_c;
+            use_d = (current_d - 1);
         } else {
-            //no more l3 pages, go up to l2
-            if (current_b > 1) {
-                //next page = current_a, b+1, 1
-                consoleLog = current_a + ", " + (current_b - 1) + ", 1";
+            if (current_c > 1) {
+                //next page = current_a, current_b, c-1
+                consoleLog = current_a + ", " + current_b + ", " + (current_c - 1) + ", " + previous_l4_max;
                 use_a = current_a;
-                use_b = current_b - 1;
-                use_c = 1;
+                use_b = current_b;
+                use_c = current_c;
+                use_d = previous_l4_max;
             } else {
-                //no more l2 pages, go up to l1
-                if (current_a > 1) {
-                    //next page = a+1, 1, 1
-                    consoleLog = (current_a - 1) + ", 1, 1";
-                    use_a = current_a - 1;
-                    use_b = 1;
-                    use_c = 1;
+                //no more l3 pages, go up to l2
+                if (current_b > 1) {
+                    //next page = current_a, b-1, 1
+                    consoleLog = current_a + ", " + (current_b - 1) + ", " + previous_l3_max + ", " + previous_l4_max;
+                    use_a = current_a;
+                    use_b = current_b - 1;
+                    use_c = previous_l3_max;
+                    use_d = previous_l4_max;
                 } else {
-                    consoleLog = "no more pages";
-                    alert("This is the beginning of the module.");
-                    okayToLoad = false;
+                    //no more l2 pages, go up to l1
+                    if (current_a > 1) {
+                        //next page = a-1, 1, 1
+                        consoleLog = (current_a - 1) + ", " + previous_nav_l2_max + ", " + previous_l3_max + ", " + previous_l4_max;
+                        use_a = current_a - 1;
+                        use_b = previous_nav_l2_max;
+                        use_c = previous_l3_max;
+                        use_d = previous_l4_max;
+                    } else {
+                        consoleLog = "no more pages";
+                        alert("This is the beginning of the module.");
+                        okayToLoad = false;
+                    }
                 }
             }
         }
+
+        
 
         console.log(consoleLog);
 
         if (okayToLoad) {
 
-            if (current_a == use_a && current_b == use_b) {
+            if (current_a == use_a && current_b == use_b && current_c == use_c) {
+
+                //only need to load level 4 and content
+                NavigateLevel4(use_a, use_b, use_c, use_d, false);
+
+            } else if (current_a == use_a && current_b == use_b) {
 
                 //only need to load level 3 and content
-                NavigateLevel3(use_a, use_b, use_c, false);
+                NavigateLevel3(use_a, use_b, use_c, use_d, false);
 
             } else if (current_a == use_a) {
                 //load level 2 and level 3 and content
-                NavigateLevel2(use_a, use_b, false);
+                NavigateLevel2(use_a, use_b, use_c, use_d, false);
 
             } else {
                 //load all
-                NavigateLevel1(use_a, false);
+                NavigateLevel1(use_a, use_b, use_c, use_d, false);
 
             }
         }
@@ -164,37 +177,49 @@ function CreateListeners() {
         var current_a = getNavigationA();
         var current_b = getNavigationB();
         var current_c = getNavigationC();
+        var current_d = getNavigationD();
 
         var use_a = 0;
         var use_b = 0;
         var use_c = 0;
+        var use_d = 0;
 
         var okayToLoad = true;
 
         var consoleLog;
 
-        if (current_c < nav_l3_max) {
+        if (current_d < nav_l4_max) {
+            //next page = current_a, current_b, current_c, d+1
+            consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d + 1);
+            use_a = current_a;
+            use_b = current_b;
+            use_c = current_c;
+            use_d = current_d + 1;
+        } else if (current_c < nav_l3_max) {
             //next page = current_a, current_b, a+1
-            consoleLog = current_a + ", " + current_b + ", " + (current_c + 1);
+            consoleLog = current_a + ", " + current_b + ", " + (current_c + 1) + ", " + 1;
             use_a = current_a;
             use_b = current_b;
             use_c = current_c + 1;
+            use_d = 1;
         } else {
             //no more l3 pages, go up to l2
             if (current_b < nav_l2_max) {
                 //next page = current_a, b+1, 1
-                consoleLog = current_a + ", " + (current_b + 1) + ", 1";
+                consoleLog = current_a + ", " + (current_b + 1) + ", 1, 1";
                 use_a = current_a;
                 use_b = current_b + 1;
                 use_c = 1;
+                use_d = 1;
             } else {
                 //no more l2 pages, go up to l1
                 if (current_a < nav_l1_max) {
                     //next page = a+1, 1, 1
-                    consoleLog = (current_a + 1) + ", 1, 1";
+                    consoleLog = (current_a + 1) + ", 1, 1, 1";
                     use_a = current_a + 1;
                     use_b = 1;
                     use_c = 1;
+                    use_d = 1;
                 } else {
                     consoleLog = "no more pages";
                     alert("This is the end of the module.");
@@ -206,18 +231,23 @@ function CreateListeners() {
         console.log(consoleLog);
         if (okayToLoad) {
 
-            if (current_a == use_a && current_b == use_b) {
+            if (current_a == use_a && current_b == use_b && current_c == use_c) {
 
                 //only need to load level 3 and content
-                NavigateLevel3(use_a, use_b, use_c, true);
+                NavigateLevel4(use_a, use_b, use_c, use_d, true);
+
+            } else if (current_a == use_a && current_b == use_b) {
+
+                //only need to load level 3 and content
+                NavigateLevel3(use_a, use_b, use_c, use_d, true);
 
             } else if (current_a == use_a) {
                 //load level 2 and level 3 and content
-                NavigateLevel2(use_a, use_b, true);
+                NavigateLevel2(use_a, use_b, 1, 1, true);
 
             } else {
                 //load all
-                NavigateLevel1(use_a, true);
+                NavigateLevel1(use_a, 1, 1, 1, true);
 
             }
         }
@@ -246,7 +276,7 @@ function CreateListeners() {
 
 
         //load w/ parameters
-        NavigateLevel1(getNavigationA());
+        NavigateLevel1(getNavigationA(), 1, 1, 1);
 
     });
 
@@ -260,7 +290,7 @@ function CreateListeners() {
 
 
         //load w/ parameters
-        NavigateLevel2(getNavigationA(), getNavigationB());
+        NavigateLevel2(getNavigationA(), getNavigationB(), 1, 1);
 
     });
 
@@ -270,7 +300,16 @@ function CreateListeners() {
         $(element).addClass("header_l3_selected");
 
         //load w/ parameters
-        NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC());
+        NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC(), 1);
+
+    });
+
+    $(".header_l4").tomclick("", "", function (element, event) {
+        $(".header_l4").removeClass("header_l4_selected")
+        $(element).addClass("header_l4_selected");
+
+        //load w/ parameters
+        NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC(), getNavigationD());
 
     });
 }
@@ -313,6 +352,15 @@ function getNavigationC() {
     }
     return -1;
 }
+function getNavigationD() {
+    var arr = $("#level_4_navigation").find(".header_l4");
+    for (var i = 0; i < arr.length; i++) {
+        if ($(arr[i]).hasClass('header_l4_selected')) {
+            return i + 1;
+        }
+    }
+    return -1;
+}
 
 function toggleBookmarks() {
     var len = $.trim($('#bookmarks').html()).length;
@@ -330,7 +378,7 @@ function toggleBookmarks() {
     }
 }
 
-function getNavDescription(a, b, c) {
+function getNavDescription(a, b, c, d) {
     var ret_str = "";
 
     switch (a) {
@@ -383,7 +431,7 @@ function getNavDescription(a, b, c) {
                     ret_str += "Quiz > Quiz";
                     break;
                 case 7:
-                    ret_str += "Pathology > Pathology"; 5
+                    ret_str += "Pathology > Pathology"; 
                     break;
             }
             break;
@@ -545,6 +593,8 @@ function getNavDescription(a, b, c) {
             break;
     }
 
+    ret_str += " > " + d;
+
     return ret_str;
 }
 
@@ -573,7 +623,7 @@ function NewLoadFinish() {
     console.log('waiting', WaitingForLoad);
 
     if (WaitingForLoad == LoadCounter) {
-        alert('counters equal');
+        //alert('counters equal');
         init();
         console.log("doing init now");
     }
@@ -636,19 +686,21 @@ function togglePageFold(pg, element) {
     var a = getNavigationA();
     var b = getNavigationB();
     var c = getNavigationC();
+    var d = getNavigationD();
 
-    var idStr = "bookmark_" + a + "_" + b + "_" + c;
+    var idStr = "bookmark_" + a + "_" + b + "_" + c + "_" + d;
 
     if (!CurrentPageIsBookmarked) {
 
         PageFoldAnimate(pg, true);
 
-        var nav_title = getNavDescription(a, b, c);
+        var nav_title = getNavDescription(a, b, c, d);
 
         $("#bookmark_string").val(nav_title);
         $("#bookmark_a").val(a);
         $("#bookmark_b").val(b);
         $("#bookmark_c").val(c);
+        $("#bookmark_d").val(d);
         $("#bookmarkPopup").dialog("open");
 
         //unbind hover
@@ -693,6 +745,7 @@ function togglePageFold(pg, element) {
                     loadUrl = loadUrl.replace("99999", getNavigationA());
                     loadUrl = loadUrl.replace("88888", getNavigationB());
                     loadUrl = loadUrl.replace("77777", getNavigationC());
+                    loadUrl = loadUrl.replace("66666", getNavigationD());
                     $("#main_content").load(loadUrl, NewLoadFinish);
                 }
             });
@@ -701,9 +754,9 @@ function togglePageFold(pg, element) {
 
 }
 
-function NavigateLevel1(a, isNext) {
+function NavigateLevel1(a, b, c, d, isNext) {
     LoadCounter = 1;
-    WaitingForLoad = 6;
+    WaitingForLoad = 7;
 
     var loadUrl = URL_GetNavigationTitle;
     loadUrl = loadUrl.replace("99999", a);
@@ -719,19 +772,27 @@ function NavigateLevel1(a, isNext) {
 
     loadUrl = URL_GetLevel2Navigation;
     loadUrl = loadUrl.replace("99999", a);
-    loadUrl = loadUrl.replace("88888", 1);
+    loadUrl = loadUrl.replace("88888", b);
     $(".level_2_navigation").load(loadUrl, NewLoadFinish);
 
     loadUrl = URL_GetLevel3Navigation;
     loadUrl = loadUrl.replace("99999", a);
-    loadUrl = loadUrl.replace("88888", 1);
-    loadUrl = loadUrl.replace("77777", 1);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
     $(".level_3_navigation").load(loadUrl, NewLoadFinish);
+
+    loadUrl = URL_GetLevel4Navigation;
+    loadUrl = loadUrl.replace("99999", a);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
+    $("#level_4_navigation").load(loadUrl, NewLoadFinish);
 
     loadUrl = URL_GetContent;
     loadUrl = loadUrl.replace("99999", a);
-    loadUrl = loadUrl.replace("88888", 1);
-    loadUrl = loadUrl.replace("77777", 1);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
 
     if (isNext !== undefined) {
         if (isNext) {
@@ -753,9 +814,9 @@ function NavigateLevel1(a, isNext) {
     }
 
 }
-function NavigateLevel2(a, b, isNext) {
+function NavigateLevel2(a, b, c, d, isNext) {
     LoadCounter = 1;
-    WaitingForLoad = 3;
+    WaitingForLoad = 4;
 
     var loadUrl = URL_GetLevel2Navigation;
     loadUrl = loadUrl.replace("99999", a);
@@ -765,13 +826,21 @@ function NavigateLevel2(a, b, isNext) {
     loadUrl = URL_GetLevel3Navigation;
     loadUrl = loadUrl.replace("99999", a);
     loadUrl = loadUrl.replace("88888", b);
-    loadUrl = loadUrl.replace("77777", 1);
+    loadUrl = loadUrl.replace("77777", c);
     $(".level_3_navigation").load(loadUrl, NewLoadFinish);
+
+    loadUrl = URL_GetLevel4Navigation;
+    loadUrl = loadUrl.replace("99999", a);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
+    $("#level_4_navigation").load(loadUrl, NewLoadFinish);
 
     loadUrl = URL_GetContent;
     loadUrl = loadUrl.replace("99999", a);
     loadUrl = loadUrl.replace("88888", b);
-    loadUrl = loadUrl.replace("77777", 1);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
     if (isNext !== undefined) {
         if (isNext) {
             $("#main_content").fadeOut(function () {
@@ -791,9 +860,9 @@ function NavigateLevel2(a, b, isNext) {
         });
     }
 }
-function NavigateLevel3(a, b, c, isNext) {
+function NavigateLevel3(a, b, c, d, isNext) {
     LoadCounter = 1;
-    WaitingForLoad = 2;
+    WaitingForLoad = 3;
 
     var loadUrl = URL_GetLevel3Navigation;
     loadUrl = loadUrl.replace("99999", a);
@@ -801,10 +870,18 @@ function NavigateLevel3(a, b, c, isNext) {
     loadUrl = loadUrl.replace("77777", c);
     $(".level_3_navigation").load(loadUrl, NewLoadFinish);
 
+    loadUrl = URL_GetLevel4Navigation;
+    loadUrl = loadUrl.replace("99999", a);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
+    $("#level_4_navigation").load(loadUrl, NewLoadFinish);
+
     loadUrl = URL_GetContent;
     loadUrl = loadUrl.replace("99999", a);
     loadUrl = loadUrl.replace("88888", b);
     loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
     if (isNext !== undefined) {
         if (isNext) {
             $("#main_content").fadeOut(function () {
@@ -824,6 +901,41 @@ function NavigateLevel3(a, b, c, isNext) {
         });
     }
 
+}
+function NavigateLevel4(a, b, c, d, isNext) {
+    LoadCounter = 1;
+    WaitingForLoad = 2;
+
+    loadUrl = URL_GetLevel4Navigation;
+    loadUrl = loadUrl.replace("99999", a);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
+    $("#level_4_navigation").load(loadUrl, NewLoadFinish);
+
+    loadUrl = URL_GetContent;
+    loadUrl = loadUrl.replace("99999", a);
+    loadUrl = loadUrl.replace("88888", b);
+    loadUrl = loadUrl.replace("77777", c);
+    loadUrl = loadUrl.replace("66666", d);
+    if (isNext !== undefined) {
+        if (isNext) {
+            $("#main_content").fadeOut(function () {
+                $("#main_content").load(loadUrl, NewLoadFinish);
+                $("#main_content").effect('slide', { direction: "right" });
+            });
+        } else {
+            $("#main_content").fadeOut(function () {
+                $("#main_content").load(loadUrl, NewLoadFinish);
+                $("#main_content").effect('slide', { direction: "left" });
+            });
+        }
+    } else {
+        $("#main_content").fadeOut(function () {
+            $("#main_content").load(loadUrl, NewLoadFinish);
+            $("#main_content").effect('slide', { direction: "right" });
+        });
+    }
 }
 
 function ShowNotes(id) {

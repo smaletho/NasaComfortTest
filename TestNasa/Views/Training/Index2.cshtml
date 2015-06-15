@@ -36,6 +36,10 @@
     @Html.Action("GetLevel3Navigation", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C })
 }
 
+@section Level4Navigation{
+    @Html.Action("GetLevel4Navigation", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C, nav_d = Model.Nav_D })
+}
+
 @section Content {
-    @Html.Action("GetContent", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C })
+    @Html.Action("GetContent", new { nav_a = Model.Nav_A, nav_b = Model.Nav_B, nav_c = Model.Nav_C, nav_d = Model.Nav_D })
 }

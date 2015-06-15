@@ -108,6 +108,7 @@ namespace TestNasa.Controllers
             //model.Nav_A = 1;
             //model.Nav_B = 1;
             //model.Nav_C = 1;
+            //model.Nav_D = 1;
 
             //model.BookmarkList = new List<string>();
             //model.PageIsBookmarked = false;
@@ -117,7 +118,7 @@ namespace TestNasa.Controllers
                 model = (TrainingModel)Session["CurrentPageModel"];
 
                 //check if page is bookmarked
-                string checkBookmark = "bookmark_" + model.Nav_A.ToString() + "_" + model.Nav_B.ToString() + "_" + model.Nav_C.ToString();
+                string checkBookmark = "bookmark_" + model.Nav_A.ToString() + "_" + model.Nav_B.ToString() + "_" + model.Nav_C.ToString() + "_" + model.Nav_D.ToString();
 
                 model.PageIsBookmarked = IsPageBookmarked(model.NewBookmarkList, checkBookmark);
             }
@@ -128,6 +129,7 @@ namespace TestNasa.Controllers
                 model.Nav_A = 1;
                 model.Nav_B = 1;
                 model.Nav_C = 1;
+                model.Nav_D = 1;
 
                 model.NewBookmarkList = new List<BookmarkObject>();
                 model.PageIsBookmarked = false;
@@ -148,10 +150,12 @@ namespace TestNasa.Controllers
             //arr[1] = l1
             //arr[2] = l2
             //arr[3] = l3
+            //arr[4] = l4
 
             int a = Convert.ToInt32(arr[1]);
             int b = Convert.ToInt32(arr[2]);
             int c = Convert.ToInt32(arr[3]);
+            int d = Convert.ToInt32(arr[4]);
 
             TrainingModel model = new TrainingModel();
 
@@ -161,9 +165,10 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 //check if page is bookmarked
-                string checkBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString();
+                string checkBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString() + "_" + d.ToString();
 
                 model.PageIsBookmarked = IsPageBookmarked(model.NewBookmarkList, checkBookmark);
             }
@@ -174,6 +179,7 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 model.NewBookmarkList = new List<BookmarkObject>();
                 model.PageIsBookmarked = false;
@@ -184,7 +190,7 @@ namespace TestNasa.Controllers
 
             return View("Index2", model);
         }
-        public ActionResult NewSetPageInt(int a, int b, int c)
+        public ActionResult NewSetPageInt(int a, int b, int c, int d)
         {
             TrainingModel model = new TrainingModel();
 
@@ -194,9 +200,10 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 //check if page is bookmarked
-                string checkBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString();
+                string checkBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString() + "_" + d.ToString();
 
                 model.PageIsBookmarked = IsPageBookmarked(model.NewBookmarkList, checkBookmark);
             }
@@ -207,6 +214,7 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 model.NewBookmarkList = new List<BookmarkObject>();
                 model.PageIsBookmarked = false;
@@ -267,9 +275,18 @@ namespace TestNasa.Controllers
 
             return View("Level3Navigation");
         }
-        public ActionResult GetContent(int nav_a, int nav_b, int nav_c)
+        public ActionResult GetLevel4Navigation(int nav_a, int nav_b, int nav_c, int nav_d)
         {
-            string checkBookmark = "bookmark_" + nav_a.ToString() + "_" + nav_b.ToString() + "_" + nav_c.ToString();
+            ViewBag.Nav_A = nav_a;
+            ViewBag.Nav_B = nav_b;
+            ViewBag.Nav_C = nav_c;
+            ViewBag.Nav_D = nav_d;
+
+            return View("Level4Navigation");
+        }
+        public ActionResult GetContent(int nav_a, int nav_b, int nav_c, int nav_d)
+        {
+            string checkBookmark = "bookmark_" + nav_a.ToString() + "_" + nav_b.ToString() + "_" + nav_c.ToString() + "_" + nav_d.ToString();
 
             TrainingModel model = new TrainingModel();
             if (Session["CurrentPageModel"] != null)
@@ -292,6 +309,7 @@ namespace TestNasa.Controllers
                 model.Nav_A = 1;
                 model.Nav_B = 1;
                 model.Nav_C = 1;
+                model.Nav_D = 1;
 
                 model.NewBookmarkList = new List<BookmarkObject>();
                 model.PageIsBookmarked = false;
@@ -303,6 +321,7 @@ namespace TestNasa.Controllers
             ViewBag.Nav_A = nav_a;
             ViewBag.Nav_B = nav_b;
             ViewBag.Nav_C = nav_c;
+            ViewBag.Nav_D = nav_d;
             ViewBag.IsBookmarked = model.PageIsBookmarked;
             ViewBag.BookmarkId = checkBookmark;
 
@@ -321,6 +340,7 @@ namespace TestNasa.Controllers
                 model.Nav_A = 1;
                 model.Nav_B = 1;
                 model.Nav_C = 1;
+                model.Nav_D = 1;
 
                 model.NewBookmarkList = new List<BookmarkObject>();
                 model.PageIsBookmarked = false;
@@ -331,7 +351,7 @@ namespace TestNasa.Controllers
 
             return View("BookmarksView", model);
         }
-        public ActionResult AddBookmark(int a, int b, int c, string user_title, string nav_title, string notes)
+        public ActionResult AddBookmark(int a, int b, int c, int d, string user_title, string nav_title, string notes)
         {
             TrainingModel model = new TrainingModel();
             if (Session["CurrentPageModel"] != null)
@@ -341,9 +361,10 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 BookmarkObject obj = new BookmarkObject();
-                obj.BookmarkId = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString();
+                obj.BookmarkId = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString() + "_" + d.ToString();
                 obj.UserNotes = notes;
                 obj.UserTitle = user_title;
                 obj.NavTitle = nav_title;
@@ -357,14 +378,15 @@ namespace TestNasa.Controllers
                 model.Nav_A = a;
                 model.Nav_B = b;
                 model.Nav_C = c;
+                model.Nav_D = d;
 
                 model.BookmarkList = new List<string>();
 
-                string newBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString();
+                string newBookmark = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString() + "_" + d.ToString();
 
 
                 BookmarkObject obj = new BookmarkObject();
-                obj.BookmarkId = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString();
+                obj.BookmarkId = "bookmark_" + a.ToString() + "_" + b.ToString() + "_" + c.ToString() + "_" + d.ToString();
                 obj.UserNotes = notes;
                 obj.UserTitle = user_title;
                 obj.NavTitle = nav_title;
@@ -479,6 +501,7 @@ namespace TestNasa.Controllers
         public int Nav_A { get; set; }
         public int Nav_B { get; set; }
         public int Nav_C { get; set; }
+        public int Nav_D { get; set; }
 
         public List<string> BookmarkList { get; set; }
         public List<BookmarkObject> NewBookmarkList { get; set; }
