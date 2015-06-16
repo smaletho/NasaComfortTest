@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TheArtOfDev;
@@ -116,7 +117,8 @@ namespace TestNasa.Controllers
             if (Session["CurrentPageModel"] != null)
             {
                 model = (TrainingModel)Session["CurrentPageModel"];
-
+                if (model.NewBookmarkList == null)
+                    model.NewBookmarkList = new List<BookmarkObject>();
                 //check if page is bookmarked
                 string checkBookmark = "bookmark_" + model.Nav_A.ToString() + "_" + model.Nav_B.ToString() + "_" + model.Nav_C.ToString() + "_" + model.Nav_D.ToString();
 
@@ -325,12 +327,14 @@ namespace TestNasa.Controllers
             ViewBag.IsBookmarked = model.PageIsBookmarked;
             ViewBag.BookmarkId = checkBookmark;
 
-            ViewBag.EdgeClass = "EDGE-8837070";
-            ViewBag.FileName = "guide_" + nav_a.ToString() + nav_b.ToString() + nav_c.ToString() + nav_d.ToString();
+            //ViewBag.EdgeClass = "EDGE-8837070";
+            //ViewBag.FileName = "guide_" + nav_a.ToString() + nav_b.ToString() + nav_c.ToString() + nav_d.ToString();
+            ViewBag.FileName = GetFileName(nav_a, nav_b, nav_c, nav_d);
+            ViewBag.EdgeClass = GetEdgeClass(ViewBag.FileName);
 
-            if (ViewBag.FileName == "guide_2111"
-                || ViewBag.FileName == "guide_2211"
-                || ViewBag.FileName == "guide_2212")
+            if (ViewBag.FileName == "2111_objective"
+                || ViewBag.FileName == "2211_foundation"
+                || ViewBag.FileName == "2212_foundation")
             {
                 ViewBag.HasContent = true;
             }
@@ -515,17 +519,83 @@ namespace TestNasa.Controllers
 
 
 
-        public string GetHeadContent(int a, int b, int c, int d)
+        public string GetEdgeClass(string fileName)
         {
-            string buildFileName = "guide_" + a.ToString() + b.ToString() + c.ToString() + d.ToString();
+            string edgeClass = "";
 
-            return "";
+            string filePath = Server.MapPath("~/Content/EdgeFiles/" + fileName + ".html");
+
+            string html;
+            if (System.IO.File.Exists(filePath))
+            {
+                using (StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8))
+                {
+                    html = streamReader.ReadToEnd();
+                }
+
+                string[] htmlLines = html.Split('\n');
+                string[] delimiter = {".edgeLoad-", " "};
+
+                foreach (string currentLine in htmlLines)
+                {
+                    if (currentLine.Contains(".edgeLoad-"))
+                    {
+                        string[] parsed = currentLine.Split(delimiter, System.StringSplitOptions.None);
+                        foreach (string s in parsed)
+                        {
+                            if (s.Contains("EDGE"))
+                                edgeClass = s;
+                        }
+                    }
+                }
+            }
+
+            return edgeClass;
         }
-        public string GetBodyDiv(int a, int b, int c, int d)
+        public string GetFileName(int a, int b, int c, int d)
         {
-            string buildFileName = "guide_" + a.ToString() + b.ToString() + c.ToString() + d.ToString();
+            string buildFileName = a.ToString() + b.ToString() + c.ToString() + d.ToString() + "_";
+            switch (a)
+            {
+                case 1:
+                    //fundoscopy
+                    break;
+                case 2:
+                    //kidney & bladder
+                    switch (b)
+                    {
+                        case 1:
+                            buildFileName += "objective";
+                            break;
+                        case 2:
+                            buildFileName += "foundation";
+                            break;
+                        case 3:
+                            buildFileName += "setup";
+                            break;
+                        case 4:
+                            buildFileName += "exam";
+                            break;
+                        case 5:
+                            buildFileName += "pathology";
+                            break;
+                        case 6:
+                            buildFileName += "quiz";
+                            break;
+                        case 7:
+                            buildFileName += "troubleshooting";
+                            break;
+                    }
+                    break;
+                case 3:
+                    //intubation
+                    break;
+                case 4:
+                    //iv insertion
+                    break;
+            }
 
-            return "";
+            return buildFileName;
         }
         
     }
