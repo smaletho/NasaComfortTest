@@ -116,7 +116,7 @@ function CreateListeners() {
                 consoleLog = current_a + ", " + current_b + ", " + (current_c - 1) + ", " + previous_l4_max;
                 use_a = current_a;
                 use_b = current_b;
-                use_c = current_c;
+                use_c = (current_c - 1);
                 use_d = previous_l4_max;
             } else {
                 //no more l3 pages, go up to l2

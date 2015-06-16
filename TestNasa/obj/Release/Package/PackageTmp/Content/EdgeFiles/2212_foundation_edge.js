@@ -597,5 +597,5 @@
 
     AdobeEdge.registerCompositionDefn(compId, symbols, fonts, scripts, resources, opts);
 
-    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("../Content/EdgeFiles/guide_2111_edgeActions.js");
+    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("../Content/EdgeFiles/2212_foundation_edgeActions.js");
 })("EDGE-8837070");
