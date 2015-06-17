@@ -36,30 +36,37 @@
                             font: ['Lucida Console, Monaco, monospace', [22, "px"], "rgba(39,39,39,1.00)", "normal", "none", "", "break-word", "nowrap"]
                         },
                         {
-                            id: 'Text2',
+                            id: 'Text2Copy',
                             type: 'text',
-                            rect: ['50px', '90px', '427px', '400px', 'auto', 'auto'],
-                            text: "The ultrasound image shows a two dimensional slice of tissue under the probe. <br><br>One edge of the probe has a  reference marker, a raised grey stripe you can see and feel. The reference marker corresponds to the ultrasound screen indicator.<br><br>The other side of the probe is the non-marker edge.",
+                            rect: ['680px', '90px', '646px', '353px', 'auto', 'auto'],
+                            text: "Ultrasound requires gel as an acoustic conductor between the probe and the skin.  <br><br>If there is not enough gel, part of the image will be lost (black or artifactual).<br><br>Hold the probe like a pencil while keeping part of the hand on the patient for stability, similar to a tripod.  <br><br>The probe requires consistent firm pressure to maintain contact with the body. This allows probe contact on the body even while tilting or panning. If your hand gets tired switch hands or use both hands.<br><br><br>",
                             align: "left",
-                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [18, "px"], "rgba(39,39,39,1.00)", "300", "none solid rgb(0, 0, 0)", "normal", "break-word", "normal"]
+                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [16, "px"], "rgba(63,63,63,1.00)", "300", "none solid rgb(0, 0, 0)", "normal", "break-word", "normal"]
                         },
                         {
-                            id: 'foundation2211d',
+                            id: 'pencilProbe',
                             type: 'image',
-                            rect: ['618px', '22px', '800px', '420px', 'auto', 'auto'],
-                            fill: ["rgba(0,0,0,0)",im+"foundation2211d.jpg",'0px','0px']
+                            rect: ['930px', '371px', '300px', '300px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"pencilProbe.jpg",'0px','0px']
                         },
                         {
-                            id: 'foundation2211b',
-                            type: 'image',
-                            rect: ['50px', '412px', '310px', '260px', 'auto', 'auto'],
-                            fill: ["rgba(0,0,0,0)",im+"foundation2211b.jpg",'0px','0px']
+                            id: 'Rectangle',
+                            type: 'rect',
+                            rect: ['549px', '371px', '358px', '300px', 'auto', 'auto'],
+                            fill: ["rgba(192,192,192,1)"],
+                            stroke: [2,"rgba(255,255,255,1.00)","solid"]
                         },
                         {
-                            id: 'foundation2211a',
+                            id: 'foundation2211c',
                             type: 'image',
-                            rect: ['382px', '412px', '310px', '260px', 'auto', 'auto'],
-                            fill: ["rgba(0,0,0,0)",im+"foundation2211a.jpg",'0px','0px']
+                            rect: ['551px', '373px', '358px', '300px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"foundation2211c.jpg",'0px','0px']
+                        },
+                        {
+                            id: 'applyGel',
+                            type: 'image',
+                            rect: ['50px', '90px', '600px', '600px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"applyGel.jpg",'0px','0px']
                         }
                     ],
                     style: {
@@ -130,12 +137,12 @@
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
+                            type: 'text',
                             rect: ['17px', '5px', 'auto', 'auto', 'auto', 'auto'],
-                            font: ['Lucida Console, Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1.00)', '500', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap'],
                             id: 'Text5',
                             text: 'REVIEW<br>CONCEPTS &amp; PROCEDURES',
                             align: 'center',
-                            type: 'text'
+                            font: ['Lucida Console, Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1.00)', '500', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap']
                         }
                     ],
                     style: {
@@ -172,12 +179,12 @@
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
+                            type: 'text',
                             rect: ['65px', '12px', 'auto', 'auto', 'auto', 'auto'],
-                            font: ['\'Lucida Console\', Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1)', '500', 'none solid rgb(39, 39, 39)', 'normal', 'break-word', 'nowrap'],
                             id: 'Text6',
                             text: 'GO TO SET UP',
                             align: 'center',
-                            type: 'text'
+                            font: ['\'Lucida Console\', Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1)', '500', 'none solid rgb(39, 39, 39)', 'normal', 'break-word', 'nowrap']
                         }
                     ],
                     style: {
@@ -193,10 +200,49 @@
 
                     ]
                 }
+            },
+            "videoPH": {
+                version: "5.0.1",
+                minimumCompatibleVersion: "5.0.0",
+                build: "5.0.1.386",
+                scaleToFit: "none",
+                centerStage: "none",
+                resizeInstances: false,
+                content: {
+                    dom: [
+                        {
+                            rect: ['0px', '0px', '800px', '598px', 'auto', 'auto'],
+                            id: 'Rectangle2Copy3',
+                            stroke: [0, 'rgb(0, 0, 0)', 'none'],
+                            type: 'rect',
+                            fill: ['rgba(192,192,192,1.00)']
+                        },
+                        {
+                            type: 'text',
+                            rect: ['274', '240', 'auto', 'auto', 'auto', 'auto'],
+                            id: 'Text7',
+                            text: 'Video Place Holder<br>800x600',
+                            align: 'right',
+                            font: ['\'Lucida Console\', Monaco, monospace', [40, 'px'], 'rgba(51,172,177,1)', '400', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap']
+                        }
+                    ],
+                    style: {
+                        '${symbolSelector}': {
+                            rect: [null, null, '800px', '598px']
+                        }
+                    }
+                },
+                timeline: {
+                    duration: 0,
+                    autoPlay: true,
+                    data: [
+
+                    ]
+                }
             }
         };
 
     AdobeEdge.registerCompositionDefn(compId, symbols, fonts, scripts, resources, opts);
 
-    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("2211_foundation_edgeActions.js");
+    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("2213_foundation_edgeActions.js");
 })("comfortEdge");
