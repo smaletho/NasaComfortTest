@@ -59,7 +59,7 @@ function CreateListeners() {
     $("#bookmarks-button").tomclick("", "", toggleBookmarks);
     $("#colorChangeDiv").tomclick("", "", hideMenu);
     $("#belowColorChange").tomclick("", "", hideMenu);
-    $("#main_content").tomclick("", "", hideMenu);
+    //$("#main_content").tomclick("", "", hideMenu);
 
     $("#minimize-notes-button").tomclick("", "", function () {
         ExpandShrinkNotes(false);

@@ -34,7 +34,7 @@ else
             var arr = $("#main_content").find(".replaceWithVideo");
             $.each(arr, function (key, value) {
                 var classArr = $(value).prop('class').toString().split(' ');
-                var videoName = classArr[1];
+                var videoName = classArr[2];
                 $(value).empty();
                 var height = $(value).height();
                 var width = $(value).width();
