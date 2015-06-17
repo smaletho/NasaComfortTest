@@ -48,4 +48,4 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
    })("videoPH");
    //Edge symbol end:'videoPH'
 
-})(window.jQuery || AdobeEdge.$, AdobeEdge, "EDGE-8837070");
+})(window.jQuery || AdobeEdge.$, AdobeEdge, "comfortEdge");

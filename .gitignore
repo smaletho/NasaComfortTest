@@ -1,7 +1,13 @@
-/TestNasa.v12.suo.BASE.suo
-/TestNasa.v12.suo.LOCAL.suo
-/TestNasa.v12.suo.REMOTE.suo
-/TestNasa/obj/Release/Package/PackageTmp/Content/legal-pad.jpg
-/TestNasa/obj/Release/Package/PackageTmp/Scripts/ShellFunctions.js
-/TestNasa.v12.suo
-/*.suo
+# Ignore Visual Studio user-specific settings files.
+# Ignore root web.config, since it will differ from server to server
+# Ignore the publish settings file, since these settings may differ from developer to developer
+# Ignore OS-generated files .DS_Store and Thumbs.db
+# Ignore contents of App_Data directory. 
+# ...but at least provide empty App_Data directory when someone clones project.
+
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+*/bin/*  
+*/obj/*

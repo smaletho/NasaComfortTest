@@ -84,16 +84,6 @@
                     autoPlay: true,
                     data: [
                         [
-                            "eid2",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${reviewBTN}",
-                            '559px',
-                            '559px'
-                        ],
-                        [
                             "eid4",
                             "top",
                             0,
@@ -102,6 +92,16 @@
                             "${setUpBTN}",
                             '627px',
                             '627px'
+                        ],
+                        [
+                            "eid2",
+                            "top",
+                            0,
+                            0,
+                            "linear",
+                            "${reviewBTN}",
+                            '559px',
+                            '559px'
                         ],
                         [
                             "eid3",
@@ -136,10 +136,10 @@
                 content: {
                     dom: [
                         {
-                            rect: ['0px', '0px', '711px', '710px', 'auto', 'auto'],
+                            type: 'rect',
                             id: 'Rectangle',
                             stroke: [0, 'rgb(0, 0, 0)', 'none'],
-                            type: 'rect',
+                            rect: ['0px', '0px', '711px', '710px', 'auto', 'auto'],
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
@@ -181,8 +181,8 @@
                             stroke: [0, 'rgba(0,0,0,1)', 'none'],
                             cursor: 'pointer',
                             rect: ['0px', '0px', '250px', '40px', 'auto', 'auto'],
-                            boxShadow: ['', 3, 3, 3, 0, 'rgba(0,0,0,0.65098)'],
-                            fill: ['rgba(192,192,192,1)']
+                            fill: ['rgba(192,192,192,1)'],
+                            boxShadow: ['', 3, 3, 3, 0, 'rgba(0,0,0,0.65098)']
                         },
                         {
                             type: 'text',
@@ -223,8 +223,8 @@
                             stroke: [0, 'rgba(0,0,0,1)', 'none'],
                             cursor: 'pointer',
                             rect: ['0px', '0px', '250px', '40px', 'auto', 'auto'],
-                            boxShadow: ['', 3, 3, 3, 0, 'rgba(0,0,0,0.65098)'],
-                            fill: ['rgba(192,192,192,1)']
+                            fill: ['rgba(192,192,192,1)'],
+                            boxShadow: ['', 3, 3, 3, 0, 'rgba(0,0,0,0.65098)']
                         },
                         {
                             type: 'text',
@@ -253,5 +253,5 @@
 
     AdobeEdge.registerCompositionDefn(compId, symbols, fonts, scripts, resources, opts);
 
-    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("../Content/EdgeFiles/2111_objective_edgeActions.js");
-})("EDGE-8837070");
+    if (!window.edge_authoring_mode) AdobeEdge.getComposition(compId).load("2111_objective_edgeActions.js");
+})("comfortEdge");

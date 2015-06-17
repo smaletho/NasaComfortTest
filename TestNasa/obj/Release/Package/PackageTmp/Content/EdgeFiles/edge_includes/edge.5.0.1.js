@@ -313,7 +313,9 @@ var docElement            = doc.documentElement,
     // We'll do 'j' for js and 'c' for css, yay for unreadable minification tactics
     type = type || "j";
     if ( isString( resource ) ) {
-      // if the resource passed in here is a string, preload the file
+        // if the resource passed in here is a string, preload the file
+        var temp = resource;
+        resource = "../Content/EdgeFiles/" + temp;
       preloadFile( type == "c" ? strCssElem : strJsElem, resource, type, this['i']++, dontExec, attrObj, timeout );
     } else {
       // Otherwise it's a callback function and we can splice it into the stack to run
@@ -3148,7 +3150,7 @@ window.AdobeEdge = window.AdobeEdge || {};
                         //TODO - get rid of this from the runtime code
                         comp.load(projectPrefix + "_edge.js?symbol="+opts.sym)                        
                     } else {
-                        comp.load("../Content/EdgeFiles/" + projectPrefix + "_edge.js");
+                        comp.load(projectPrefix + "_edge.js");
                     }
                 }
             }

@@ -25,18 +25,25 @@ else
         <!--Adobe Edge Runtime-->
         <script type="text/javascript" charset="utf-8" src="~/Content/EdgeFiles/edge_includes/edge.5.0.1.js"></script>
         <style>
-            .edgeLoad-@ViewBag.EdgeClass {
+            .edgeLoad-comfortEdge {
                 visibility: hidden;
             }
         </style>
-        <script>   AdobeEdge.loadComposition('@ViewBag.FileName', '@ViewBag.EdgeClass', { scaleToFit: "none", centerStage: "none", minW: "0", maxW: "undefined", width: "550px", height: "400px" }, { dom: [] }, { dom: [] });    </script> 
+        <script>   AdobeEdge.loadComposition('@ViewBag.FileName', 'comfortEdge', { scaleToFit: "none", centerStage: "none", minW: "0", maxW: "undefined", width: "550px", height: "400px" }, { dom: [] }, { dom: [] });    </script> 
         <script>AdobeEdge.bootstrapCallback(function (compId) {
-            $("#stage_Rectangle3Copy").empty();
-            var t = '<iframe width="390" height="190" src="https://www.youtube-nocookie.com/embed/PQrW0yMY1DE?autohide=1&autoplay=1"></iframe>';
-            $("#stage_Rectangle3Copy").append($(t));
+            var arr = $("#main_content").find(".replaceWithVideo");
+            $.each(arr, function (key, value) {
+                var classArr = $(value).prop('class').toString().split(' ');
+                var videoName = classArr[2];
+                $(value).empty();
+                var height = $(value).height();
+                var width = $(value).width();
+                var t = '<iframe width="' + width + '" height="' + height + '" src="http://review.bgmedia.com/video/' + videoName + '.mp4"></iframe>';
+                $(value).append($(t));
+            });
         });</script>
         <!--Adobe Edge Runtime End-->
-        <div id="stage" class="@ViewBag.EdgeClass"></div> 
+        <div id="stage" class="comfortEdge"></div>
     }
     else
     {

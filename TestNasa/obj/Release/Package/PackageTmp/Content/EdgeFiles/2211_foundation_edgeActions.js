@@ -40,12 +40,4 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
    })("setUpBTN");
    //Edge symbol end:'setUpBTN'
 
-   //=========================================================
-   
-   //Edge symbol: 'videoPH'
-   (function(symbolName) {   
-   
-   })("videoPH");
-   //Edge symbol end:'videoPH'
-
-})(window.jQuery || AdobeEdge.$, AdobeEdge, "EDGE-8837070");
+})(window.jQuery || AdobeEdge.$, AdobeEdge, "comfortEdge");
