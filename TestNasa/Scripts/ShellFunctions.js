@@ -448,7 +448,10 @@ function getNavDescription(a, b, c, d) {
                             ret_str += "Probe handling";
                             break;
                         case 2:
-                            ret_str += "Imaging";
+                            ret_str += "Concepts";
+                            break;
+                        case 3:
+                            ret_str += "Image Acquisition";
                             break;
                     }
                     break;
@@ -460,9 +463,6 @@ function getNavDescription(a, b, c, d) {
                             break;
                         case 2:
                             ret_str += "Ultrasound machine";
-                            break;
-                        case 3:
-                            ret_str += "Image acquisition";
                             break;
                     }
                     break;
@@ -476,12 +476,29 @@ function getNavDescription(a, b, c, d) {
                             ret_str += "Left Kidney";
                             break;
                         case 3:
-                            ret_str += "Bladder";
+                            ret_str += "Horizontal Bladder";
+                            break;
+                        case 4:
+                            ret_str += "Vertical Bladder";
                             break;
                     }
                     break;
                 case 5:
-                    ret_str += "Pathology > Pathology";
+                    ret_str += "Pathology > ";
+                    switch (c) {
+                        case 1:
+                            ret_str += "Normal Kidney";
+                            break;
+                        case 2:
+                            ret_str += "Abnormal Kidney";
+                            break;
+                        case 3:
+                            ret_str += "Normal Bladder";
+                            break;
+                        case 4:
+                            ret_str += "Abnormal Bladder";
+                            break;
+                    }
                     break;
                 case 6:
                     ret_str += "Quiz > Quiz";

@@ -75,9 +75,12 @@
                 Probe handling
             </div>
             <div class="header_l3 @if (ViewBag.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
+                Concepts
+            </div>
+            <div class="header_l3 @if (ViewBag.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
                 Imaging
             </div>
-            <script>var nav_l3_max = 2; var previous_l3_max = 1;</script>
+            <script>var nav_l3_max = 3; var previous_l3_max = 1;</script>
                                       break;
             case 3:
             <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
@@ -86,10 +89,7 @@
             <div class="header_l3 @if (ViewBag.Nav_C == 2) { WriteLiteral(" header_l3_selected"); }">
                 Ultrasound machine
             </div>
-            <div class="header_l3 @if (ViewBag.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
-                Image acquisition
-            </div>
-            <script>var nav_l3_max = 3; var previous_l3_max = 2;</script>
+            <script>var nav_l3_max = 2; var previous_l3_max = 3;</script>
                                       break;
             case 4:
             <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
@@ -99,15 +99,27 @@
                 Left Kidney
             </div>
             <div class="header_l3 @if (ViewBag.Nav_C == 3) { WriteLiteral(" header_l3_selected"); }">
-                Bladder
+                Horizontal Bladder
             </div>
-            <script>var nav_l3_max = 3; var previous_l3_max = 3;</script>
+            <div class="header_l3 @if (ViewBag.Nav_C == 4) { WriteLiteral(" header_l3_selected"); }">
+                Vertical Bladder
+            </div>
+            <script>var nav_l3_max = 4; var previous_l3_max = 2;</script>
                                       break;
             case 5:
             <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
-                Pathology
+                Normal Kidney
             </div>
-            <script>var nav_l3_max = 1; var previous_l3_max = 3;</script>
+            <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                Abnormal Kidney
+            </div>
+            <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                Normal Bladder
+            </div>
+            <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">
+                Abnormal Bladder
+            </div>
+            <script>var nav_l3_max = 4; var previous_l3_max = 4;</script>
                                       break;
             case 6:
             <div class="header_l3 @if (ViewBag.Nav_C == 1) { WriteLiteral(" header_l3_selected"); }">

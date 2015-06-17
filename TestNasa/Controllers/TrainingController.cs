@@ -330,11 +330,9 @@ namespace TestNasa.Controllers
             //ViewBag.EdgeClass = "EDGE-8837070";
             //ViewBag.FileName = "guide_" + nav_a.ToString() + nav_b.ToString() + nav_c.ToString() + nav_d.ToString();
             ViewBag.FileName = GetFileName(nav_a, nav_b, nav_c, nav_d);
-            ViewBag.EdgeClass = GetEdgeClass(ViewBag.FileName);
+            //ViewBag.EdgeClass = GetEdgeClass(ViewBag.FileName);
 
-            if (ViewBag.FileName == "2111_objective"
-                || ViewBag.FileName == "2211_foundation"
-                || ViewBag.FileName == "2212_foundation")
+            if (nav_a == 2)
             {
                 ViewBag.HasContent = true;
             }
