@@ -38,7 +38,8 @@ else
                 $(value).empty();
                 var height = $(value).height();
                 var width = $(value).width();
-                var t = '<iframe width="' + width + '" height="' + height + '" src="http://review.bgmedia.com/video/' + videoName + '.mp4"></iframe>';
+                var t = '<video width="' + width + '" height="' + height + '" controls autoplay><source src="http://review.bgmedia.com/video/' + videoName + '.mp4" type="video/mp4">Can\'t play video</video>';
+                //var t = '<iframe width="' + width + '" height="' + height + '" src="http://review.bgmedia.com/video/' + videoName + '.mp4"></iframe>';
                 $(value).append($(t));
             });
         });</script>
