@@ -17,6 +17,7 @@
     $(".header_l2").unbind();
     $(".header_l3").unbind();
     $(".header_l4").unbind();
+    $(document).unbind();
 }
 
 function CreateListeners() {
@@ -88,171 +89,8 @@ function CreateListeners() {
         $("#save-button").hide();
     });
 
-    $("#previous_button").tomclick("", "", function () {
-        var current_a = getNavigationA();
-        var current_b = getNavigationB();
-        var current_c = getNavigationC();
-        var current_d = getNavigationD();
-
-        var use_a = 0;
-        var use_b = 0;
-        var use_c = 0;
-        var use_d = 0;
-
-        var okayToLoad = true;
-
-        var consoleLog;
-
-        if (current_d > 1) {
-            //next page = current_a, current_ b, current_c, d-1
-            consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d - 1);
-            use_a = current_a;
-            use_b = current_b;
-            use_c = current_c;
-            use_d = (current_d - 1);
-        } else {
-            if (current_c > 1) {
-                //next page = current_a, current_b, c-1
-                consoleLog = current_a + ", " + current_b + ", " + (current_c - 1) + ", " + previous_l4_max;
-                use_a = current_a;
-                use_b = current_b;
-                use_c = (current_c - 1);
-                use_d = previous_l4_max;
-            } else {
-                //no more l3 pages, go up to l2
-                if (current_b > 1) {
-                    //next page = current_a, b-1, 1
-                    consoleLog = current_a + ", " + (current_b - 1) + ", " + previous_l3_max + ", " + previous_l4_max;
-                    use_a = current_a;
-                    use_b = current_b - 1;
-                    use_c = previous_l3_max;
-                    use_d = previous_l4_max;
-                } else {
-                    //no more l2 pages, go up to l1
-                    if (current_a > 1) {
-                        //next page = a-1, 1, 1
-                        consoleLog = (current_a - 1) + ", " + previous_nav_l2_max + ", " + previous_l3_max + ", " + previous_l4_max;
-                        use_a = current_a - 1;
-                        use_b = previous_nav_l2_max;
-                        use_c = previous_l3_max;
-                        use_d = previous_l4_max;
-                    } else {
-                        consoleLog = "no more pages";
-                        alert("This is the beginning of the module.");
-                        okayToLoad = false;
-                    }
-                }
-            }
-        }
-
-        
-
-        console.log(consoleLog);
-
-        if (okayToLoad) {
-
-            if (current_a == use_a && current_b == use_b && current_c == use_c) {
-
-                //only need to load level 4 and content
-                NavigateLevel4(use_a, use_b, use_c, use_d, false);
-
-            } else if (current_a == use_a && current_b == use_b) {
-
-                //only need to load level 3 and content
-                NavigateLevel3(use_a, use_b, use_c, use_d, false);
-
-            } else if (current_a == use_a) {
-                //load level 2 and level 3 and content
-                NavigateLevel2(use_a, use_b, use_c, use_d, false);
-
-            } else {
-                //load all
-                NavigateLevel1(use_a, use_b, use_c, use_d, false);
-
-            }
-        }
-
-    });
-    $("#next_button").tomclick("", "", function () {
-        var current_a = getNavigationA();
-        var current_b = getNavigationB();
-        var current_c = getNavigationC();
-        var current_d = getNavigationD();
-
-        var use_a = 0;
-        var use_b = 0;
-        var use_c = 0;
-        var use_d = 0;
-
-        var okayToLoad = true;
-
-        var consoleLog;
-
-        if (current_d < nav_l4_max) {
-            //next page = current_a, current_b, current_c, d+1
-            consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d + 1);
-            use_a = current_a;
-            use_b = current_b;
-            use_c = current_c;
-            use_d = current_d + 1;
-        } else if (current_c < nav_l3_max) {
-            //next page = current_a, current_b, a+1
-            consoleLog = current_a + ", " + current_b + ", " + (current_c + 1) + ", " + 1;
-            use_a = current_a;
-            use_b = current_b;
-            use_c = current_c + 1;
-            use_d = 1;
-        } else {
-            //no more l3 pages, go up to l2
-            if (current_b < nav_l2_max) {
-                //next page = current_a, b+1, 1
-                consoleLog = current_a + ", " + (current_b + 1) + ", 1, 1";
-                use_a = current_a;
-                use_b = current_b + 1;
-                use_c = 1;
-                use_d = 1;
-            } else {
-                //no more l2 pages, go up to l1
-                if (current_a < nav_l1_max) {
-                    //next page = a+1, 1, 1
-                    consoleLog = (current_a + 1) + ", 1, 1, 1";
-                    use_a = current_a + 1;
-                    use_b = 1;
-                    use_c = 1;
-                    use_d = 1;
-                } else {
-                    consoleLog = "no more pages";
-                    alert("This is the end of the module.");
-                    okayToLoad = false;
-                }
-            }
-        }
-
-        console.log(consoleLog);
-        if (okayToLoad) {
-
-            if (current_a == use_a && current_b == use_b && current_c == use_c) {
-
-                //only need to load level 3 and content
-                NavigateLevel4(use_a, use_b, use_c, use_d, true);
-
-            } else if (current_a == use_a && current_b == use_b) {
-
-                //only need to load level 3 and content
-                NavigateLevel3(use_a, use_b, use_c, use_d, true);
-
-            } else if (current_a == use_a) {
-                //load level 2 and level 3 and content
-                NavigateLevel2(use_a, use_b, 1, 1, true);
-
-            } else {
-                //load all
-                NavigateLevel1(use_a, 1, 1, 1, true);
-
-            }
-        }
-
-    });
+    $("#previous_button").tomclick("", "", goToPreviousPage);
+    $("#next_button").tomclick("", "", goToNextPage);
 
     $(".menu_button").tomclick("", "", function (element, event) {
         if ($(".menu").css('display') == "none") {
@@ -312,6 +150,186 @@ function CreateListeners() {
         NavigateLevel3(getNavigationA(), getNavigationB(), getNavigationC(), getNavigationD());
 
     });
+
+    $(document).keydown(function (e) {
+        switch (e.which) {
+            case 37:
+                //left
+                goToPreviousPage();
+                break;
+            case 39:
+                //right
+                goToNextPage();
+                break;
+            default:
+                return;
+        }
+    });
+}
+
+function goToNextPage() {
+    var current_a = getNavigationA();
+    var current_b = getNavigationB();
+    var current_c = getNavigationC();
+    var current_d = getNavigationD();
+
+    var use_a = 0;
+    var use_b = 0;
+    var use_c = 0;
+    var use_d = 0;
+
+    var okayToLoad = true;
+
+    var consoleLog;
+
+    if (current_d < nav_l4_max) {
+        //next page = current_a, current_b, current_c, d+1
+        consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d + 1);
+        use_a = current_a;
+        use_b = current_b;
+        use_c = current_c;
+        use_d = current_d + 1;
+    } else if (current_c < nav_l3_max) {
+        //next page = current_a, current_b, a+1
+        consoleLog = current_a + ", " + current_b + ", " + (current_c + 1) + ", " + 1;
+        use_a = current_a;
+        use_b = current_b;
+        use_c = current_c + 1;
+        use_d = 1;
+    } else {
+        //no more l3 pages, go up to l2
+        if (current_b < nav_l2_max) {
+            //next page = current_a, b+1, 1
+            consoleLog = current_a + ", " + (current_b + 1) + ", 1, 1";
+            use_a = current_a;
+            use_b = current_b + 1;
+            use_c = 1;
+            use_d = 1;
+        } else {
+            //no more l2 pages, go up to l1
+            if (current_a < nav_l1_max) {
+                //next page = a+1, 1, 1
+                consoleLog = (current_a + 1) + ", 1, 1, 1";
+                use_a = current_a + 1;
+                use_b = 1;
+                use_c = 1;
+                use_d = 1;
+            } else {
+                consoleLog = "no more pages";
+                alert("This is the end of the module.");
+                okayToLoad = false;
+            }
+        }
+    }
+
+    console.log(consoleLog);
+    if (okayToLoad) {
+
+        if (current_a == use_a && current_b == use_b && current_c == use_c) {
+
+            //only need to load level 3 and content
+            NavigateLevel4(use_a, use_b, use_c, use_d, true);
+
+        } else if (current_a == use_a && current_b == use_b) {
+
+            //only need to load level 3 and content
+            NavigateLevel3(use_a, use_b, use_c, use_d, true);
+
+        } else if (current_a == use_a) {
+            //load level 2 and level 3 and content
+            NavigateLevel2(use_a, use_b, 1, 1, true);
+
+        } else {
+            //load all
+            NavigateLevel1(use_a, 1, 1, 1, true);
+
+        }
+    }
+}
+
+function goToPreviousPage() {
+    var current_a = getNavigationA();
+    var current_b = getNavigationB();
+    var current_c = getNavigationC();
+    var current_d = getNavigationD();
+
+    var use_a = 0;
+    var use_b = 0;
+    var use_c = 0;
+    var use_d = 0;
+
+    var okayToLoad = true;
+
+    var consoleLog;
+
+    if (current_d > 1) {
+        //next page = current_a, current_ b, current_c, d-1
+        consoleLog = current_a + ", " + current_b + ", " + current_c + ", " + (current_d - 1);
+        use_a = current_a;
+        use_b = current_b;
+        use_c = current_c;
+        use_d = (current_d - 1);
+    } else {
+        if (current_c > 1) {
+            //next page = current_a, current_b, c-1
+            consoleLog = current_a + ", " + current_b + ", " + (current_c - 1) + ", " + previous_l4_max;
+            use_a = current_a;
+            use_b = current_b;
+            use_c = (current_c - 1);
+            use_d = previous_l4_max;
+        } else {
+            //no more l3 pages, go up to l2
+            if (current_b > 1) {
+                //next page = current_a, b-1, 1
+                consoleLog = current_a + ", " + (current_b - 1) + ", " + previous_l3_max + ", " + previous_l4_max;
+                use_a = current_a;
+                use_b = current_b - 1;
+                use_c = previous_l3_max;
+                use_d = previous_l4_max;
+            } else {
+                //no more l2 pages, go up to l1
+                if (current_a > 1) {
+                    //next page = a-1, 1, 1
+                    consoleLog = (current_a - 1) + ", " + previous_nav_l2_max + ", " + previous_l3_max + ", " + previous_l4_max;
+                    use_a = current_a - 1;
+                    use_b = previous_nav_l2_max;
+                    use_c = previous_l3_max;
+                    use_d = previous_l4_max;
+                } else {
+                    consoleLog = "no more pages";
+                    alert("This is the beginning of the module.");
+                    okayToLoad = false;
+                }
+            }
+        }
+    }
+
+
+
+    console.log(consoleLog);
+
+    if (okayToLoad) {
+
+        if (current_a == use_a && current_b == use_b && current_c == use_c) {
+
+            //only need to load level 4 and content
+            NavigateLevel4(use_a, use_b, use_c, use_d, false);
+
+        } else if (current_a == use_a && current_b == use_b) {
+
+            //only need to load level 3 and content
+            NavigateLevel3(use_a, use_b, use_c, use_d, false);
+
+        } else if (current_a == use_a) {
+            //load level 2 and level 3 and content
+            NavigateLevel2(use_a, use_b, use_c, use_d, false);
+
+        } else {
+            //load all
+            NavigateLevel1(use_a, use_b, use_c, use_d, false);
+
+        }
+    }
 }
 
 function hideMenu() {
