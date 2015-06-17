@@ -145,6 +145,9 @@
     <Content Include="Content\EdgeFiles\2212_foundation.html" />
     <Content Include="Content\EdgeFiles\2212_foundation_edge.js" />
     <Content Include="Content\EdgeFiles\2212_foundation_edgeActions.js" />
+    <Content Include="Content\EdgeFiles\2213_foundation.html" />
+    <Content Include="Content\EdgeFiles\2213_foundation_edge.js" />
+    <Content Include="Content\EdgeFiles\2213_foundation_edgeActions.js" />
     <Content Include="Content\EdgeFiles\2221_foundation.html" />
     <Content Include="Content\EdgeFiles\2221_foundation_edge.js" />
     <Content Include="Content\EdgeFiles\2221_foundation_edgeActions.js" />
@@ -282,6 +285,15 @@
     <Content Include="Content\EdgeFiles\2811_reference_edgeActions.js" />
     <Content Include="Content\EdgeFiles\edge_includes\edge.5.0.1.js" />
     <Content Include="Content\EdgeFiles\edge_includes\edge.5.0.1.min.js" />
+    <Content Include="Content\EdgeFiles\images\applyGel.jpg" />
+    <Content Include="Content\EdgeFiles\images\foundation2211a.jpg" />
+    <Content Include="Content\EdgeFiles\images\foundation2211b.jpg" />
+    <Content Include="Content\EdgeFiles\images\foundation2211c.jpg" />
+    <Content Include="Content\EdgeFiles\images\foundation2211d.jpg" />
+    <Content Include="Content\EdgeFiles\images\horizontalOrientation.jpg" />
+    <Content Include="Content\EdgeFiles\images\objective2111.jpg" />
+    <Content Include="Content\EdgeFiles\images\pencilProbe.jpg" />
+    <Content Include="Content\EdgeFiles\images\verticalOrientation.jpg" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\Images\comfortlogo2.png" />
     <Content Include="Content\Images\diagnosis.png" />
