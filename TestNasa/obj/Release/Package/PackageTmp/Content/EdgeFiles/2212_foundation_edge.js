@@ -28,114 +28,48 @@
                 content: {
                     dom: [
                         {
-                            id: 'halfImage2',
-                            symbolName: 'halfImage',
-                            type: 'rect',
-                            rect: ['353px', '0px', 'undefined', 'undefined', 'auto', 'auto'],
-                            transform: [[],[],[],['0.67235']]
-                        },
-                        {
-                            id: 'Rectangle2Copy4',
-                            type: 'rect',
-                            rect: ['733px', '287px', '196px', '196px', 'auto', 'auto'],
-                            fill: ["rgba(192,192,192,1.00)"],
-                            stroke: [2,"rgba(255,255,255,1.00)","solid"]
-                        },
-                        {
-                            id: 'Rectangle3Copy2',
-                            type: 'rect',
-                            rect: ['533px', '510px', '396px', '196px', 'auto', 'auto'],
-                            fill: ["rgba(192,192,192,1)"],
-                            stroke: [2,"rgba(255,255,255,1.00)","solid"]
-                        },
-                        {
                             id: 'Text',
                             type: 'text',
-                            rect: ['484px', '20px', 'auto', 'auto', 'auto', 'auto'],
+                            rect: ['50px', '50px', 'auto', 'auto', 'auto', 'auto'],
                             text: "Probe Handling",
                             align: "right",
-                            font: ['Lucida Console, Monaco, monospace', [40, "px"], "rgba(39,39,39,1.00)", "normal", "none", "", "break-word", "nowrap"]
-                        },
-                        {
-                            id: 'TextCopy',
-                            type: 'text',
-                            rect: ['219px', '20px', 'auto', 'auto', 'auto', 'auto'],
-                            text: "Foundation",
-                            align: "right",
-                            font: ['Lucida Console, Monaco, monospace', [40, "px"], "rgba(51,172,177,1.00)", "normal", "none", "", "break-word", "nowrap"]
-                        },
-                        {
-                            id: 'Text2',
-                            type: 'text',
-                            rect: ['69px', '220px', '336px', '290px', 'auto', 'auto'],
-                            text: "In a long axis view, the reference  marker should always point upward then orient the beam to the length of the organ. <br><br>In Short axis or transverse, the transducer marker should point to the patients’ right and orient to the widest region of that organ.",
-                            align: "left",
-                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [18, "px"], "rgba(63,63,63,1.00)", "400", "none solid rgb(0, 0, 0)", "normal", "break-word", "normal"]
+                            font: ['Lucida Console, Monaco, monospace', [22, "px"], "rgba(39,39,39,1.00)", "normal", "none", "", "break-word", "nowrap"]
                         },
                         {
                             id: 'Text2Copy2',
                             type: 'text',
-                            rect: ['50px', '90px', '355px', '170px', 'auto', 'auto'],
+                            rect: ['50px', '90px', '667px', '54px', 'auto', 'auto'],
                             text: "Correct probe orientation will ensure that the image is not reversed on the screen.<br>",
                             align: "left",
-                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [22, "px"], "rgba(39,39,39,1.00)", "400", "none", "normal", "break-word", "normal"]
+                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [16, "px"], "rgba(39,39,39,1.00)", "400", "none", "normal", "break-word", "normal"]
                         },
                         {
-                            id: 'Text2Copy',
+                            id: 'Text2',
                             type: 'text',
-                            rect: ['990px', '90px', '355px', '512px', 'auto', 'auto'],
-                            text: "Ultrasound requires gel as an acoustic conductor between the probe and the skin.  <br><br>If there is not enough gel, part of the image will be lost (black or artifactual).<br><br>Hold the probe like a pencil while keeping part of the hand on the patient for stability, similar to a tripod.  <br><br>The probe requires consistent firm pressure to maintain contact with the body. This allows probe contact on the body even while tilting or panning. If your hand gets tired switch hands or use both hands.<br>",
+                            rect: ['970px', '279px', '400px', '612px', 'auto', 'auto'],
+                            text: "In a long axis view, the reference  marker should always point upward then orient the beam to the length of the organ. <br><br><br><br><br><br><br><br><br><br><br><br><br><br>In Short axis or transverse, the transducer marker should point to the patients’ right and orient to the widest region of that organ.<br>",
                             align: "left",
-                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [18, "px"], "rgba(63,63,63,1.00)", "300", "none solid rgb(0, 0, 0)", "normal", "break-word", "normal"]
+                            font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [14, "px"], "rgba(39,39,39,1.00)", "400", "none", "normal", "break-word", "normal"]
                         },
                         {
-                            id: 'Rectangle2',
+                            id: 'video',
                             type: 'rect',
-                            rect: ['485px', '287px', '196px', '196px', 'auto', 'auto'],
-                            fill: ["rgba(192,192,192,1.00)"],
-                            stroke: [2,"rgba(255,255,255,1.00)","solid"]
-                        },
-                        {
-                            id: 'Text8',
-                            type: 'text',
-                            rect: ['496px', '316px', '178px', '149px', 'auto', 'auto'],
-                            text: "Ultrasound image without a proper amount of conductive gel.  Show the black under the probe contact.",
-                            align: "left",
-                            font: ['\'Lucida Console\', Monaco, monospace', [14, "px"], "rgba(248,7,119,1.00)", "400", "none solid rgb(51, 172, 177)", "normal", "break-word", ""],
-                            textStyle: ["", "", "20px", ""]
-                        },
-                        {
-                            id: 'Text8Copy2',
-                            type: 'text',
-                            rect: ['609px', '160px', 'auto', 'auto', 'auto', 'auto'],
-                            text: "Probe diagram <br>pointing out marker <br>face<br>gray ridge",
-                            align: "left",
-                            font: ['\'Lucida Console\', Monaco, monospace', [14, "px"], "rgba(51,172,177,1)", "400", "none solid rgb(51, 172, 177)", "normal", "break-word", "nowrap"],
-                            textStyle: ["", "", "20px", ""]
-                        },
-                        {
-                            id: 'Text8Copy3',
-                            type: 'text',
-                            rect: ['617px', '572px', 'auto', 'auto', 'auto', 'auto'],
-                            text: "holding probe like a pencil<br>",
-                            align: "right",
-                            font: ['\'Lucida Console\', Monaco, monospace', [14, "px"], "rgba(248,7,119,1.00)", "400", "none solid rgb(51, 172, 177)", "normal", "break-word", "nowrap"]
-                        },
-                        {
-                            id: 'Text8Copy',
-                            type: 'text',
-                            rect: ['746px', '314px', '148px', '151px', 'auto', 'auto'],
-                            text: "Ultrasound image without a proper amount of conductive gel.  Show the black under the probe contact.",
-                            align: "left",
-                            font: ['\'Lucida Console\', Monaco, monospace', [14, "px"], "rgba(248,7,119,1.00)", "400", "none solid rgb(51, 172, 177)", "normal", "break-word", ""],
-                            textStyle: ["", "", "20px", ""]
-                        },
-                        {
-                            id: 'Rectangle3Copy',
-                            type: 'rect',
-                            rect: ['485px', '68px', '396px', '196px', 'auto', 'auto'],
+                            rect: ['50px', '141px', '798px', '508px', 'auto', 'auto'],
                             fill: ["rgba(192,192,192,1)"],
-                            stroke: [2,"rgba(255,255,255,1.00)","solid"]
+                            stroke: [1,"rgb(51, 172, 177)","solid"],
+                            userClass: "replaceWithVideo probeHandling"
+                        },
+                        {
+                            id: 'verticalOrientation',
+                            type: 'image',
+                            rect: ['962px', '16px', '400px', '255px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"verticalOrientation.jpg",'0px','0px']
+                        },
+                        {
+                            id: 'horizontalOrientation',
+                            type: 'image',
+                            rect: ['962px', '355px', '400px', '255px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"horizontalOrientation.jpg",'0px','0px']
                         }
                     ],
                     style: {
@@ -151,316 +85,7 @@
                     duration: 0,
                     autoPlay: true,
                     data: [
-                        [
-                            "eid84",
-                            "width",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            '178px',
-                            '178px'
-                        ],
-                        [
-                            "eid75",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2}",
-                            '485px',
-                            '485px'
-                        ],
-                        [
-                            "eid15",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${halfImage2}",
-                            '0px',
-                            '0px'
-                        ],
-                        [
-                            "eid81",
-                            "width",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2Copy4}",
-                            '196px',
-                            '196px'
-                        ],
-                        [
-                            "eid85",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            '496px',
-                            '496px'
-                        ],
-                        [
-                            "eid68",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy3}",
-                            '617px',
-                            '617px'
-                        ],
-                        [
-                            "eid72",
-                            "line-height",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy2}",
-                            '20px',
-                            '20px'
-                        ],
-                        [
-                            "eid74",
-                            "height",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2}",
-                            '196px',
-                            '196px'
-                        ],
-                        [
-                            "eid102",
-                            "color",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy3}",
-                            'rgba(248,7,119,1.00)',
-                            'rgba(248,7,119,1.00)'
-                        ],
-                        [
-                            "eid98",
-                            "border-color",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2}",
-                            'rgba(255,255,255,1.00)',
-                            'rgba(255,255,255,1.00)'
-                        ],
-                        [
-                            "eid76",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2}",
-                            '287px',
-                            '287px'
-                        ],
-                        [
-                            "eid91",
-                            "height",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            '151px',
-                            '151px'
-                        ],
-                        [
-                            "eid63",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy2}",
-                            '609px',
-                            '609px'
-                        ],
-                        [
-                            "eid71",
-                            "line-height",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            '20px',
-                            '20px'
-                        ],
-                        [
-                            "eid99",
-                            "border-color",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2Copy4}",
-                            'rgba(255,255,255,1.00)',
-                            'rgba(255,255,255,1.00)'
-                        ],
-                        [
-                            "eid96",
-                            "scaleX",
-                            0,
-                            0,
-                            "linear",
-                            "${halfImage2}",
-                            '0.67235',
-                            '0.67235'
-                        ],
-                        [
-                            "eid88",
-                            "width",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            '148px',
-                            '148px'
-                        ],
-                        [
-                            "eid101",
-                            "color",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            'rgba(248,7,119,1.00)',
-                            'rgba(248,7,119,1.00)'
-                        ],
-                        [
-                            "eid73",
-                            "width",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2}",
-                            '196px',
-                            '196px'
-                        ],
-                        [
-                            "eid64",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy2}",
-                            '160px',
-                            '160px'
-                        ],
-                        [
-                            "eid89",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            '746px',
-                            '746px'
-                        ],
-                        [
-                            "eid78",
-                            "height",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2Copy4}",
-                            '196px',
-                            '196px'
-                        ],
-                        [
-                            "eid90",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy}",
-                            '314px',
-                            '314px'
-                        ],
-                        [
-                            "eid87",
-                            "height",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            '149px',
-                            '149px'
-                        ],
-                        [
-                            "eid82",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2Copy4}",
-                            '733px',
-                            '733px'
-                        ],
-                        [
-                            "eid100",
-                            "color",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            'rgba(248,7,119,1.00)',
-                            'rgba(248,7,119,1.00)'
-                        ],
-                        [
-                            "eid86",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            '316px',
-                            '316px'
-                        ],
-                        [
-                            "eid70",
-                            "line-height",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8}",
-                            '20px',
-                            '20px'
-                        ],
-                        [
-                            "eid77",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Rectangle2Copy4}",
-                            '287px',
-                            '287px'
-                        ],
-                        [
-                            "eid67",
-                            "top",
-                            0,
-                            0,
-                            "linear",
-                            "${Text8Copy3}",
-                            '572px',
-                            '572px'
-                        ],
-                        [
-                            "eid97",
-                            "left",
-                            0,
-                            0,
-                            "linear",
-                            "${halfImage2}",
-                            '353px',
-                            '353px'
-                        ]
+
                     ]
                 }
             },
@@ -515,12 +140,12 @@
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
+                            type: 'text',
                             rect: ['17px', '5px', 'auto', 'auto', 'auto', 'auto'],
-                            font: ['Lucida Console, Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1.00)', '500', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap'],
                             id: 'Text5',
                             text: 'REVIEW<br>CONCEPTS &amp; PROCEDURES',
                             align: 'center',
-                            type: 'text'
+                            font: ['Lucida Console, Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1.00)', '500', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap']
                         }
                     ],
                     style: {
@@ -557,12 +182,12 @@
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
+                            type: 'text',
                             rect: ['65px', '12px', 'auto', 'auto', 'auto', 'auto'],
-                            font: ['\'Lucida Console\', Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1)', '500', 'none solid rgb(39, 39, 39)', 'normal', 'break-word', 'nowrap'],
                             id: 'Text6',
                             text: 'GO TO SET UP',
                             align: 'center',
-                            type: 'text'
+                            font: ['\'Lucida Console\', Monaco, monospace', [16, 'px'], 'rgba(39,39,39,1)', '500', 'none solid rgb(39, 39, 39)', 'normal', 'break-word', 'nowrap']
                         }
                     ],
                     style: {
@@ -596,12 +221,12 @@
                             fill: ['rgba(192,192,192,1.00)']
                         },
                         {
+                            type: 'text',
                             rect: ['274', '240', 'auto', 'auto', 'auto', 'auto'],
-                            font: ['\'Lucida Console\', Monaco, monospace', [40, 'px'], 'rgba(51,172,177,1)', '400', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap'],
                             id: 'Text7',
                             text: 'Video Place Holder<br>800x600',
                             align: 'right',
-                            type: 'text'
+                            font: ['\'Lucida Console\', Monaco, monospace', [40, 'px'], 'rgba(51,172,177,1)', '400', 'none solid rgb(51, 172, 177)', 'normal', 'break-word', 'nowrap']
                         }
                     ],
                     style: {

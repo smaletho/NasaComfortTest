@@ -44,18 +44,16 @@
                             font: ['Lucida Sans Unicode, Lucida Grande, sans-serif', [18, "px"], "rgba(39,39,39,1.00)", "300", "none solid rgb(0, 0, 0)", "normal", "break-word", "normal"]
                         },
                         {
+                            id: 'foundation2211d',
+                            type: 'image',
+                            rect: ['618px', '22px', '800px', '420px', 'auto', 'auto'],
+                            fill: ["rgba(0,0,0,0)",im+"foundation2211d.jpg",'0px','0px']
+                        },
+                        {
                             id: 'foundation2211b',
                             type: 'image',
                             rect: ['50px', '412px', '310px', '260px', 'auto', 'auto'],
                             fill: ["rgba(0,0,0,0)",im+"foundation2211b.jpg",'0px','0px']
-                        },
-                        {
-                            id: 'video',
-                            type: 'rect',
-                            rect: ['605px', '14px', '800px', '510px', 'auto', 'auto'],
-                            fill: ["rgba(192,192,192,1)"],
-                            stroke: [0,"rgb(0, 0, 0)","none"],
-                            userClass: "replaceWithVideo probeHandling"
                         },
                         {
                             id: 'foundation2211a',
