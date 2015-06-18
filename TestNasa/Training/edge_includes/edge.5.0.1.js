@@ -314,8 +314,8 @@ var docElement            = doc.documentElement,
     type = type || "j";
     if ( isString( resource ) ) {
         // if the resource passed in here is a string, preload the file
-        var temp = resource;
-        resource = "../Content/EdgeFiles/" + temp;
+        //var temp = resource;
+        //resource = "../Content/EdgeFiles/" + temp;
       preloadFile( type == "c" ? strCssElem : strJsElem, resource, type, this['i']++, dontExec, attrObj, timeout );
     } else {
       // Otherwise it's a callback function and we can splice it into the stack to run
