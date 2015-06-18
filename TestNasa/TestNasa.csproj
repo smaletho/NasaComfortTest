@@ -141,6 +141,7 @@
     <Content Include="Content\Images\diagnosicWhite.png" />
     <Content Include="Content\Images\diagnosis.png" />
     <Content Include="Content\Images\diagnosisName.png" />
+    <Content Include="Content\Images\diagnosisWhite.png" />
     <Content Include="Content\Images\eyeWhite.png" />
     <Content Include="Content\Images\fundoscopy.png" />
     <Content Include="Content\Images\fundoscopyName.png" />
@@ -154,6 +155,7 @@
     <Content Include="Content\Images\kidneybladderName.png" />
     <Content Include="Content\Images\kidneyWhite.png" />
     <Content Include="Content\Images\reference.png" />
+    <Content Include="Content\Images\referenceMenubar.png" />
     <Content Include="Content\Images\referenceWhite.png" />
     <Content Include="Content\legal-pad.jpg" />
     <Content Include="Content\page-fold.png" />
